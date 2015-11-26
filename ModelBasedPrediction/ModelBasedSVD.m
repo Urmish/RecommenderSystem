@@ -4,12 +4,14 @@ close all;
 singularValueThreshold = 0.8;
 predThreshold = 3.5;
 customerId = 192;
-modelNumber = 1; %0 - Average Value based %1 - Incremental SVD based
+modelNumber = 0; %0 - Average Value based %1 - Incremental SVD based
 iterCount = 100; %Used by Incremental SVD
 
 X = ConvertUDataToMatrix();
 if (modelNumber == 0)
-    [Pred, AveragePerCustomer] = AverageValueBasedMatrixCompletion(X,singularValueThreshold);
+    [Pred, AveragePerCustomer] = AverageValueBasedMatrixCompletion(X',singularValueThreshold);
+    Pred = Pred';
+    AveragePerCustomer = mean(Pred);
 else
     [Pred, AveragePerCustomer] = IncrementalLowRankCompletion(X,iterCount,singularValueThreshold);
 end
@@ -34,4 +36,6 @@ if (predThreshold > AveragePerCustomer(customerId))
 else
     fprintf('Average Values for this customer have been high and it is difficult to comeup with a prediction using this technique\n');    
 end
+
 %Nearest Neighbor
+
