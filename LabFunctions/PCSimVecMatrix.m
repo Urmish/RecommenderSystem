@@ -1,4 +1,4 @@
-function o_SimilarityVec  = PCSimVecMatrix( i_Vec1, i_M)                                                           
+function [o_SimilarityVec,normM]  = PCSimVecMatrix( i_Vec1, i_M)                                                           
 % Calculates Person Coefficient similarity between a vector and rows of
 % matrix M
 % Completion
