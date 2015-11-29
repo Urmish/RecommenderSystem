@@ -4,6 +4,8 @@ function [ o_Pred,o_AveragePerCustomer ] = AverageValueBasedMatrixCompletion( i_
 
 m_XComplete = FillZeroEntryWithAverageInARow(i_matrix);
 o_AveragePerCustomer = sum(m_XComplete,2)./sum(m_XComplete~=0,2);
+o_AveragePerCustomer(isnan(o_AveragePerCustomer)) = 0;
+o_AveragePerCustomer(isinf(o_AveragePerCustomer)) = 0;
 m_AveragePerCustomerMatrix = repmat(o_AveragePerCustomer,[1 size(m_XComplete, 2)]);
 m_XNormalized = m_XComplete - m_AveragePerCustomerMatrix;
 [m_U m_S m_V] = svd(m_XNormalized,'econ');
