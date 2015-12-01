@@ -11,7 +11,7 @@ for i = 1:size(testXValidUsers,1)
         i_singularValueThreshold = 0.3;
         i_predThreshold = 3.6;
         i_customerId = i;
-        i_modelNumber = 1;
+        i_modelNumber = 0;
         i_iterCount = 100;
         i_NumNearestNeighbor = 20;
         i_knnDistanceMeasure = 'cosine';
@@ -29,8 +29,13 @@ scatter(xaxis1,yaxis);
 figure(2)
 hold on
 scatter(xaxis1,yaxis2);
-mean1 = mean(yaxis./totalMoviesInTest)
-mean2 = mean(yaxis2./totalMoviesInTest)
+array1 = yaxis./totalMoviesInTest;
+array1(isnan(array1)) = 0;
+array1(isinf(array1)) = 0;
+array2 = yaxis2./totalMoviesInTest;
+array2(isnan(array2)) = 0;
+array2(isinf(array2)) = 0;
+mean2 = sum(array2,2)/sum(array2~=0,2)
 %Mean of 30 people for Model 0
 %1. 0.4725
 %2. 0.5625

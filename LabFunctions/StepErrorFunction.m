@@ -1,4 +1,4 @@
-function [ o_numberOfError,o_totalMovies ] = StepErrorFunction( i_input1,i_input2,i_threshold )
+function [ o_numberOfError,o_totalMovies,o_totalPositivesWrong,o_totalPositives ] = StepErrorFunction( i_input1,i_input2,i_threshold )
 %STEPERRORFUNCTION - Takes 2 1x1682 arrays are ratings. These ratings are
 %predictions or test ratings of users. This functions tries to establish
 %whether the prediction of movies a user likes or dislikes were actually
@@ -31,5 +31,7 @@ i_input2(i_input2<-i_threshold) = -1;
 i_input2(i_input2<=i_threshold & i_input2>=-i_threshold) = 0;
 o_numberOfError = sum(i_input2(i_input1~=0) ~= i_input1(i_input1~=0),2);
 o_totalMovies = sum(i_input1~=0,2);
+o_totalPositivesWrong = sum(i_input2(i_input1>0) ~= i_input1(i_input1>00),2);
+o_totalPositives = sum(i_input1>00,2);
 end
 
