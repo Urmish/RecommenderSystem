@@ -1,6 +1,5 @@
-function [o_recPred, o_recNN  ] = ModelBasedPredictionTest(i_testdata,i_singularValueThreshold,i_predThreshold,i_customerId, i_modelNumber, i_iterCount, i_NumNearestNeighbor, i_knnDistanceMeasure )
-%MODELBASEDPREDICTIONTEST Summary of this function goes here
-%   Detailed explanation goes here
+function [o_recPred, o_recNN, o_predMatrix,o_AveragePerCustomer  ] = ModelBasedPredictionTest(i_testdata,i_singularValueThreshold,i_predThreshold,i_customerId, i_modelNumber, i_iterCount, i_NumNearestNeighbor, i_knnDistanceMeasure, i_predMatrix, i_AveragePerCustomer, i_usePredMatrix )
+%MODELBASEDPREDICTIONTEST Runs model based SVD to return predictions
 % Parameter Values - Input
 %i_testdata
 %i_singularValueThreshold = Singular values lower than this value
@@ -12,22 +11,36 @@ function [o_recPred, o_recNN  ] = ModelBasedPredictionTest(i_testdata,i_singular
 %i_iterCount = %Used by Incremental SVD. Number of iterations
 %i_NumNearestNeighbor = NN for knn search;
 %i_knnDistanceMeasure = Distance measure used by knn search, example 'cosine';
+%i_predMatrix = Prediction Matrix used in the code, this matrix is only
+%used if i_usePredMatrix is set
+%i_AveragePerCustomer = Average Rating Per Customer, this matrix is only
+%used if i_usePredMatrix is set
+%i_usePredMatrix = Set to 0 if you do not have predMatrix and
+%AveragePerCustomer, Else set to one.
 
 % Parameter Values - Output
 % o_recPred - Recommendation based on Prediction
 % o_recNN - Recommendation based on NN
+% o_predMatrix - Prediction Matrix generated
+% o_AveragePerCustomer - Average Ratings for Current Train Dataset
 
 X = ConvertUDataToMatrix(i_testdata);
 IDtoM = GetMovieNameDatabase();
-if (i_modelNumber == 0)
-    size(X')
-    [Pred ~] = AverageValueBasedMatrixCompletion(X',i_singularValueThreshold);
-    Pred = Pred';
-    AveragePerCustomer = mean(Pred,2);
+if (i_usePredMatrix == 0)
+    if (i_modelNumber == 0)
+        size(X')
+        [Pred ~] = AverageValueBasedMatrixCompletion(X',i_singularValueThreshold);
+        Pred = Pred';
+        AveragePerCustomer = mean(Pred,2);
+    else
+        [Pred, AveragePerCustomer] = IncrementalLowRankCompletion(X,i_iterCount,i_singularValueThreshold);
+    end
 else
-    [Pred, AveragePerCustomer] = IncrementalLowRankCompletion(X,i_iterCount,i_singularValueThreshold);
+    Pred = i_predMatrix;
+    AveragePerCustomer = i_AveragePerCustomer;
 end
-
+o_predMatrix = Pred;
+o_AveragePerCustomer = AveragePerCustomer;
 %Error
 index_nonzero = find(X~=0);
 error = norm(X(index_nonzero) - Pred(index_nonzero))/norm(X(index_nonzero));
