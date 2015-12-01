@@ -14,8 +14,8 @@ end
 ind = find(i_testVector~=0);
 [useless sortedTestInd] = sort(i_testVector(ind),'descend');
 [useless sortedPredInd] = sort(i_predVector(ind),'descend');
-ind1 = ind(1,sortedTestInd)
-ind2 = ind(1,sortedPredInd)
+ind1 = ind(1,sortedTestInd);
+ind2 = ind(1,sortedPredInd);
 topK=5;
 if (size(ind1,2) < topK)
     topK=size(ind1,2);
@@ -24,7 +24,7 @@ intersection = intersect(ind1(1:topK),ind2(1:topK));
 if (size(intersection,2) == 0)
     o_percentageCorrect=0;
 else
-    intersection
+    intersection;
     o_percentageCorrect = size(intersection,2)/topK;
 end
 end
