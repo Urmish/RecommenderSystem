@@ -89,7 +89,13 @@ You should observe that the columns of the matrices $U$ and $V$ are orthonormal,
   \subsubsection{Which Nearest Neighbor approximation to Use?}
   To answer this question we will resort to the golden answer to life, universe and anything non concrete - \textit{"It Depends!!!"}. For the purpose of this lab we used Nearest Neighbor approach in a lower dimension space of predicted matrix. Empirically, it worked better. In general, one tries different approaches and sees what works best for their environment and their preference of error metrics.
   \subsection{Bringing it All Together}
-  Now that you have all the concepts required to understand a Model Based Recommender System, we will encourage you to experiment with it to get an idea of the different tradeoffs involved and the corresponding complexity in settling down on a method.
-  {\color{blue}\textbf{EXERCISE: }}
+  Now that you have all the concepts required to understand a Model Based Recommender System, we will encourage you to experiment with it to get an idea of the different tradeoffs involved and the corresponding complexity in settling down on a method.\\
+  {\color{blue}\textbf{EXERCISE: Look at the code in "ModelBasedPrediction / EvaluateModelBasedSVD.m" Play around with parameters, look at the impact it has on different error rates. It is upto you to decide what factors do you care about and what according to you is the best system. We have provided you with outputs for many different parameters in the table-reference-here[TODO FIXME].}}
+  \section{Miscellaneous Topics}
+  \subsection{Item Based Recommendation System}
+  \subsection{Seredipity}
+  Recommender Systems exist to help users dicsover an item that he or she would like among the large pool of items available. Most of the errors that we saw did not talk about the novelty of recommendation. For example, if I have seen Star Wars: A New Hope, Star Wars: The Empire Strikes Back and Star Wars: Revenge of the Sith, I will most likely find a lot of nearest neighbors whose collective votes leads to the recommendation for The Phantom Menace, Attack of the Clones and Revenge of the Sith. I might end up liking that movie. Now consider a scenario where I end up watching a movie of a different genre altogether, say "Lincoln" and end up liking it a lot. An item based recommendation system would have never led me to discover this movie as all the movies I have rated fall into the Action/Saga/Fantasy category. Such disoveries are called seredipitious discoveries. 
+
+Serendipity is related to unexpectedness and involves a positive emotional response of the user about a previously unknown item. It measures how surprising the unexpected recommendations that is, serendipity is concerned with the novelt of recommendations and how far such recommendations may positively affect the user. It is generally not easy to measure and most systems consider a tradeoff between various forms of accuracy and seredipity. 
 \end{document}
 
