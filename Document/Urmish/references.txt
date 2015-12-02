@@ -1,0 +1,2 @@
+ref 1 - Sarwar, B.M, Konstan "Applying Knowledge from KDD to Recommender System"
+ref 2 - Billsus "Learning Collaborative Information Filters"
