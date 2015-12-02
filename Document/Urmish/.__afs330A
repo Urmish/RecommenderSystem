@@ -109,28 +109,13 @@ We need some methodology to evaluate our recommendations. In this section we wil
 \end{align*}
 \paragraph{}
 We can try to design our algorithm to reduce this RMSE value, by minimizing the sum of squared errors (SSE) thereby giving us more accurate predictions of user ratings and hence improving our recommendations. 
-  \subsubsection{Top Five Rated Movies}
-  We sort the movies in our test dataset in a decreasing order and look at the top 5 rated movies, we then look at the predictions for all the movies rated in the test vector and sort them in a decreasing fashion. We find the intersection of the top 5 movies for both these sets to see how close we came to understanding user preference. let  the top five movies in the test dataset for a user be represented by :
+  \subsubsection{Top 5 Rated Movies}
+  We sort the movies in our test dataset in a decreasing order and look at the top 5 rated movies, we then look at the predictions for all the movies rated in the test vector and sort them in a decreasing fashion. We find the intersection of the top 5 movies for both these sets to see how close we came to understanding user preference.
   \begin{align*}
-  S_{test}
+  \[
+  Error = \frac{(Top 5 Movies in Test) \cap Top5Predicted}{|Top5Test|}
+  \]
   \end{align*}
-  And the top five movies using the predictions for the movies rated in test dataset for the user be represented by:
-  \begin{align*}
-  S_{pred}
-  \end{align*}
-  Thus, 
-  \begin{align*}
-  Error = \frac{S_{test} \cap S_{pred}}{|S_{test}|}
-  \end{align*}
-  \subsubsection{Number of Good Movies Not Predicted}
-  Another measure of error could be the number of movies that were rated by the user in the test dataset as good which the recommender system predicted as bad. For the notion of good, we use a threshold value. Any movie with a rating more than the threshold value above average is considered good. Thus, if $S_{gtb}$ represent the number of good movies that the recommender system predicted as bad and $S_{g}$ are the set of all good movies in the test data set, then the error is simply, 
-  \begin{align*}
-  Error = \frac{|S_{gtb}|}{|S_{g}|}
-  \end{align*}
-  \subsubsection{Number of Flipped Movies}
-  This is an extension of the previous error metric. Here we look at all the movies that user rated good an bad. The definition of good remains the same as before. We define bad movies as movies which have ratings lower than $AverageValue - Threshold$. $S_{flip}$ represent the sum of number of good movies that the recommender system predicted as bad and bad movies that the recommender system predicted as good, $S_{gb}$ are the set of all good and bad movies in the test data set, then the error is simply, 
-  \begin{align*}
-  Error = \frac{|S_{flip}|}{|S_{gb}|}
-  \end{align*}
+
 \end{document}
 

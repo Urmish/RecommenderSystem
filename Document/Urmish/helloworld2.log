@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.9.8)  2 DEC 2015 16:47
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.9.8)  2 DEC 2015 17:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -377,44 +377,52 @@ ueSVD.m[]
 LaTeX Warning: Reference `table:example_ratings1' on page 4 undefined on input 
 line 83.
 
-[4]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 100.
- [5]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 100.
+[4] [5]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 135.
+ [6]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 135.
  (./helloworld2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 100.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 100.
-Package rerunfilecheck Info: File `helloworld2.out' has not changed.
-(rerunfilecheck)             Checksum: 66ACE7037E0E9B833CD42CCCA19D2A18;1072.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 135.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 135.
 
+
+Package rerunfilecheck Warning: File `helloworld2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `helloworld2.out':
+(rerunfilecheck)             Before: 7B4ACFC06A6F919D78E56094C0C4320E;1319
+(rerunfilecheck)             After:  BAB918D14C4830FFADCCF459A5C441C4;1501.
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 5889 strings out of 493629
- 86497 string characters out of 3134964
+ 5899 strings out of 493629
+ 86661 string characters out of 3134964
  172787 words of memory out of 3000000
- 9133 multiletter control sequences out of 15000+200000
+ 9136 multiletter control sequences out of 15000+200000
  6126 words of font info for 23 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 29i,9n,28p,896b,400s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 29i,10n,28p,896b,400s stack positions out of 5000i,500n,10000p,200000b,50000s
 </afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmbx10.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmbx12.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_
-rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></afs/cs.wisc.edu/s/
-texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></
-afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr10.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmsy10.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></afs/cs.wisc.edu/s/texliv
-e-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></afs/c
-s.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmtt10.pfb>
-Output written on helloworld2.pdf (5 pages, 135796 bytes).
+rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></afs/cs.wisc.edu/s/
+texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi7.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr10.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></afs/cs.wisc.edu/s/texlive
+-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></afs/cs
+.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmsy7.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmti10.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on helloworld2.pdf (6 pages, 160039 bytes).
 PDF statistics:
- 154 PDF objects out of 1000 (max. 8388607)
- 136 compressed objects within 2 object streams
- 41 named destinations out of 1000 (max. 500000)
- 113 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 182 PDF objects out of 1000 (max. 8388607)
+ 161 compressed objects within 2 object streams
+ 48 named destinations out of 1000 (max. 500000)
+ 137 words of extra memory for PDF output out of 10000 (max. 10000000)
 

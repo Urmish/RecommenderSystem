@@ -12,3 +12,8 @@
 \BOOKMARK [1][-]{section.2}{Miscellaneous Topics}{}% 12
 \BOOKMARK [2][-]{subsection.2.1}{Item Based Recommendation System}{section.2}% 13
 \BOOKMARK [2][-]{subsection.2.2}{Seredipity}{section.2}% 14
+\BOOKMARK [2][-]{subsection.2.3}{How to Evaluate a Recommender System?}{section.2}% 15
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Root Mean Square Error}{subsection.2.3}% 16
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Top Five Rated Movies}{subsection.2.3}% 17
+\BOOKMARK [3][-]{subsubsection.2.3.3}{Number of Good Movies Not Predicted}{subsection.2.3}% 18
+\BOOKMARK [3][-]{subsubsection.2.3.4}{Number of Flipped Movies}{subsection.2.3}% 19
