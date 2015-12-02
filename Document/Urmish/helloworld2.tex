@@ -17,7 +17,25 @@
 
 \textit{For example, let us consider two customers one of whom rates 10 different writing pad products as "high" and another customer rates 10 different notepads as "high". NN based recommender system will not capture their association.}
   \end{itemize}
-  One of the methods used to handle both the problems is the low rank approximation method.
+  One of the methods used to handle both the problems is the low rank approximation method. Let us do an exercise to understand the issues discussed above and see how low rank approximation can help us. \\
+  \begin{table}[]
+  \centering
+  \label{my-label}
+  \begin{tabular}{|l|l|l|l|l|}
+  \hline
+      & Die Hard 1 & Die Hard 2 & Die Hard 3 & Die Hard 4 \\ \hline
+John  & 4          & 4          &            &            \\ \hline
+Susan & 4          & 2          & 3          & 3          \\ \hline
+Jack  &            &            & 4          & 4          \\ \hline
+  \end{tabular}
+  \caption{Truncate to Die Hard}
+  \label{Model-1}
+  \end{table}
+\\
+{\color{blue}\textbf{EXERCISE: Take a look at Table~\ref{Model-1}. This illustrates the example we described while discussing "Sparsity". So how do you ensure that John and Eric are considered similar to each other? Look at the code writted in "Examples/ToyExampleModelSVDMotivation.m" and see how low rank approximation helps us magically establish this relationship between John and Eric. We will discuss what this low rank approximation is and how do we calculate it in the next section. }}
+\\
+\\
+{\color{blue}\textbf{EXERCISE: Look at "Examples/ToyExampleModelSVDMotivation2.m". It explains a scenario similar to the talked about in Synonym Problem and looks at a potential solution }}
   \subsection{Singular Vector Decomposition}
 \paragraph{}
 The Singular Value Decomposition (SVD) is a well known matrix factorization method. Formally, the SVD of an $m \times n$ matrix $A$ is a factorization of the form $A = U \Sigma V^{T}$ where $U$ is an $m \times m$ orthogonal matrix, $\Sigma$ is an $m \times n$ diagonal matrix with non-negative terms on the diagonal, and $V$ is an $n \times n$ orthogonal matrix. The diagonal entries of $\Sigma$ are known as the singular values of $A$. The $m$ columns of $U$ and the $n$ column of $V$ are known as the left and right singular vectors of $A$ respectively.
@@ -70,5 +88,8 @@ You should observe that the columns of the matrices $U$ and $V$ are orthonormal,
   Another work around to find better neighbors is to look for neighbors in a lower dimension space of the original sparse matrix. The motivation here is that a lower dimension space will lead to a denser matrix and might help us find better neighbors.
   \subsubsection{Which Nearest Neighbor approximation to Use?}
   To answer this question we will resort to the golden answer to life, universe and anything non concrete - \textit{"It Depends!!!"}. For the purpose of this lab we used Nearest Neighbor approach in a lower dimension space of predicted matrix. Empirically, it worked better. In general, one tries different approaches and sees what works best for their environment and their preference of error metrics.
+  \subsection{Bringing it All Together}
+  Now that you have all the concepts required to understand a Model Based Recommender System, we will encourage you to experiment with it to get an idea of the different tradeoffs involved and the corresponding complexity in settling down on a method.
+  {\color{blue}\textbf{EXERCISE: }}
 \end{document}
 
