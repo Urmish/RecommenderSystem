@@ -158,11 +158,83 @@ PC(u,v) = PC(\textbf{x}_{u}, \textbf{x}_{v}) = \frac
 {\sqrt	{	\sum_{i \in{I_{uv}}}^{}{(r_{ui} - \bar{r_{u}})^2}	\sum_{i \in{I_{uv}}}^{}{(r_{vj} - \bar{r_{v}})^2}}		}
 \end{equation}
 
-where rubar [TODO FIXME] represents the mean of the ratings given by user \textit{u}. Note that PC accounts for variance in ratings only for the ratings of the movies I\textsubscript{uv} that have been rated by both users \textit{u} and \textit{v}. The sign of similarity weight calculated using PC indicates whether the correlation between the two users is direct or inverse, and the magnitude of similarity weight (ranging from 0 to 1) represents the strength of correlation. These will be used to predict unknown ratings for a user using \textit{neighborhood based} methods later.
+where $\bar{r_{u}}$ [TODO FIXME] represents the mean of the ratings given by user \textit{u}. Note that PC accounts for variance in ratings only for the ratings of the movies I\textsubscript{uv} that have been rated by both users \textit{u} and \textit{v}. The sign of similarity weight calculated using PC indicates whether the correlation between the two users is direct or inverse, and the magnitude of similarity weight (ranging from 0 to 1) represents the strength of correlation. These will be used to predict unknown ratings for a user using \textit{neighborhood based} methods later.
 
 \textbf{
 EXERCISE3: Calculate the Pearson Correlation (PC) similarity of \textit{Eric} with other users in Table \ref{table:example_ratings1}. You can use the function \textit{PCSimVecMatrix} provided with the lab. Which user(s) would you say is \textit{similar} to \textit{Eric}. You can do a similar analysis for comparing the Cosine similarities and Pearson Correlation similarities of other users.
 }
+
+\subsection{User based recommendation}
+The Recommender Systems exist so that they can make recommendations to the user. As highlighted in section [TODO FIXME], collaborative filtering relies on finding users similar to a user of interest based on the ratings given by them. We now have two important measures of finding similarity between users, namely Cosine Similarity and Pearson Correlation similarity. It follows that these similarity measures can now be used to find the neighbors nearest to a user, and subsequently their ratings can be \textit{combined} to give us predicted ratings for a number of movies that have actually not been rated by the user of interest. It is natural that the movies whose predicted ratings are higher are the potential candidates that the recommender system can recommend to the user.
+
+Thus, the rating r\textsubscript{ui} of a user \textit{u} for a new item \textit{i}, can be predicted using the ratings given to \textit{i} by users most similar to \textit{u}. Let w\textsubscript{uv} denote the similarity weight between users \textit{u} and \textit{v}, and N(u) be the set of \textit{k} neighbors of \textit{u}, then the predicted rating r\textsubscript{ui} can be calculated as:
+\begin{equation}
+r_{ui} = \frac
+{\sum_{v \in{N_{i}(u)}}^{}{r_{vi}}}
+{|N_{i}(u)|}
+\end{equation}
+Note that the formula considers the only neighbors \textit{v} of user \textit{u} who have rated the movie \textit{i}, N\textsubscript{i}(u) representing the set of such neighbors.
+
+\textbf{
+EXERCISE4: Carefully look at the formula in the equation [TODO FIXME]. Can you find a flaw in the formula? What does it use the similarity weights of user \textit{u} with different users \textit{v} for? Explain qualitatively, how the formula is not making full use of the similarity weights?
+}
+
+If you have an intuitive answer to EXERCISE4 [TODO FIXME], equation [TODO FIXME] that is more sophisticated in its calculation of the predicted rating should make sense.
+\begin{equation}
+r_{ui} = \frac
+{\sum_{v \in{N_{i}(u)}}^{}{w_{uv}r_{vi}}}
+{\sum_{v \in{N_{i}(u)}}^{}{|w_{uv}|}}
+\end{equation}
+
+We now take a small detour to look at the concept of \textit{Rating Normalization} and will then come back to learn how to really generate a recommendation for a user.
+
+\section{Rating normalization}
+Various users rate the movies differently, each having his/her own personal scale even when they have to give a rating on the same scale of 1 to 5. For example, while a rating of 4 by one user might imply a strong preference for a movie, the same rating by another user whose average rating across movies is 4, might not give us any interesting information to use. To tackle this two normalization techniques are: Mean-Centering and Z-score normalization.
+
+\subsection{Mean-Centering}
+The idea of mean-centering is quite simple. It determines whether a rating is positive or negative by comparing it to the mean of the ratings for that user. Once we have the ratings for nearest neighbors, they can be \textit{normalized} by subtracting their corresponding means and then used to generate the predicted rating for a user using the following relation.
+\begin{equation}
+r_{ui} = \bar{r_{u}} + \frac
+{\sum_{v \in{N_{i}(u)}}^{}{w_{uv}(r_{vi} - \bar{r_{v})}}}
+{\sum_{v \in{N_{i}(u)}}^{}{|w_{uv}|}}
+\end{equation}
+
+where $\bar{r_{u}}$ [TODO FIXME] is the mean of ratings of user \textit{u}.
+
+\subsection{Z-score normalization}
+ While mean-centering takes removes the user bias by removing the mean from their ratings, it still does not consider the spread of ratings given by a user. For example, consider two users both of whom have an average rating of 2.8. Further user X shows a lot of variation in his ratings from 1 to 5, whereas user Y has most ratings very close to 2.8. In this case, a rating of 4.5 by Y would imply an exceptional liking for the movie for user Y. The same cannot be said for user X. Z-score normalization takes care of this by normalizing the ratings so the ratings of a user have a mean of zero and a variance of 1. You can explore the MATLAB function \textit{zscore}.
+ 
+\begin{table*}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{} 			& \textbf{Matrix} & \textbf{Titanic} & \textbf{DieHard} & \textbf{ForrestGump} & \textbf{Wall-E}\\ 
+\hline
+\textbf{John} 		& 	 	5		  & 		1		 & 				    &   	2			   & 		2		\\ 
+\hline
+\textbf{Lucy} 		& 	 	1		  & 		5		 & 		2		    &   	5			   & 		5		\\ 
+\hline
+\textbf{Eric} 		& 	 	2		  & 				 & 		3		    &   	5			   & 		4		\\ 
+\hline
+\textbf{Diane} 		& 	 	4		  & 		3		 & 		5		    &   	3			   & 				\\ 
+\hline
+\textbf{Kim} 		& 	 	1		  & 		4		 & 				    &   	5			   & 				\\ 
+\hline
+\end{tabular}
+\caption{Example ratings}
+\label{table:example_ratings2}
+\end{table*}
+
+\textbf{
+EXERCISE5: Consider the Table \ref{example_ratings2} which has a new user Kim added to our earlier toy example. We are interested in generating a recommendation for Kim. Can you guess which movie we should recommend just by looking at the table? Now write a small code in MATLAB to generate those predictions following the steps mentioned below:
+\begin{itemize}
+\item{}Calculate the PC similarity of Kim with other users using the provided MATLAB function \textit{PCSimVecMatrix}
+\item{Find the nearest neighbors of Kim using a threshold}
+\item{}Use mean-centering to normalize the ratings of the neighbors 
+\item{}Generate a recommendation for Kim using the normalized ratings of neighbors and similarity weights.
+\end{itemize}
+}
+Carefully read the specification of the provided MATLAB function \textit{PCSimVecMatrix}. Can you use it to skip one of the steps mentioned in the EXERCISE above.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{figure}	% need to run the latex twice to generate correct figure reference numbers.
 %
