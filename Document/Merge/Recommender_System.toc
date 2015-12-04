@@ -19,16 +19,16 @@
 \contentsline {subsubsection}{\numberline {3.2.2}Average Value Based SVD Completion}{9}
 \contentsline {subsubsection}{\numberline {3.2.3}Iterative SVD Completion}{10}
 \contentsline {subsection}{\numberline {3.3}Nearest Neighbor}{10}
-\contentsline {subsubsection}{\numberline {3.3.1}Using Predicted Matrix}{10}
-\contentsline {subsubsection}{\numberline {3.3.2}Original Matrix in Lower Dimension}{10}
+\contentsline {subsubsection}{\numberline {3.3.1}Using Predicted Matrix}{11}
+\contentsline {subsubsection}{\numberline {3.3.2}Original Matrix in Lower Dimension}{11}
 \contentsline {subsubsection}{\numberline {3.3.3}Which Nearest Neighbor approximation to Use?}{11}
 \contentsline {subsection}{\numberline {3.4}Bringing it All Together}{11}
-\contentsline {section}{\numberline {4}Miscellaneous Topics}{11}
-\contentsline {subsection}{\numberline {4.1}Content Based Recommender Systems}{11}
-\contentsline {subsubsection}{\numberline {4.1.1}Advantages and Drawbacks of Content-based Filtering}{11}
+\contentsline {section}{\numberline {4}Miscellaneous Topics}{12}
+\contentsline {subsection}{\numberline {4.1}Content Based Recommender Systems}{12}
+\contentsline {subsubsection}{\numberline {4.1.1}Advantages and Drawbacks of Content-based Filtering}{12}
 \contentsline {subsection}{\numberline {4.2}Serendipity}{12}
-\contentsline {section}{\numberline {A}Latent Matrix Factorization}{13}
-\contentsline {paragraph}{Basic Idea}{13}
-\contentsline {paragraph}{The Mathematics of Matrix Factorization}{14}
-\contentsline {paragraph}{Regularization}{15}
-\contentsline {paragraph}{Implementation in Python}{15}
+\contentsline {section}{\numberline {A}Latent Matrix Factorization}{14}
+\contentsline {paragraph}{Basic Idea}{14}
+\contentsline {paragraph}{The Mathematics of Matrix Factorization}{15}
+\contentsline {paragraph}{Regularization}{16}
+\contentsline {paragraph}{Implementation in Python}{16}

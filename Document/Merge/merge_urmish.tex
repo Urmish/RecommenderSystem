@@ -24,11 +24,11 @@ Jack  &            &            & 4          & 4          \\ \hline
   \end{table}
 \\
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Take a look at Table~\ref{Model-1}. The table illustrates the example we described while discussing \textit{Sparsity}. So how do you ensure that John and Eric are considered similar to each other? Look at the code written in \textit{Examples/ToyExampleModelSVDMotivation.m} and see how low rank approximation helps us magically establish this relationship between John and Eric. We will discuss what low rank approximation in the next section. 
+Take a look at Table~\ref{Model-1}. The table illustrates the example we described while discussing \textit{Sparsity}. So how do you ensure that John and Eric are considered similar to each other? Look at the code written in \textit{Examples/ToyExampleModelSVDMotivation.m} and run it to see how low rank approximation helps us magically establish this relationship between John and Eric!! We will discuss what low rank approximation in the next section.  For now, do you agree that this method is helping us with the sparsity problem? 
 \end{myremark}
 
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Look at \textit{Examples/ToyExampleModelSVDMotivation2.m}. It explains a scenario similar to the talked about in Synonym Problem and looks at a potential solution.
+Look at \textit{Examples/ToyExampleModelSVDMotivation2.m}. It explains a scenario similar to the talked about in Synonym Problem and looks at a potential solution. Run the code and observe the output? Do you think Low Rank approximation is finding some sort of latent association? What are the predictions for values not rated by the user?
 \end{myremark}
   \subsection{Singular Vector Decomposition}
 
@@ -58,14 +58,14 @@ You should observe that the columns of the matrices $U$ and $V$ are orthonormal.
     \item Let $R$ be the original sparse matrix where rows represent the user and columns represent the movies
     \item Fill the empty cells in each column with average values of the product/movies in that column.
     \item Calculate the average rating for each customer $\overline{C}$ using the non zero values
-    \item Let $R_{norm} = R - \overline{C}$  
+    \item Let $R_{norm} = R - \overline{C}$, i.e. mean center each row. 
     \item Factor $R_{norm}$ using SVD and obtain $U$, $S$ and $V$
     \item Truncate $U$, $S$ and $V$ to $U_k$, $S_k$ and $V_k$.
     \item Compute the resultant matrix $Pred_{norm} = U_k*S_k*V_k$
     \item Add the average customer value calculated in Step 3 to this matrix, i.e, $Pred = Pred_{norm} + \overline{C} $
   \end{enumerate}
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Implement a function for average value SVD completion. Use the matrix generated from table \ref{table:example_ratings1}. Compare the result with our implementation located in \textit{Examples/ToyExampleAverageValueSVD.m}.
+Implement a function for average value SVD completion. Use the steps described above and run the code on matrix generated from table \ref{table:example_ratings1}. Compare the result with our implementation located in \textit{Examples/ToyExampleAverageValueSVD.m}. What do you think about the corresponding predictions? Do they make sense? 
 \end{myremark}
   \subsubsection{Iterative SVD Completion}
   Another simple approach to complete a matrix and generate predictions is to use iterative SVD. 
@@ -76,12 +76,13 @@ Implement a function for average value SVD completion. Use the matrix generated 
     \item Truncate $U$, $S$ and $V$ to $U_k$, $S_k$ and $V_k$.
     \item Compute the resultant matrix $R_{next} = U_k*S_k*V_k$
     \item Use the known values in $R$ to replace values in $R_{next}$
-    \item Repeat the process from Step 3, $T$ number of times.
+    \item Repeat the process from Step 3, $T$ number of times. $T$ is the number of times you want to repeat the process.
   \end{enumerate}
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Implement a function for iterative SVD completion. Use the matrix generated from table \ref{table:example_ratings1}. Compare the result with our implementation located in \textit{Examples/ToyExampleIterativeSVD.m}.
+Implement a function for iterative SVD completion. Use the steps described above and run your code on the matrix generated from table \ref{table:example_ratings1}. Compare the result with our implementation located in \textit{Examples/ToyExampleIterativeSVD.m}. Look at the corresponding predictions. What do you think about them? How do they compare to the predictions using the previous methods?
 \end{myremark}
   \subsection{Nearest Neighbor}
+  By now you should have learnt to predict the ratings for unmarked items. So what do we do with these predictions? One thing we can do is recommend the top rated predictions for each user and that works perfectly fine. Another thing we can look into is the Nearest Neighbor approach that we discussed earlier in the lab.
   \subsubsection{Using Predicted Matrix}
   Once we have a prediction for all the movies/products of all the users, we can use nearest neighbors to generate item recommendation for a user. Why do we do this when we already have a prediction? Well, nearest neighbor method can lead to something called as "Serendipity". We will discuss the meaning of Serendipity in a later section. This method is based on the assumption - given a high accuracy of prediction, we might find better neighbors and thus better ratings.
   \subsubsection{Original Matrix in Lower Dimension}
@@ -91,7 +92,17 @@ Implement a function for iterative SVD completion. Use the matrix generated from
   \subsection{Bringing it All Together}
   Now that you have all the concepts required to understand a Model Based Recommender System, we will encourage you to experiment with it to get an idea of the different trade-offs involved and the corresponding complexity in settling down on a method.
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Look at the code in \textit{ModelBasedPrediction / EvaluateModelBasedSVD.m} Play around with the parameters, look at the impact it has on different error rates. It is upto you to decide what factors are important and what constitutes a good system. We have provided you with outputs for many different parameters in the table-reference-here[TODO FIXME].
+Write a code to run Model Based Prediction on the entire movie lens dataset. Follow these steps - 
+\begin{enumerate}
+\item Load u1.base and u1.test.
+\item Create a Matrix of the form user*movies where unitialized values to zero. We already have function calls to do both these steps so feel free to use them
+\item Create two matrix completion for the u1.base dataset, one based on Average Value and one based on Incremental SVD
+\item Look at the Top 5 predictions from both of them for any random customer.
+\item Pick a customer from u1.test and look at the movies he has rated. 
+\item Look at the corresponding ratings in your predictions. Do they agree?
+\item Calculate the various error metrics that we discussed earlier in the lab.
+\end{enumerate}
+We have already implemented this code in \textit{ModelBasedPrediction / EvaluateModelBasedSVD.m}. Play around with the parameters, look at the impact it has on different error rates. It is upto you to decide what factors are important and what constitutes a good system. We have provided you with outputs for many different parameters in the table-reference-here[TODO FIXME].
 \end{myremark}
   \section{Miscellaneous Topics}
   \subsection{Content Based Recommender Systems}
