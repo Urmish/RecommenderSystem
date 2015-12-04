@@ -50,8 +50,9 @@ You should observe that the columns of the matrices $U$ and $V$ are orthonormal.
   \subsection{Generating Predictions}
   We can use SVD in recommender system to capture certain latent relationship between customers and products/movies. We can use this relationship to capture the predicted likeliness of a certain product/movie by a consumer. \textit{So the next big question is}, how do you calculate the SVD of an incomplete matrix? Or rather, how do you complete a matrix in general? In order to handle this, we will study various approximations. We will then run these methods and collect empirical evidence to validate their effectiveness.
   \subsubsection{Latent Matrix Factorization}
-  NEED TO ADD STUFF HERE
-
+ There are numerous algorithms for generating recommendations. While user-based or item-based collaborative filtering methods are easy and intuitive, matrix factorization methods are usually more efficient because they allow us to determine the latent features underlying the interactions between users and items. Matrix factorization is just a mathematical tool for playing around with matrices, and is thus relevant in many situations where one would like to discover something hidden in the data.
+ Matrix factorization is basically factorizing a matrix, i.e. finding out two (or more) matrices such that their multiplication will result in the original matrix.
+ It can be used to identify latent features underlying the interactions between two different kinds of entities. One of it’s obvious application is to predict ratings (or score) in collaborative filtering.
   \subsubsection{Average Value Based SVD Completion}
   Below is the description of steps used to generate predictions using Average Values -
   \begin{enumerate}
