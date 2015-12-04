@@ -24,11 +24,11 @@ Jack  &            &            & 4          & 4          \\ \hline
   \end{table}
 \\
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Take a look at Table~\ref{Model-1}. The table illustrates the example we described while discussing "Sparsity". So how do you ensure that John and Eric are considered similar to each other? Look at the code written in "Examples/ToyExampleModelSVDMotivation.m" and see how low rank approximation helps us magically establish this relationship between John and Eric. We will discuss what low rank approximation in the next section. 
+Take a look at Table~\ref{Model-1}. The table illustrates the example we described while discussing \textit{Sparsity}. So how do you ensure that John and Eric are considered similar to each other? Look at the code written in \textit{Examples/ToyExampleModelSVDMotivation.m} and see how low rank approximation helps us magically establish this relationship between John and Eric. We will discuss what low rank approximation in the next section. 
 \end{myremark}
 
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Look at "Examples/ToyExampleModelSVDMotivation2.m". It explains a scenario similar to the talked about in Synonym Problem and looks at a potential solution.
+Look at \textit{Examples/ToyExampleModelSVDMotivation2.m}. It explains a scenario similar to the talked about in Synonym Problem and looks at a potential solution.
 \end{myremark}
   \subsection{Singular Vector Decomposition}
 
@@ -199,7 +199,7 @@ U5 & 1.36 & 1.07 & 4.89 & 4.12\\ [1ex] % [1ex] adds vertical space
  We can see that for existing ratings we have the approximations very close to the true values, and we also get some 'predictions' of the unknown values. In this simple example, we can easily see that U1 and U2 have similar taste and they both rated D1 and D2 high, while the rest of the users preferred D3, D4 and D5. When the number of features (K in the Python code) is 2, the algorithm is able to associate the users and items to two different features, and the predictions also follow these associations. For example, we can see that the predicted rating of U4 on D3 is 4.59, because U4 and U5 both rated D4 high.
 
   \subsubsection{Average Value Based SVD Completion}
-  Below is the description of steps used to generate predictions using Average Values for SVD Completion -
+  Below is the description of steps used to generate predictions using Average Values -
   \begin{enumerate}
     \item Let $R$ be the original sparse matrix where rows represent the user and columns represent the movies
     \item Fill the empty cells in each column with average values of the product/movies in that column.
@@ -208,10 +208,10 @@ U5 & 1.36 & 1.07 & 4.89 & 4.12\\ [1ex] % [1ex] adds vertical space
     \item Factor $R_{norm}$ using SVD and obtain $U$, $S$ and $V$
     \item Truncate $U$, $S$ and $V$ to $U_k$, $S_k$ and $V_k$.
     \item Compute the resultant matrix $Pred_{norm} = U_k*S_k*V_k$
-    \item Add the average customer value calculated in Step 3 to this matrix $Pred = Pred_{norm} + \overline{C} $
+    \item Add the average customer value calculated in Step 3 to this matrix, i.e, $Pred = Pred_{norm} + \overline{C} $
   \end{enumerate}
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Implement a function for average value SVD completion. Use the matrix generated from table \ref{table:example_ratings1}. Compare the result with our implementation located in Examples/ToyExampleAverageValueSVD.m
+Implement a function for average value SVD completion. Use the matrix generated from table \ref{table:example_ratings1}. Compare the result with our implementation located in \textit{Examples/ToyExampleAverageValueSVD.m}.
 \end{myremark}
   \subsubsection{Iterative SVD Completion}
   Another simple approach to complete a matrix and generate predictions is to use iterative SVD. 
@@ -222,22 +222,22 @@ Implement a function for average value SVD completion. Use the matrix generated 
     \item Truncate $U$, $S$ and $V$ to $U_k$, $S_k$ and $V_k$.
     \item Compute the resultant matrix $R_{next} = U_k*S_k*V_k$
     \item Use the known values in $R$ to replace values in $R_{next}$
-    \item Repeat the process from Step 3 $t$ number of times.
+    \item Repeat the process from Step 3, $T$ number of times.
   \end{enumerate}
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Implement a function for iterative SVD completion. Use the matrix generated from table \ref{table:example_ratings1}. Compare the result with our implementation located in Examples/ToyExampleIterativeSVD.m
+Implement a function for iterative SVD completion. Use the matrix generated from table \ref{table:example_ratings1}. Compare the result with our implementation located in \textit{Examples/ToyExampleIterativeSVD.m}.
 \end{myremark}
   \subsection{Nearest Neighbor}
   \subsubsection{Using Predicted Matrix}
-  Once we have a prediction for all the movies/products for all the users, we can use nearest neighbors to generate item recommendation for a user. One may ask what use is this method if we already have a prediction? Well, nearest neighbor method can lead to something called as "Serendipity". We will discuss the meaning of Serendipity in a later section. This method is based on the assumption - given a high accuracy of prediction, we might find better neighbors and thus better ratings.
+  Once we have a prediction for all the movies/products of all the users, we can use nearest neighbors to generate item recommendation for a user. Why do we do this when we already have a prediction? Well, nearest neighbor method can lead to something called as "Serendipity". We will discuss the meaning of Serendipity in a later section. This method is based on the assumption - given a high accuracy of prediction, we might find better neighbors and thus better ratings.
   \subsubsection{Original Matrix in Lower Dimension}
   Another work around to find better neighbors is to look for neighbors in a lower dimension space of the original sparse matrix. The motivation here is that a lower dimension space will lead to a denser matrix and might help us find better neighbors.
   \subsubsection{Which Nearest Neighbor approximation to Use?}
-  To answer this question we will resort to the golden answer to life, universe and anything non concrete - \textit{"It Depends!!!"}. For the purpose of this lab we used Nearest Neighbor approach in a lower dimension space of predicted matrix. Empirically, it worked better. In general, one tries different approaches and sees what works best for their environment and their preference of error metrics.
+  To answer this question we will resort to the golden answer to anything non-concrete - \textit{"It Depends!!!"}. For the purpose of this lab we used Nearest Neighbor approach in a lower dimension space of predicted matrix. Empirically, it worked better. In general, one tries different approaches and sees what works best for their environment and their preference of error metrics.
   \subsection{Bringing it All Together}
   Now that you have all the concepts required to understand a Model Based Recommender System, we will encourage you to experiment with it to get an idea of the different trade-offs involved and the corresponding complexity in settling down on a method.
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Look at the code in "ModelBasedPrediction / EvaluateModelBasedSVD.m" Play around with parameters, look at the impact it has on different error rates. It is upto you to decide what factors do you care about and what according to you is the best system. We have provided you with outputs for many different parameters in the table-reference-here[TODO FIXME].
+Look at the code in \textit{ModelBasedPrediction / EvaluateModelBasedSVD.m} Play around with the parameters, look at the impact it has on different error rates. It is upto you to decide what factors are important and what constitutes a good system. We have provided you with outputs for many different parameters in the table-reference-here[TODO FIXME].
 \end{myremark}
   \section{Miscellaneous Topics}
   \subsection{Content Based Recommender Systems}
@@ -268,8 +268,8 @@ Look at the code in "ModelBasedPrediction / EvaluateModelBasedSVD.m" Play around
 \end{itemize}
 
   \subsection{Serendipity}
-  Recommender Systems exist to help users discover an item that he or she would like among the large pool of items available. Most of the errors that we saw did not talk about the novelty of recommendation. For example, if I have seen Star Wars: A New Hope, Star Wars: The Empire Strikes Back and Star Wars: Revenge of the Sith, I will most likely find a lot of nearest neighbors whose collective votes leads to the recommendation for The Phantom Menace, Attack of the Clones and Revenge of the Sith. I might end up liking that movie. Now consider a scenario where I end up watching a movie of a different genre altogether, say "Lincoln" and end up liking it a lot. An item based recommendation system would have never led me to discover this movie as all the movies I have rated fall into the Action/Saga/Fantasy category. Such discoveries are called serendipitous discoveries. 
+  Recommender Systems exist to help users discover an item that he or she would like among the large pool of items available. Most of the errors that we saw did not talk about the novelty of recommendation. For example, if I have seen Star Wars: A New Hope, Star Wars: The Empire Strikes Back and Star Wars: Revenge of the Sith, I will most likely find a lot of nearest neighbors whose collective votes leads to the recommendation for The Phantom Menace, Attack of the Clones and Revenge of the Sith. I will definitely end up liking that movie. Now consider a scenario where watch a movie of a completely different genre, say \textit{Lincoln} and enjoy it a lot. An item based recommendation system would have never led me to discover this movie as all the movies I have rated fall into the Action/Saga/Fantasy category. Such discoveries are called serendipitous discoveries. 
 
-Serendipity is related to unexpectedness and involves a positive emotional response of the user about a previously unknown item. It measures how surprising the unexpected recommendations that is, serendipity is concerned with the novelty of recommendations and how far such recommendations may positively affect the user. It is generally not easy to measure and most systems consider a trade-off between various forms of accuracy and serendipity. 
+Serendipity is related to unexpectedness and involves a positive emotional response of the user about a previously unknown item. It is concerned with the novelty of recommendations and how far such recommendations may positively affect the user. Serendipity is generally not easy to measure and most systems consider a trade-off between various forms of accuracy and serendipity. 
 % \end{document}
 

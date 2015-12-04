@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.9.8)  3 DEC 2015 23:17
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.9.8)  3 DEC 2015 23:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -972,23 +972,71 @@ Missing character: There is no “ in font cmr10!
 
 
 (./merge_lokesh.tex
+
+LaTeX Warning: Reference `eq:utility_U' on page 3 undefined on input line 5.
+
 File: bc-lampe.mps Graphic file (type mps)
- [MP to PDF]
+[MP to PDF]
 (/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/bclogo/bc-lam
 pe.mps)
 Overfull \hbox (28.705pt too wide) in paragraph at lines 39--39
 [] 
  []
 
+
+LaTeX Warning: Reference `eq:cosine_sim' on page 3 undefined on input line 44.
+
+File: bc-lampe.mps Graphic file (type mps)
+[MP to PDF]
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/bclogo/bc-lam
+pe.mps)
+Overfull \hbox (28.705pt too wide) in paragraph at lines 54--54
+[] 
+ []
+
 [3
 
 
-] [4]
+]
 
-LaTeX Warning: Reference `example_ratings2' on page 5 undefined on input line 1
-56.
+LaTeX Warning: Reference `eq:PC_sim' on page 4 undefined on input line 74.
 
-[5] [6]) [7]
+File: bc-lampe.mps Graphic file (type mps)
+[MP to PDF]
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/bclogo/bc-lam
+pe.mps)
+Overfull \hbox (28.705pt too wide) in paragraph at lines 85--85
+[] 
+ []
+
+[4]
+File: bc-lampe.mps Graphic file (type mps)
+ [MP to PDF]
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/bclogo/bc-lam
+pe.mps)
+
+LaTeX Warning: Reference `eq:basic_pred' on page 5 undefined on input line 100.
+
+
+
+Overfull \hbox (28.705pt too wide) in paragraph at lines 100--100
+[] 
+ []
+
+
+LaTeX Warning: Reference `eq:second_pred' on page 5 undefined on input line 102
+.
+
+[5]
+File: bc-lampe.mps Graphic file (type mps)
+ [MP to PDF]
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/bclogo/bc-lam
+pe.mps)
+Overfull \hbox (28.705pt too wide) in paragraph at lines 156--156
+[] 
+ []
+
+[6]) [7]
 \openout2 = `merge_urmish.aux'.
 
  (./merge_urmish.tex
@@ -1050,9 +1098,9 @@ File: bc-lampe.mps Graphic file (type mps)
  [MP to PDF]
 (/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/bclogo/bc-lam
 pe.mps)
-Underfull \hbox (badness 2096) in paragraph at lines 241--241
-[]\OT1/cmr/m/n/10 Look at the code in "Mod-el-Based-Pre-dic-tion / Eval-u-ate-M
-od-el-
+Underfull \hbox (badness 4699) in paragraph at lines 241--241
+[]\OT1/cmr/m/n/10 Look at the code in \OT1/cmr/m/it/10 Mod-el-Based-Pre-dic-tio
+n / Eval-u-ate-Mod-el-
  []
 
 
@@ -1076,11 +1124,11 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 17691 strings out of 493629
- 342943 string characters out of 3134964
+ 17698 strings out of 493629
+ 343605 string characters out of 3134964
  506639 words of memory out of 3000000
- 20585 multiletter control sequences out of 15000+200000
- 14495 words of font info for 55 fonts, out of 3000000 for 9000
+ 20586 multiletter control sequences out of 15000+200000
+ 13437 words of font info for 52 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  62i,14n,80p,1110b,1362s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/enc/dvips/cm-su
@@ -1089,29 +1137,27 @@ nts/type1/public/amsfonts/cm/cmbx10.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_
 rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></afs/cs.wisc.edu/s/
 texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></
 afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmbxti10.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/font
-s/type1/public/amsfonts/cm/cmex10.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rh
-el5/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></afs/cs.wisc.edu/s/te
-xlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></af
-s/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmmi7.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr10.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></afs/cs.wisc.edu/s/texlive-2
-011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></afs/cs.wi
-sc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-7.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmsy10.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy7.pfb></afs/cs.wisc.edu/s/texlive-2011/amd
-64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></afs/cs.wisc.edu
-/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pf
-b></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmtt9.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fon
-ts/type1/public/cm-super/sfbx1000.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rh
-el5/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on Recommender_System.pdf (16 pages, 279688 bytes).
+ts/cm/cmex10.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi10.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel
+5/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></afs/cs.wisc.edu/s/texli
+ve-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></afs/c
+s.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr10.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr12.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></afs/cs.wisc.edu/s/texlive-2011
+/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></afs/cs.wisc.e
+du/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
+pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmsy7.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmti10.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64
+_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></afs/cs.wisc.edu/s
+/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><
+/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/cm-su
+per/sfrm1000.pfb>
+Output written on Recommender_System.pdf (16 pages, 262046 bytes).
 PDF statistics:
- 161 PDF objects out of 1000 (max. 8388607)
- 106 compressed objects within 2 object streams
+ 152 PDF objects out of 1000 (max. 8388607)
+ 100 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  109 words of extra memory for PDF output out of 10000 (max. 10000000)
 

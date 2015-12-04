@@ -1,15 +1,15 @@
 \contentsline {section}{\numberline {1}Motivation}{2}
 \contentsline {section}{\numberline {2}User Based Recommendation}{3}
-\contentsline {subsection}{\numberline {2.1}Idea of \textit {similarity}}{3}
-\contentsline {subsubsection}{\numberline {2.1.1}Similarity weight computation}{3}
+\contentsline {subsection}{\numberline {2.1}Idea of Similarity}{3}
+\contentsline {subsubsection}{\numberline {2.1.1}Similarity Weight Computation}{3}
 \contentsline {subsection}{\numberline {2.2}Calculating Predicted Ratings}{4}
-\contentsline {subsection}{\numberline {2.3}Rating normalization}{5}
+\contentsline {subsection}{\numberline {2.3}Rating Normalization}{5}
 \contentsline {subsubsection}{\numberline {2.3.1}Mean-Centering}{5}
-\contentsline {subsubsection}{\numberline {2.3.2}Z-score normalization}{5}
+\contentsline {subsubsection}{\numberline {2.3.2}Z-score Normalization}{6}
 \contentsline {subsection}{\numberline {2.4}How to Evaluate a Recommender System?}{6}
 \contentsline {subsubsection}{\numberline {2.4.1}Root Mean Square Error}{6}
-\contentsline {paragraph}{}{6}
-\contentsline {subsubsection}{\numberline {2.4.2}Top Five Rated Movies}{6}
+\contentsline {paragraph}{}{7}
+\contentsline {subsubsection}{\numberline {2.4.2}Top Five Rated Movies}{7}
 \contentsline {subsubsection}{\numberline {2.4.3}Number of Good Movies Not Predicted}{7}
 \contentsline {subsubsection}{\numberline {2.4.4}Number of Flipped Movies}{7}
 \contentsline {section}{\numberline {3}Model Based Systems}{8}
