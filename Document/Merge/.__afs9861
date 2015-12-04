@@ -7,7 +7,6 @@
 \usepackage{tabularx}                    % for creating table
 \usepackage{multirow}                    % for tables
 \usepackage{fixltx2e}
-\usepackage[parfill]{parskip}
 
 % mehreen
 \usepackage{mathtools}
@@ -35,11 +34,6 @@
 
 % urmish
 % \usepackage[colorlinks]{hyperref}
-\usepackage{titlesec} %Paragraph ke liye
-\titleformat{\paragraph} %Paragraph ke liye
-{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
-\titlespacing*{\paragraph}
-{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex} %Paragraph ke liye
 
 \begin{document}
 	\title{CS532 Lab\\Recommender Systems}

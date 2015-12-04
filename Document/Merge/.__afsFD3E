@@ -7,7 +7,6 @@
 \usepackage{tabularx}                    % for creating table
 \usepackage{multirow}                    % for tables
 \usepackage{fixltx2e}
-\usepackage[parfill]{parskip}
 
 % mehreen
 \usepackage{mathtools}

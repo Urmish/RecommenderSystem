@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.9.8)  3 DEC 2015 21:40
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.9.8)  3 DEC 2015 22:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -326,6 +326,10 @@ LaTeX Info: Redefining \em on input line 420.
 LaTeX Info: The control sequence `\[' is already robust on input line 471.
 LaTeX Info: The control sequence `\]' is already robust on input line 472.
 )
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/parskip/parsk
+ip.sty
+Package: parskip 2001/04/09 non-zero parskip adjustments
+)
 (/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/mh/mathtools.
 sty
 Package: mathtools 2011/04/06 v1.11 mathematical typesetting tools
@@ -395,45 +399,58 @@ Package color Info: Driver file: pdftex.def on input line 130.
 (/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/listings/lstl
 ang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/titlesec/titl
+esec.sty
+Package: titlesec 2011/08/28 v2.9.1 Sectioning titles
+\ttl@box=\box30
+\beforetitleunit=\skip52
+\aftertitleunit=\skip53
+\ttl@plus=\dimen145
+\ttl@minus=\dimen146
+\ttl@toksa=\toks26
+\titlewidth=\dimen147
+\titlewidthlast=\dimen148
+\titlewidthfirst=\dimen149
 ) (./Recommender_System.aux (./merge_mehreen.aux) (./merge_lokesh.aux)
 (./merge_urmish.aux))
 \openout1 = `Recommender_System.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 38.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 38.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 44.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 44.
 
 (/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/base/ts1cmr.f
 d
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    ... okay on input line 44.
 
 (/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/context/base/supp-p
 df.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count117
-\scratchdimen=\dimen145
-\scratchbox=\box30
+\scratchdimen=\dimen150
+\scratchbox=\box31
 \nofMPsegments=\count118
 \nofMParguments=\count119
-\everyMPshowfont=\toks26
+\everyMPshowfont=\toks27
 \MPscratchCnt=\count120
-\MPscratchDim=\dimen146
+\MPscratchDim=\dimen151
 \MPnumerator=\count121
 \makeMPintoPDFobject=\count122
-\everyMPtoPDFconversion=\toks27
+\everyMPtoPDFconversion=\toks28
 )
 (/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/generic/oberdiek/pd
 ftexcmds.sty
@@ -525,18 +542,22 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count123
-LaTeX Font Info:    Try loading font information for U+msa on input line 42.
+LaTeX Font Info:    Try loading font information for U+msa on input line 48.
 
 (/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/amsfonts/umsa
 .fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 42.
+LaTeX Font Info:    Try loading font information for U+msb on input line 48.
 
 (/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/amsfonts/umsb
 .fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-) [1
+) (./Recommender_System.toc)
+\tf@toc=\write3
+\openout3 = `Recommender_System.toc'.
+
+ [1
 
 {/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-var/fonts/map/pdftex/updmap/
 pdftex.map}]
@@ -549,36 +570,21 @@ Missing character: There is no “ in font cmr10!
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no “ in font cmr10!
- [2
+) [2
 
 ]
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
- [3]
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
- [4] [5]
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
- [6]) [7]
 \openout2 = `merge_lokesh.aux'.
 
 
-(./merge_lokesh.tex [8
+(./merge_lokesh.tex [3
 
 
-] [9]
+] [4]
 
-LaTeX Warning: Reference `example_ratings2' on page 10 undefined on input line 
-236.
+LaTeX Warning: Reference `example_ratings2' on page 5 undefined on input line 1
+56.
 
-) [10]
+[5] [6]) [7]
 \openout2 = `merge_urmish.aux'.
 
  (./merge_urmish.tex
@@ -591,23 +597,38 @@ Underfull \hbox (badness 10000) in paragraph at lines 20--39
 
  []
 
-[11
+[8
 
 
-] [12] [13] [14]) [15] (./Recommender_System.aux (./merge_mehreen.aux)
-(./merge_lokesh.aux) (./merge_urmish.aux))
+] [9]
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+ [10]
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+ [11] [12] [13]
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+ [14]) [15] (./Recommender_System.aux
+(./merge_mehreen.aux) (./merge_lokesh.aux) (./merge_urmish.aux))
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 6302 strings out of 493629
- 96276 string characters out of 3134964
- 218741 words of memory out of 3000000
- 9475 multiletter control sequences out of 15000+200000
+ 6584 strings out of 493629
+ 100193 string characters out of 3134964
+ 214764 words of memory out of 3000000
+ 9747 multiletter control sequences out of 15000+200000
  14495 words of font info for 55 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 38i,10n,40p,1138b,974s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,10n,40p,1109b,1535s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/enc/dvips/cm-su
 per/cm-super-ts1.enc}</afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmbx10.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_
@@ -633,7 +654,7 @@ b></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmtt9.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fon
 ts/type1/public/cm-super/sfbx1000.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rh
 el5/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on Recommender_System.pdf (15 pages, 275564 bytes).
+Output written on Recommender_System.pdf (15 pages, 275281 bytes).
 PDF statistics:
  130 PDF objects out of 1000 (max. 8388607)
  93 compressed objects within 1 object stream
