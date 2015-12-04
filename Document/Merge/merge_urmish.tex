@@ -1,19 +1,10 @@
-% \documentclass{article}
-% \usepackage{amsmath}
-% \usepackage{algorithm}
-% \usepackage[noend]{algpseudocode}
-% \usepackage[colorlinks]{hyperref}
-% 
-% 
-% \begin{document}
-%  \pagenumbering{arabic}
 \section{Model Based Systems}
   The systems based on methods discussed earlier in the lab have been widely used and produce good results. But such algorithms have been shown to have several limitations. 
   \begin{itemize}
-    \item \underline{Sparsity} - Nearest Neighbor (NN) Algorithms need exact matches. As a result algorithms sacrifice recommender system coverage and accuracy [TODO FIXME ref1]. To be more precise, correlation coefficient is only defined between customers who have few products (movies in our database) in common. In an ecommerce environment where there are large number of items, one may find many customers who do not have any correlation with other customers [TODO FIXME ref2]. As a result Nearest Neighbor based algorithms are not able to recommend anything to these customers. This problem is known as the reduced coverage problem. The sparsity could also a recommender system from detecting certain obvious neighbors. 
+    \item \underline{Sparsity} - Nearest Neighbor (NN) Algorithms need exact matches. As a result algorithms sacrifice recommender system coverage and accuracy [TODO FIXME ref1]. To be more precise, correlation coefficient is only defined between customers who have few products (movies in our database) in common. In an e-commerce environment where there are large number of items, one may find many customers who do not have any correlation with other customers [TODO FIXME ref2]. As a result Nearest Neighbor based algorithms are not able to recommend anything to these customers. This problem is known as the reduced coverage problem. The sparsity could also a recommender system from detecting certain obvious neighbors. 
 
 \textit{For example - John and Susan are highly correlated, while Susan and Jack are highly correlated. Conventional wisdom might suggest John and Jack should also have similar choices, however if John and Jack have very few ratings in common, such patterns could be easily missed}
-    \item \underline{Synonym Problem} - In real life scenarios, different product names can refer to similar items. Correlation based recommender systems cannot find such latent association and thus end up treating these objects as two seperate entities. 
+    \item \underline{Synonym Problem} - In real life scenarios, different product names can refer to similar items. Correlation based recommender systems cannot find such latent association and thus end up treating these objects as two separate entities. 
 
 \textit{For example, let us consider two customers one of whom rates 10 different writing pad products as "high" and another customer rates 10 different notepads as "high". NN based recommender system will not capture their association.}
   \end{itemize}
@@ -33,7 +24,7 @@ Jack  &            &            & 4          & 4          \\ \hline
   \end{table}
 \\
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Take a look at Table~\ref{Model-1}. This illustrates the example we described while discussing "Sparsity". So how do you ensure that John and Eric are considered similar to each other? Look at the code writted in "Examples/ToyExampleModelSVDMotivation.m" and see how low rank approximation helps us magically establish this relationship between John and Eric. We will discuss what this low rank approximation is and how do we calculate it in the next section. 
+Take a look at Table~\ref{Model-1}. This illustrates the example we described while discussing "Sparsity". So how do you ensure that John and Eric are considered similar to each other? Look at the code written in "Examples/ToyExampleModelSVDMotivation.m" and see how low rank approximation helps us magically establish this relationship between John and Eric. We will discuss what this low rank approximation is and how do we calculate it in the next section. 
 \end{myremark}
 
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
@@ -101,7 +92,7 @@ Having discussed the intuition behind matrix factorization, we can now go on to 
     r_{ij} = p_i^{T}q_j = \sum_{k=1}^{K}p_{ik}q_{kj}
   \end{gather*}
 
- Now, we have to find a way to obtain $\mathbf{P}$ and $\mathbf{Q}$. One way to approach this problem is the first intialize the two matrices with some values, calculate how `different’ their product is to $\mathbf{M}$, and then try to minimize this difference iteratively. Such a method is called gradient descent, aiming at finding a local minimum of the difference.
+ Now, we have to find a way to obtain $\mathbf{P}$ and $\mathbf{Q}$. One way to approach this problem is the first initialize the two matrices with some values, calculate how `different’ their product is to $\mathbf{M}$, and then try to minimize this difference iteratively. Such a method is called gradient descent, aiming at finding a local minimum of the difference.
 
  Here we consider the squared error because the estimated rating can be either higher or lower than the real rating.
 
@@ -244,7 +235,7 @@ Implement a function for iterative SVD completion. Use the matrix generated from
   \subsubsection{Which Nearest Neighbor approximation to Use?}
   To answer this question we will resort to the golden answer to life, universe and anything non concrete - \textit{"It Depends!!!"}. For the purpose of this lab we used Nearest Neighbor approach in a lower dimension space of predicted matrix. Empirically, it worked better. In general, one tries different approaches and sees what works best for their environment and their preference of error metrics.
   \subsection{Bringing it All Together}
-  Now that you have all the concepts required to understand a Model Based Recommender System, we will encourage you to experiment with it to get an idea of the different tradeoffs involved and the corresponding complexity in settling down on a method.
+  Now that you have all the concepts required to understand a Model Based Recommender System, we will encourage you to experiment with it to get an idea of the different trade-offs involved and the corresponding complexity in settling down on a method.
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
 Look at the code in "ModelBasedPrediction / EvaluateModelBasedSVD.m" Play around with parameters, look at the impact it has on different error rates. It is upto you to decide what factors do you care about and what according to you is the best system. We have provided you with outputs for many different parameters in the table-reference-here[TODO FIXME].
 \end{myremark}
