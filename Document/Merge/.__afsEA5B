@@ -74,7 +74,7 @@
 %Box Environment Ends
 
 %Counter
-\newcounter{ques}
+\newcounter{exerciseNum}
 %To use \stepcounter{ques}Exercise \arabic{ques} => increment by 1 and use
 %End Counter
 
