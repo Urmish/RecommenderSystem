@@ -1,0 +1,18 @@
+\documentclass{article}
+\usepackage{inputenc,amsmath,amssymb,upquote,graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage[font=bf]{caption}    % to make the figure captions bold
+\usepackage{tabularx}                    % for creating table
+\usepackage{multirow}                    % for tables
+
+
+\begin{document}
+	\title{CS532 Lab\\Recommender Systems}
+	\author{Lokesh Jindal \and Mehreen Ali \and Urmish Thakker}
+	\date{Fall 2015} 
+	\maketitle
+	
+% \include{../Mehreen/Mehreen.tex}
+\include{merge_lokesh}
+% \include{../Urmish/helloworld2.tex}
+\end{document}
