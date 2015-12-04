@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage{inputenc,amsmath,amssymb,upquote,graphicx}
+\usepackage[margin=1in]{geometry}
+
+% lokesh
+\usepackage[font=bf]{caption}    % to make the figure captions bold
+\usepackage{tabularx}                    % for creating table
+\usepackage{multirow}                    % for tables
+\usepackage{fixltx2e}
+\usepackage[parfill]{parskip}
+
+% mehreen
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+% urmish
+% \usepackage[colorlinks]{hyperref}
+\usepackage{titlesec} %Paragraph ke liye
+\titleformat{\paragraph} %Paragraph ke liye
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex} %Paragraph ke liye
+
+%Box Environment
+\usepackage{environ}
+\usepackage[tikz]{bclogo}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{lipsum}
+
+\NewEnviron{myremark}[1]
+  {\par\medskip\noindent
+  \begin{tikzpicture}
+    \node[inner sep=0pt] (box) {\parbox[t]{.99\textwidth}{%
+      \begin{minipage}{.3\textwidth}
+      \centering\tikz[scale=5]\node[scale=3,rotate=30]{\bclampe};
+      \end{minipage}%
+      \begin{minipage}{.65\textwidth}
+      \textbf{#1}\par\smallskip
+      \BODY
+      \end{minipage}\hfill}%
+    };
+    \draw[black!75!black,line width=3pt] 
+      ( $ (box.north east) + (-5pt,3pt) $ ) -- ( $ (box.north east) + (0,3pt) $ ) -- ( $ (box.south east) + (0,-3pt) $ ) -- + (-5pt,0);
+    \draw[black!75!black,line width=3pt] 
+      ( $ (box.north west) + (5pt,3pt) $ ) -- ( $ (box.north west) + (0,3pt) $ ) -- ( $ (box.south west) + (0,-3pt) $ ) -- + (5pt,0);
+  \end{tikzpicture}\par\medskip%
+}
+%To Use 
+%\begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
+%Look at the ratings of user \textit{Eric} in Table \ref{table:example_ratings1}. Also look at the ratings given by other users in the table. Can you guess which user(s) are similar to user \textit{Eric}?
+%\end{myremark}
+%
+%Box Environment Ends
+
+%Counter
+\newcounter{ques}
+%To use \stepcounter{ques}Exercise \arabic{ques} => increment by 1 and use
+%End Counter
+
+\begin{document}
+	\title{CS532 Lab\\Recommender Systems}
+	\author{Lokesh Jindal \and Mehreen Ali \and Urmish Thakker}
+	\date{Fall 2015} 
+	\maketitle
+\tableofcontents
+\include{merge_mehreen}
+\include{merge_lokesh}
+\include{merge_urmish}
+\end{document}

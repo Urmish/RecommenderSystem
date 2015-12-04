@@ -1,10 +1,10 @@
 \section{Model Based Systems}
   The systems based on methods discussed earlier in the lab have been widely used and produce good results. But such algorithms have been shown to have several limitations. 
   \begin{itemize}
-    \item \underline{Sparsity} - Nearest Neighbor (NN) Algorithms need exact matches. As a result algorithms sacrifice recommender system coverage and accuracy [TODO FIXME ref1]. To be more precise, correlation coefficient is only defined between customers who have few products (movies in our database) in common. In an e-commerce environment where there are large number of items, one may find many customers who do not have any correlation with other customers [TODO FIXME ref2]. As a result Nearest Neighbor based algorithms are not able to recommend anything to these customers. This problem is known as the reduced coverage problem. The sparsity could also a recommender system from detecting certain obvious neighbors. 
+    \item \underline{Sparsity} - Nearest Neighbor (NN) Algorithms need exact matches. As a result algorithms sacrifice recommender system coverage and accuracy [TODO FIXME ref1]. To be more precise, correlation coefficient is only defined between customers who have products (movies in our database) in common. In an ecommerce environment where there are large number of items, one may find many customers who do not have any correlation with other customers [TODO FIXME ref2]. As a result Nearest Neighbor based algorithms are not able to recommend anything to these customers. This problem is known as the reduced coverage problem. The sparsity could also lead to a recommender system from missing certain obvious neighbors. 
 
 \textit{For example - John and Susan are highly correlated, while Susan and Jack are highly correlated. Conventional wisdom might suggest John and Jack should also have similar choices, however if John and Jack have very few ratings in common, such patterns could be easily missed}
-    \item \underline{Synonym Problem} - In real life scenarios, different product names can refer to similar items. Correlation based recommender systems cannot find such latent association and thus end up treating these objects as two separate entities. 
+    \item \underline{Synonym Problem} - In real life scenarios, different product names can refer to similar items. Correlation based recommender systems cannot find such latent association and thus end up treating these objects as two seperate entities. 
 
 \textit{For example, let us consider two customers one of whom rates 10 different writing pad products as "high" and another customer rates 10 different notepads as "high". NN based recommender system will not capture their association.}
   \end{itemize}
@@ -24,17 +24,17 @@ Jack  &            &            & 4          & 4          \\ \hline
   \end{table}
 \\
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Take a look at Table~\ref{Model-1}. This illustrates the example we described while discussing "Sparsity". So how do you ensure that John and Eric are considered similar to each other? Look at the code written in "Examples/ToyExampleModelSVDMotivation.m" and see how low rank approximation helps us magically establish this relationship between John and Eric. We will discuss what this low rank approximation is and how do we calculate it in the next section. 
+Take a look at Table~\ref{Model-1}. The table illustrates the example we described while discussing "Sparsity". So how do you ensure that John and Eric are considered similar to each other? Look at the code written in "Examples/ToyExampleModelSVDMotivation.m" and see how low rank approximation helps us magically establish this relationship between John and Eric. We will discuss what low rank approximation in the next section. 
 \end{myremark}
 
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Look at "Examples/ToyExampleModelSVDMotivation2.m". It explains a scenario similar to the talked about in Synonym Problem and looks at a potential solution 
+Look at "Examples/ToyExampleModelSVDMotivation2.m". It explains a scenario similar to the talked about in Synonym Problem and looks at a potential solution.
 \end{myremark}
   \subsection{Singular Vector Decomposition}
 
-The Singular Value Decomposition (SVD) is a well known matrix factorization method. Formally, the SVD of an $m \times n$ matrix $A$ is a factorization of the form $A = U \Sigma V^{T}$ where $U$ is an $m \times m$ orthogonal matrix, $\Sigma$ is an $m \times n$ diagonal matrix with non-negative terms on the diagonal, and $V$ is an $n \times n$ orthogonal matrix. The diagonal entries of $\Sigma$ are known as the singular values of $A$. The $m$ columns of $U$ and the $n$ column of $V$ are known as the left and right singular vectors of $A$ respectively. 
+The Singular Value Decomposition (SVD) is a well known matrix factorization method. Formally, the SVD of a $m \times n$ matrix $A$ is a factorization of the form $A = U \Sigma V^{T}$ where $U$ is a $m \times m$ orthogonal matrix, $\Sigma$ is a $m \times n$ diagonal matrix with non-negative terms on the diagonal, and $V$ is a $n \times n$ orthogonal matrix. The diagonal entries of $\Sigma$ are known as the singular values of $A$. The $m$ columns of $U$ and the $n$ column of $V$ are known as the left and right singular vectors of $A$ respectively. 
 
-The SVD gives the `best' low-rank approximation of a matrix. To put this in a more formal notation, it minimizes the Frobenius form of the difference between the approximation and the original matrix (i.e. the sum of squared errors).
+The SVD gives the `best' low-rank approximation of a matrix. To put this in a more formal notation, it minimizes the Frobenius form of the difference between the approximation and the original matrix.
 
 Assume that matrix $A \in R^{m \times n}$ with rank $r > k$. The Frobenius norm approximation problem $min || A - Z ||_{F}$ where $rank(Z) = k$ has the solution:
 \[Z = A_{k} = U_{k} \Sigma_{k} V_{k}^{T}\]
@@ -46,9 +46,9 @@ A = magic(3)
 [U,D,V] = svd(A)
 \end{verbatim}
 
-You should observe that the columns of the matrices $U$ and $V$ are orthonormal, i.e. orthogonal unit vectors. Also note that $\Sigma$ is a diagonal matrix with non-negative and monotonically decreasing entries along the diagonal. These are the singular values of $A$. The $i^{th}$ singular value ($\Sigma_{ii}$) represents the energy content, or variance of the columns of $A$ along the $i^{th}$ left singular vector or the rows of $A$ along the $i^{th}$ right singular vector.
+You should observe that the columns of the matrices $U$ and $V$ are orthonormal. Also note that $\Sigma$ is a diagonal matrix with non-negative and monotonically decreasing entries along the diagonal. These are the singular values of $A$.
   \subsection{Generating Predictions}
-  We can use SVD in recommender system to capture certain latent relationship between customers and products/movies. We can use this relationship to capture the predicted likeliness of a certain product/movie by a consumer. However, how do you calculate the SVD of an incomplete matrix? In order to handle this, we will study various approximations. We will then run these methods and collect empirical evidence to validate their effectiveness.
+  We can use SVD in recommender system to capture certain latent relationship between customers and products/movies. We can use this relationship to capture the predicted likeliness of a certain product/movie by a consumer. \textit{So the next big question is}, how do you calculate the SVD of an incomplete matrix? Or rather, how do you complete a matrix in general? In order to handle this, we will study various approximations. We will then run these methods and collect empirical evidence to validate their effectiveness.
   \subsubsection{Latent Matrix Factorization}
 
 Recommendations can be generated by a wide range of algorithms. While user-based or item-based collaborative filtering methods are simple and intuitive, matrix factorization techniques are usually more effective because they allow us to discover the latent features underlying the interactions between users and items. Of course, matrix factorization is simply a mathematical tool for playing around with matrices, and is therefore applicable in many scenarios where one would like to find out something hidden under the data.
