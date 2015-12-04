@@ -33,10 +33,10 @@ U =
 	\end{matrix}
 	\right]
 	\end{equation}
-
-\begin{myremark}{Exercise}
-Look at the ratings of user \textit{Eric} in Table \ref{table:example_ratings1}. Also look at the ratings given by other users in the table. Can you guess which user(s) are similar to user \textit{Eric}?
-\end{myremark}
+	
+\textbf{
+EXERCISE \value {exercisenum} : Look at the ratings of user \textit{Eric} in Table \ref{table:example_ratings1}. Also look at the ratings given by other users in the table. Can you guess which user(s) are similar to user \textit{Eric}?
+}
 
 \subsubsection{Similarity weight computation}
 The example data set in Table \ref{table:example_ratings1} is very small in size for which finding users that are \textit{similar} to the user of interest might be possible. In real data sets, we need define a measure of \textit{similarity} that can be used to find the items/users that are \textit{similar} to each other. The computation of of the similarity weights is one of the most critical aspects of building \textit{neighborhood-based} recommendation systems, since it can have a significant impact on the performance and accuracy of a system.

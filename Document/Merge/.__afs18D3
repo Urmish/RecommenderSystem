@@ -60,22 +60,18 @@
       \BODY
       \end{minipage}\hfill}%
     };
-    \draw[black!75!black,line width=3pt] 
+    \draw[red!75!black,line width=3pt] 
       ( $ (box.north east) + (-5pt,3pt) $ ) -- ( $ (box.north east) + (0,3pt) $ ) -- ( $ (box.south east) + (0,-3pt) $ ) -- + (-5pt,0);
-    \draw[black!75!black,line width=3pt] 
+    \draw[red!75!black,line width=3pt] 
       ( $ (box.north west) + (5pt,3pt) $ ) -- ( $ (box.north west) + (0,3pt) $ ) -- ( $ (box.south west) + (0,-3pt) $ ) -- + (5pt,0);
   \end{tikzpicture}\par\medskip%
 }
-%To Use 
-%\begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-%Look at the ratings of user \textit{Eric} in Table \ref{table:example_ratings1}. Also look at the ratings given by other users in the table. Can you guess which user(s) are similar to user \textit{Eric}?
-%\end{myremark}
-%
 %Box Environment Ends
 
 %Counter
-\newcounter{exerciseNum}
-%To use \stepcounter{ques}Exercise \arabic{ques} => increment by 1 and use
+\newcounter {exercisenum}
+\setcounter {exercisenum} {0}
+\addtocounter {exercisenum} {1}
 %End Counter
 
 \begin{document}
