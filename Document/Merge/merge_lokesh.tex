@@ -1,8 +1,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{User Based Recommendation}
-\subsection{Idea of \textit{similarity}}
-Let's say the users of a website like Imdb [TODO FIXME] rate the movies on a scale of 1 to 5, where a rating of 5 implies the user really liked the movie and a rating of 1 implies the opposite. This data can be stored in the from of a \textit{utility matrix} where each row of the matrix corresponds to a user and each column corresponds to a movie. Consider an example rating set shown in Table [TODO FIXME ] that can be represented in the form of utility matrix \textit{utility matrix} U as shown in equation [TODO FIXME]. This 4x5 matrix stores the ratings given by 4 users to a set of 5 movies. As expected, not every user would have rated each of the 5 movies. The user-movie combination for which a rating does not exist is indicated by a 0.
+\subsection{Idea of Similarity}
+Let's say the users of a website like Imdb [TODO FIXME] rate the movies on a scale of 1 to 5, where a rating of 5 implies the user really liked the movie and a rating of 1 implies the opposite. This data can be stored in the from of a \textit{utility matrix} where each row of the matrix corresponds to a user and each column corresponds to a movie. Consider an example rating set shown in Table \ref{table:example_ratings1} that can be represented in the form of \textit{utility matrix} U as shown in equation \ref{eq:utility_U}. This 4x5 matrix stores the ratings given by 4 users to a set of 5 movies. As expected, not every user would have rated each of the 5 movies. The user-movie combination for which a rating does not exist is indicated by a 0.
 \begin{table*}
 \centering
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -22,7 +22,7 @@ Let's say the users of a website like Imdb [TODO FIXME] rate the movies on a sca
 \label{table:example_ratings1}
 \end{table*}
 
-\begin{equation}
+\begin{equation} \label{eq:utility_U}
 U = 
 	\left[
 	\begin{matrix} % the equation* above is required for matrix environment to work.
@@ -33,27 +33,27 @@ U =
 	\end{matrix}
 	\right]
 	\end{equation}
-
-\begin{myremark}{Exercise}
-Look at the ratings of user \textit{Eric} in Table \ref{table:example_ratings1}. Also look at the ratings given by other users in the table. Can you guess which user(s) are similar to user \textit{Eric}?
+	
+\begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
+Look at the ratings of user Eric in Table \ref{table:example_ratings1}. Also look at the ratings given by other users in the table. Can you guess which user(s) is(are) similar to user Eric?
 \end{myremark}
 
-\subsubsection{Similarity weight computation}
-The example data set in Table \ref{table:example_ratings1} is very small in size for which finding users that are \textit{similar} to the user of interest might be possible. In real data sets, we need define a measure of \textit{similarity} that can be used to find the items/users that are \textit{similar} to each other. The computation of of the similarity weights is one of the most critical aspects of building \textit{neighborhood-based} recommendation systems, since it can have a significant impact on the performance and accuracy of a system.
+\subsubsection{Similarity Weight Computation}
+The example data set in Table \ref{table:example_ratings1} is very small in size for which finding users that are similar to the user of interest might be trivial. For real data sets, we need to define a measure of similarity that can be used to find the items/users that are similar to each other. The computation of of the similarity weights is one of the most critical aspects of building a \textit{neighborhood-based} recommendation systems, since it can have a significant impact on the performance and accuracy of the system.
 
-\textbf{Cosine Similarity:} We apply the traditional notion of Cosine Vector (CV) similarity to find the similarity between two users \textit{u} and \textit{v}. If \textbf{x\textsubscript{u}} is vector of ratings r\textsubscript{ui} of a user \textit{u}, then the cosine similarity of users \textit{u} and \textit{v} can be calculated using the equation [TODO FIXME].
- \begin{equation}
+\textbf{Cosine Similarity:} We apply the traditional notion of Cosine Vector (CV) similarity to find the similarity between two users \textit{u} and \textit{v}. If \textbf{x\textsubscript{u}} is vector of ratings r\textsubscript{ui} of a user \textit{u}, then the cosine similarity of users \textit{u} and \textit{v} can be calculated using the equation \ref{eq:cosine_sim}.
+ \begin{equation} \label{eq:cosine_sim}
 CV(u,v) = cos(\textbf{x}_{u}, \textbf{x}_{v}) = \frac
 {\sum_{i \in{I_{uv}}}^{}{r_{ui}r_{vi}}}
 {\sqrt	{	\sum_{i \in{I_{u}}}^{}{r_{ui}^2}	\sum_{j \in{I_{v}}}^{}{r_{vj}^2}}		}
 \end{equation}
-where I\textsubscript{u} represents the set of ratings for the movies that have been rated by both users.
+where I\textsubscript{u} and I\textsubscript{v} represent the set of ratings of users \textit{u} and \textit{v} respectively, and I\textsubscript{uv} is the set of ratings for the movies that have been rated by both users.
 
-\textbf{
-EXERCISE2: In the example data set of Table [TODO FIXME], find the users that are most similar to user \text{Eric}. You can use the function \textit{CosSimVecMatrix} provided to generate the similarity of user \textit{Eric} with other users.
-}
+\begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
+In the example data set of Table \ref{table:example_ratings1}, find the users that are most similar to user Eric. You can use the function \textit{CosSimVecMatrix} (provided with the lab) to generate the similarity of user Eric with other users.
+\end{myremark}
 
-Hopefully that was easy and your have the answer - users that seem most similar to \textit{Eric} are \textit{Lucy} and \textit{Diane}. That was easy. Let's look at the ratings of \textit{Diane} who seems to be \textit{similar} to \textit{Eric}. If we calculate the means of ratings of \textit{Eric} and \textit{Diane}, 3.5 and 3.75, and subtract the respective means from their respective ratings, the new ratings look like as shown in Table \ref{table:centered_ratings1}.
+Hopefully that was easy and you have the answer - users that seem most similar to Eric are Lucy and Diane. That was easy. Let's look at the ratings of Diane who seems to be similar to Eric. If we calculate the means of ratings of Eric and Diane, 3.5 and 3.75, and subtract the means from their respective ratings, the new ratings look like as shown in Table \ref{table:centered_ratings1}.
 \begin{table*}
 \centering
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -65,42 +65,42 @@ Hopefully that was easy and your have the answer - users that seem most similar 
 \textbf{Diane} 		& 	 	0.25	  & 		-0.75	 & 		1.25		&   	-0.75		   & 		0		\\ 
 \hline
 \end{tabular}
-\caption{Mean centered ratings}
+\caption{Mean Centered Ratings}
 \label{table:centered_ratings1}
 \end{table*}
 
-Positive values in Table \ref{table:centered_ratings1} represent a preference for the movie by the user since it's rating is more than the average, whereas a negative value implies a disliking for the movie. On analyzing these \textit{mean-centered ratings}, \textit{Eric} and \textit{Diane} don't seem to be so \textit{similar} anymore. In fact, they seem to have quite the opposite taste.
+Positive values in Table \ref{table:centered_ratings1} represent a preference for the movie by the user since it's rating is more than the average, whereas a negative value implies a disliking for the movie. On analyzing these \textit{mean-centered ratings}, Eric and Diane don't seem to be so similar anymore. In fact, they seem to have quite the opposite taste. What's going on?
 
-\textbf{Pearson Correlation Similarity:} A major flaw in using \textit{Cosine Similarity} to find the \textit{similarity} between users is the fact that \textit{Cosine Similarity} does not take into account the differences in the mean and variance of the ratings made by the users. \textit{Pearson Correlation} (PC) similarity is a popular measure that can be used to compare the ratings of users since it removes the effects of mean and variance in ratings while calculating the \textit{similarity} between users. The PC similarity between users \textit{u} and \textit{v} can be calculated using the equation [TODO FIXME].
- \begin{equation}
+\textbf{Pearson Correlation Similarity:} A major flaw in using \textit{Cosine Similarity} to find the similarity between users is the fact that Cosine Similarity does not take into account the differences in the mean and variance of the ratings made by the users. Pearson Correlation (PC) similarity is a popular measure that can be used to compare the ratings of users since it removes the effects of mean and variance in ratings while calculating the similarity between users. The PC similarity between users \textit{u} and \textit{v} can be calculated using the equation \ref{eq:PC_sim}.
+ \begin{equation} \label{eq:PC_sim}
 PC(u,v) = PC(\textbf{x}_{u}, \textbf{x}_{v}) = \frac
 {\sum_{i \in{I_{uv}}}^{}{(r_{ui} - \bar{r_{u}})(r_{vi} - \bar{r_{v}})}}
 {\sqrt	{	\sum_{i \in{I_{uv}}}^{}{(r_{ui} - \bar{r_{u}})^2}	\sum_{i \in{I_{uv}}}^{}{(r_{vj} - \bar{r_{v}})^2}}		}
 \end{equation}
 
-where $\bar{r_{u}}$ [TODO FIXME] represents the mean of the ratings given by user \textit{u}. Note that PC accounts for variance in ratings only for the ratings of the movies I\textsubscript{uv} that have been rated by both users \textit{u} and \textit{v}. The sign of similarity weight calculated using PC indicates whether the correlation between the two users is direct or inverse, and the magnitude of similarity weight (ranging from 0 to 1) represents the strength of correlation. These will be used to predict unknown ratings for a user using \textit{neighborhood based} methods later.
+where $\bar{r_{u}}$ represents the mean of the ratings given by user \textit{u}. Note that PC accounts for variance in ratings only for the ratings of the movies I\textsubscript{uv} that have been rated by both users \textit{u} and \textit{v}. The sign of similarity weight calculated using PC indicates whether the correlation between the two users is direct or inverse, and the magnitude of similarity weight (ranging from 0 to 1) represents the strength of correlation. These will be used to predict unknown ratings for a user using \textit{neighborhood-based} methods later.
 
-\textbf{
-EXERCISE3: Calculate the Pearson Correlation (PC) similarity of \textit{Eric} with other users in Table \ref{table:example_ratings1}. You can use the function \textit{PCSimVecMatrix} provided with the lab. Which user(s) would you say is \textit{similar} to \textit{Eric}. You can do a similar analysis for comparing the Cosine similarities and Pearson Correlation similarities of other users.
-}
+\begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
+Calculate the Pearson Correlation (PC) similarity of Eric with other users in Table \ref{table:example_ratings1}. You can use the function \textit{PCSimVecMatrix} provided with the lab. Which user(s) would you say is similar to Eric. You can do a similar analysis for comparing the Cosine similarities and Pearson Correlation similarities of other users.
+\end{myremark}
 
 \subsection{Calculating Predicted Ratings}
-The Recommender Systems exist so that they can make recommendations to the user. As highlighted in section [TODO FIXME], collaborative filtering relies on finding users similar to a user of interest based on the ratings given by them. We now have two important measures of finding similarity between users, namely Cosine Similarity and Pearson Correlation similarity. It follows that these similarity measures can now be used to find the neighbors nearest to a user, and subsequently their ratings can be \textit{combined} to give us predicted ratings for a number of movies that have actually not been rated by the user of interest. It is natural that the movies whose predicted ratings are higher are the potential candidates that the recommender system can recommend to the user.
+The Recommender Systems exist so that they can make recommendations to the user. As highlighted in section [TODO FIXME], collaborative filtering relies on finding users similar to a user of interest based on the ratings given by them. We now have two important measures of finding similarity between users, namely Cosine similarity and Pearson Correlation similarity. It follows that these similarity measures can now be used to find the neighbors nearest to a user, and subsequently their ratings can be \textit{combined} to give us predicted ratings for a number of movies that have actually not been rated by the user of interest. It is natural that the movies whose predicted ratings are higher are the potential candidates that the recommender system can recommend to the user.
 
 Thus, the rating r\textsubscript{ui} of a user \textit{u} for a new item \textit{i}, can be predicted using the ratings given to \textit{i} by users most similar to \textit{u}. Let w\textsubscript{uv} denote the similarity weight between users \textit{u} and \textit{v}, and N(u) be the set of \textit{k} neighbors of \textit{u}, then the predicted rating r\textsubscript{ui} can be calculated as:
-\begin{equation}
+\begin{equation} \label{eq:basic_pred}
 r_{ui} = \frac
 {\sum_{v \in{N_{i}(u)}}^{}{r_{vi}}}
 {|N_{i}(u)|}
 \end{equation}
-Note that the formula considers the only neighbors \textit{v} of user \textit{u} who have rated the movie \textit{i}, N\textsubscript{i}(u) representing the set of such neighbors.
+Note that the formula considers only the neighbors \textit{v} of user \textit{u} who have rated the movie \textit{i}, N\textsubscript{i}(u) representing the set of such neighbors.
 
-\textbf{
-EXERCISE4: Carefully look at the formula in the equation [TODO FIXME]. Can you find a flaw in the formula? What does it use the similarity weights of user \textit{u} with different users \textit{v} for? Explain qualitatively, how the formula is not making full use of the similarity weights?
-}
+\begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
+Carefully look at the formula in the equation \ref{eq:basic_pred}. Can you find a flaw in the formula? What does it use the similarity weights of user \textit{u} with different users \textit{v} for? Explain qualitatively, how the formula is not making full use of the similarity weights?
+\end{myremark}
 
-If you have an intuitive answer to EXERCISE4 [TODO FIXME], equation [TODO FIXME] that is more sophisticated in its calculation of the predicted rating should make sense.
-\begin{equation}
+If you have an intuitive answer to Exercise \arabic{ques}, equation  \ref{eq:second_pred}, which is more sophisticated in its calculation of the predicted rating, should make sense.
+\begin{equation} \label{eq:second_pred}
 r_{ui} = \frac
 {\sum_{v \in{N_{i}(u)}}^{}{w_{uv}r_{vi}}}
 {\sum_{v \in{N_{i}(u)}}^{}{|w_{uv}|}}
@@ -108,21 +108,21 @@ r_{ui} = \frac
 
 We now take a small detour to look at the concept of \textit{Rating Normalization} and will then come back to learn how to really generate a recommendation for a user.
 
-\subsection{Rating normalization}
-Various users rate the movies differently, each having his/her own personal scale even when they have to give a rating on the same scale of 1 to 5. For example, while a rating of 4 by one user might imply a strong preference for a movie, the same rating by another user whose average rating across movies is 4, might not give us any interesting information to use. To tackle this two normalization techniques are: Mean-Centering and Z-score normalization.
+\subsection{Rating Normalization}
+Various users rate the movies differently, each having his/her own personal scale even when they have to give a rating on the same scale of 1 to 5. For example, while a rating of 4 by one user might imply a strong preference for a movie, the same rating by another user whose average rating across movies is 4, might not give us any interesting information to use. To tackle this, there are two popular normalization techniques: \textit{Mean-Centering} and \textit{Z-score Normalization}.
 
 \subsubsection{Mean-Centering}
 The idea of mean-centering is quite simple. It determines whether a rating is positive or negative by comparing it to the mean of the ratings for that user. Once we have the ratings for nearest neighbors, they can be \textit{normalized} by subtracting their corresponding means and then used to generate the predicted rating for a user using the following relation.
 \begin{equation}
 r_{ui} = \bar{r_{u}} + \frac
-{\sum_{v \in{N_{i}(u)}}^{}{w_{uv}(r_{vi} - \bar{r_{v})}}}
+{\sum_{v \in{N_{i}(u)}}^{}{w_{uv}(r_{vi} - \bar{r_{v}})}}
 {\sum_{v \in{N_{i}(u)}}^{}{|w_{uv}|}}
 \end{equation}
 
-where $\bar{r_{u}}$ [TODO FIXME] is the mean of ratings of user \textit{u}.
+where $\bar{r_{u}}$ is the mean of ratings of user \textit{u}.
 
-\subsubsection{Z-score normalization}
- While mean-centering takes removes the user bias by removing the mean from their ratings, it still does not consider the spread of ratings given by a user. For example, consider two users both of whom have an average rating of 2.8. Further user X shows a lot of variation in his ratings from 1 to 5, whereas user Y has most ratings very close to 2.8. In this case, a rating of 4.5 by Y would imply an exceptional liking for the movie for user Y. The same cannot be said for user X. Z-score normalization takes care of this by normalizing the ratings so the ratings of a user have a mean of zero and a variance of 1. You can explore the MATLAB function \textit{zscore}.
+\subsubsection{Z-score Normalization}
+ While mean-centering removes the user bias by removing their respective means from their ratings, it still does not consider the spread of ratings given by a user. For example, consider two users both of whom have an average rating of 2.8. Further, user X shows a lot of variation in his ratings from 1 to 5, whereas user Y has most ratings very close to 2.8. In this case, a rating of 4.5 by Y would imply an exceptional liking for the movie for user Y. The same cannot be said for user X. Z-score normalization takes care of this by normalizing the ratings so the ratings of a user have a mean of zero and a variance of 1. You can explore the MATLAB function \textit{zscore}.
  
 \begin{table*}
 \centering
@@ -145,16 +145,16 @@ where $\bar{r_{u}}$ [TODO FIXME] is the mean of ratings of user \textit{u}.
 \label{table:example_ratings2}
 \end{table*}
 
-\textbf{
-EXERCISE5: Consider the Table \ref{example_ratings2} which has a new user Kim added to our earlier toy example. We are interested in generating a recommendation for Kim. Can you guess which movie we should recommend just by looking at the table? Now write a small code in MATLAB to generate those predictions following the steps mentioned below:
+\begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
+Consider the Table \ref{table:example_ratings2} which has a new user Kim added to our earlier toy example. We are interested in generating a recommendation for Kim. Can you guess which movie we should recommend just by looking at the table? Now write a small code in MATLAB to generate those predictions following the steps mentioned below:
 \begin{itemize}
 \item{}Calculate the PC similarity of Kim with other users using the provided MATLAB function \textit{PCSimVecMatrix}
-\item{Find the nearest neighbors of Kim using a threshold}
+\item{}Find the nearest neighbors of Kim using a threshold for the similarity
 \item{}Use mean-centering to normalize the ratings of the neighbors 
-\item{}Generate a recommendation for Kim using the normalized ratings of neighbors and similarity weights.
+\item{}Generate a recommendation for Kim using the normalized ratings of neighbors and similarity weights
 \end{itemize}
-}
-Carefully read the specification of the provided MATLAB function \textit{PCSimVecMatrix}. Can you use it to skip one of the steps mentioned in the EXERCISE above.
+\end{myremark}
+Carefully read the specification of the provided MATLAB function \textit{PCSimVecMatrix}. Can you use it to skip one of the steps mentioned in Exercise \arabic{ques}.
 \subsection{How to Evaluate a Recommender System?}
 We need some methodology to evaluate our recommendations. In this section we will discuss multiple ways to do so. A recommender system generally looks at a mix of these values to evaluate its results. We first seperate our database into a test set and a train set. We compute our results based on the train set and make our predictions. We extract the predictions from our test set and look at the corresponding predictions we genrated for them. In order to quantify the difference, we use the following techniques.
   \subsubsection{Root Mean Square Error}
