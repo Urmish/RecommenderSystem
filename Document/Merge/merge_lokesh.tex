@@ -157,7 +157,7 @@ Consider the Table \ref{table:example_ratings2} which has a new user Kim added t
 Carefully read the specification of the provided MATLAB function \textit{PCSimVecMatrix}. Can you use it to skip one of the steps mentioned in Exercise \arabic{ques}.
 \subsection{How to Evaluate a Recommender System?}
 We need some methodology to evaluate our recommendations. In this section we will discuss multiple ways to do so. A recommender system generally looks at a mix of these values to evaluate its results. We first seperate our database into a test set and a train set. We compute our results based on the train set and make our predictions. We extract the predictions from our test set and look at the corresponding predictions we genrated for them. In order to quantify the difference, we use the following techniques.
-  \subsubsection{Root Mean Square Error}
+  \subsubsection{Root Mean Square Error (RMSE)}
 \[ RMSE = \sqrt{\frac{\sum_{(x,i) \in T} (r_{xi} - r_{xi}^{*})^{2}}{N}} \]
 \begin{align*}
 \text{where } &T:\text{The set of test data} \\
@@ -167,7 +167,7 @@ We need some methodology to evaluate our recommendations. In this section we wil
 \end{align*}
 \paragraph{}
 We can try to design our algorithm to reduce this RMSE value, by minimizing the sum of squared errors (SSE) thereby giving us more accurate predictions of user ratings and hence improving our recommendations. 
-  \subsubsection{Top Five Rated Movies}
+  \subsubsection{Top Five Rated Movies (TFRM)}
   We sort the movies in our test dataset in a decreasing order and look at the top 5 rated movies, we then look at the predictions for all the movies rated in the test vector and sort them in a decreasing fashion. We find the intersection of the top 5 movies for both these sets to see how close we came to understanding user preference. let  the top five movies in the test dataset for a user be represented by :
   \begin{align*}
   S_{test}
@@ -180,15 +180,26 @@ We can try to design our algorithm to reduce this RMSE value, by minimizing the 
   \begin{align*}
   Error = \frac{S_{test} \cap S_{pred}}{|S_{test}|}
   \end{align*}
-  \subsubsection{Number of Good Movies Not Predicted}
+  \subsubsection{Number of Good Movies Not Predicted (NMNP)}
   Another measure of error could be the number of movies that were rated by the user in the test dataset as good which the recommender system predicted as bad. For the notion of good, we use a threshold value. Any movie with a rating more than the threshold value above average is considered good. Thus, if $S_{gtb}$ represent the number of good movies that the recommender system predicted as bad and $S_{g}$ are the set of all good movies in the test data set, then the error is simply, 
   \begin{align*}
   Error = \frac{|S_{gtb}|}{|S_{g}|}
   \end{align*}
-  \subsubsection{Number of Flipped Movies}
+  \subsubsection{Number of Flipped Movies (NFP)}
   This is an extension of the previous error metric. Here we look at all the movies that user rated good an bad. The definition of good remains the same as before. We define bad movies as movies which have ratings lower than $AverageValue - Threshold$. $S_{flip}$ represent the sum of number of good movies that the recommender system predicted as bad and bad movies that the recommender system predicted as good, $S_{gb}$ are the set of all good and bad movies in the test data set, then the error is simply, 
   \begin{align*}
   Error = \frac{|S_{flip}|}{|S_{gb}|}
   \end{align*}
 
-
+\begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
+In this exercise, you will extend the MATLAB code from the previous exercise [TODO FIXME] to generate recommendations using user-based method on a large data set. The training data is available in file u1.base and test data in u1.test. You can read these files into \textit{utility matrix} form using the function \textit{ConvertUDataToMatrix} that takes filename as input. You should pick a user from the test data, generate recommendations for him and calculate the \textit{error} in the recommendation. You can repeat this for all the users in the test set and calculate the mean \textit{error} across the users. This will give you a measure of how well the recommendation system performs for one \textit{configuration}.
+A \textit{configuration} is defined by the chosen values for a number of parameters:
+\begin{itemize}
+\item{}Choice of similarity criteria - Cosine similarity, PC similarity
+\item{}Choice of threshold value for selecting nearest neighbors based on their similarity weights
+\item{}Choice of threshold to limit the maximum number of neighbors chosen in the previous step
+\item{}Choice of normalization used - Mean Centering, Z-score Normalization, no normalization
+\item{}Choice of metric to calculate the error - RMSE, TFRM, NMNP, NFP
+\end{itemize}
+A set of values selected for these parameters will give you one configuration. Vary one or more of these parameters to run for different configurations and calculate the mean error for each. You DO NOT need to cover the entire space of configurations. Refer to Table [TODO FIXME] to decide on 4-5 configurations. Do some choices perform better than others? Try explaining any interesting observations.
+\end{myremark}
