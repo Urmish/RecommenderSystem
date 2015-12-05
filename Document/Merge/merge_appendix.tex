@@ -76,3 +76,6 @@ U5 & - & 1 & - & 4\\ [1ex] % [1ex] adds vertical space
       p^`_{ik} = p_{ik} + \alpha\frac{\partial}{\partial p_{ik}}e_{ij}^2 = p_{ik} + \alpha(2e_{ij}q_{kj} - \beta p_{ik}) \\
       q^`_{kj} = q_{kj} + \alpha\frac{\partial}{\partial q_{kj}}e_{ij}^2 = q_{kj} + \alpha(2e_{ij}p_{ik} - \beta q_{kj})
   \end{gather*}
+\begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
+Study the code in \textit{LatentMatrixFactorization.m} which implements the Latent Matrix Factorization technique. Use \textit{LMFCall.m} to call this method. Do you get interesting and/or useful recommendations for the new user based on her ratings for a small set of movies? Try and add/change the ratings for the new user and see how the recommendations change. Try different values of regularization parameters in \textit{LatentMatrixFactorization.m} and observe the differences in new user ratings.
+\end{myremark}
