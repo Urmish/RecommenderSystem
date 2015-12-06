@@ -86,7 +86,8 @@ NNMatrix = U*Sk*V';
 K_sim = K_sim(2:end,:);
 [nn_weights,nn_sortId] = sort(K_sim,'descend');
 nnBasedRatings = normX(nn_sortId(1:i_NumNearestNeighbor)',:).*repmat(nn_weights(1:i_NumNearestNeighbor,:),1,1682);
-meanRatingNN = mean(nnBasedRatings);
+meanRatingNNNorm = sum(nnBasedRatings)./repmat(sum(nn_weights(1:i_NumNearestNeighbor,:)),1,1682);
+meanRatingNN = meanRatingNNNorm + repmat(AveragePerCustomer(i_customerId,1),1,1682);
 [SortedMovies, Index] = sort(meanRatingNN,'descend');
 if (i_printMovieNames == 1)
     fprintf('Recommendation Based on Nearest Neighbor Search - \n');

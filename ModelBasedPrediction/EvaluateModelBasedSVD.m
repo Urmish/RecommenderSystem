@@ -10,24 +10,24 @@ for i = 1:size(testXValidUsers,1)
     if(testXValidUsers(i,1) ~= 0)
         i_testdata = 'Data/u1.base'; %Path to training dataset
         i_singularValueThreshold = 0.03; %Singular Value threshold, singular values below this with respect to max singular values are trimmed
-        i_predThreshold = 3.6; %Threshold above which movies are considered good
+        i_predThreshold = 0.5; %Threshold above which movies are considered good
         i_customerId = i; %Customer for whom prediction is being generated
         i_modelNumber = 0; %Model 0 - Average Based, Model 1 - Incremental SVD
         i_iterCount = 100; %Number of iteration count for SVD approach
-        i_NumNearestNeighbor = 20; %Recommendation based on NN approach
+        i_NumNearestNeighbor = 1; %Recommendation based on NN approach
         i_knnDistanceMeasure = 'cosine'; %Similarity matrix for NN based prediction
         i_printMovieNames = 0;
         if (i==1)
-            [x_pred,x_knn,predMatrix,customerAverage] = ModelBasedPredictionTest(i_testdata,i_singularValueThreshold,i_predThreshold,i_customerId, i_modelNumber, i_iterCount, i_NumNearestNeighbor, i_knnDistanceMeasure, predMatrix,customerAverage,0,i_printMovieNames);
+            [x_pred,x_knn,predMatrix,customerAverage] = ModelBasedPredictionTest(i_testdata,i_singularValueThreshold,3.6,i_customerId, i_modelNumber, i_iterCount, i_NumNearestNeighbor, i_knnDistanceMeasure, predMatrix,customerAverage,0,i_printMovieNames);
         else
-            [x_pred,x_knn,predMatrix,customerAverage] = ModelBasedPredictionTest(i_testdata,i_singularValueThreshold,i_predThreshold,i_customerId, i_modelNumber, i_iterCount, i_NumNearestNeighbor, i_knnDistanceMeasure, predMatrix,customerAverage,1,i_printMovieNames);
+            [x_pred,x_knn,predMatrix,customerAverage] = ModelBasedPredictionTest(i_testdata,i_singularValueThreshold,3.6,i_customerId, i_modelNumber, i_iterCount, i_NumNearestNeighbor, i_knnDistanceMeasure, predMatrix,customerAverage,1,i_printMovieNames);
         end
         filled_ind = find(testX(i,:) ~= 0);
         rsePred(count) = norm(x_pred(1,filled_ind)-testX(i,filled_ind),2); %Root Square Error
         rseKnn(count) = norm(x_knn(1,filled_ind)-testX(i,filled_ind),2); %Root Square Error
         xaxis1(count) = count;
-        [totalMoviesFlippedPred(count) totalMoviesInTest(count) goodMoviesFlipped(count) totalGoodMoviesInTest(count)]= StepErrorFunction(testX(i,:),x_pred(1,:),0.5);
-        [totalMoviesFlippedKnn(count)  dummy                    goodMoviesFlippedKnn(count) dummy]= StepErrorFunction(testX(i,:),x_knn(1,:),0.5);
+        [totalMoviesFlippedPred(count) totalMoviesInTest(count) goodMoviesFlipped(count) totalGoodMoviesInTest(count)]= StepErrorFunction(testX(i,:),x_pred(1,:),i_predThreshold);
+        [totalMoviesFlippedKnn(count)  dummy                    goodMoviesFlippedKnn(count) dummy]= StepErrorFunction(testX(i,:),x_knn(1,:),i_predThreshold);
         topRankIntersectionErrorPred(count) = Top5Accuracy(testX(i,:),x_pred(1,:));
         topRankIntersectionErrorKnn(count) = Top5Accuracy(testX(i,:),x_knn(1,:));
         count=count+1
@@ -68,18 +68,25 @@ RMSEPred = sum(array1,2)/sum(array1~=0,2)
 %considered good and if it is < average-threshold then it is considered
 %bad. We subject the predictions to similar thresholding and calculated
 %the sum of good movies in test that prediction got wrong added with sum of bad movies in test that prediction got wrong
-array2 = totalMoviesFlippedPred./totalMoviesInTest;
-array2(isnan(array2)) = 0;
-array2(isinf(array2)) = 0;
-MeanFlippedMoviesPred = sum(array2,2)/sum(array2~=0,2)
+%array2 = totalMoviesFlippedPred./totalMoviesInTest;
+%array2(isnan(array2)) = 0;
+%array2(isinf(array2)) = 0;
+%MeanFlippedMoviesPred = sum(array2,2)/sum(array2~=0,2)
+MeanFlippedMoviesPred = mean(totalMoviesFlippedPred)
+mean(totalMoviesInTest)
+RatioMeanFlippedMoviesPred = MeanFlippedMoviesPred/mean(totalMoviesInTest)
 
 %Average Values of Flipped Ratings for Good Movies.
 %Same as above, we only do the entire process for good movies in test
 %vector
-array3 = goodMoviesFlipped./totalGoodMoviesInTest;
-array3(isnan(array3)) = 0;
-array3(isinf(array3)) = 0;
-MeanGoodMoviesFlippedPred = sum(array3,2)/sum(array3~=0,2)
+%array3 = goodMoviesFlipped./totalGoodMoviesInTest;
+%array3(isnan(array3)) = 0;
+%array3(isinf(array3)) = 0;
+%MeanGoodMoviesFlippedPred = sum(array3,2)/sum(array3~=0,2)
+MeanGoodMoviesFlippedPred = mean(goodMoviesFlipped)
+mean(totalGoodMoviesInTest)
+MeanRatioGoodMoviesFlippedPred = MeanGoodMoviesFlippedPred/mean(totalGoodMoviesInTest)
+
 
 %Average Value of Top Rank Intersection
 MeanTopRankIntersectionPred = mean(topRankIntersectionErrorPred)
@@ -97,18 +104,24 @@ RMSEKnn = sum(array4,2)/sum(array4~=0,2) %Will be high as a lot of movies that t
 %considered good and if it is < average-threshold then it is considered
 %bad. We subject the predictions to similar thresholding and calculated
 %the sum of good movies in test that prediction got wrong added with sum of bad movies in test that prediction got wrong
-array5 = totalMoviesFlippedPred./totalMoviesInTest;
-array5(isnan(array5)) = 0;
-array5(isinf(array5)) = 0;
-MeanFlippedMoviesKnn = sum(array5,2)/sum(array5~=0,2)
+%array5 = totalMoviesFlippedKnn./totalMoviesInTest;
+%array5(isnan(array5)) = 0;
+%array5(isinf(array5)) = 0;
+%MeanFlippedMoviesKnn = sum(array5,2)/sum(array5~=0,2)
+MeanFlippedMoviesKnn = mean(totalMoviesFlippedKnn)
+mean(totalMoviesInTest)
+RatioMeanFlippedMoviesKnn = MeanFlippedMoviesKnn/mean(totalMoviesInTest)
 
 %Average Values of Flipped Ratings for Good Movies.
 %Same as above, we only do the entire process for good movies in test
 %vector
-array6 = goodMoviesFlipped./totalGoodMoviesInTest;
-array6(isnan(array6)) = 0;
-array6(isinf(array6)) = 0;
-MeanGoodMoviesFlippedKnn = sum(array6,2)/sum(array6~=0,2)
+%array6 = goodMoviesFlippedKnn./totalGoodMoviesInTest;
+%array6(isnan(array6)) = 0;
+%array6(isinf(array6)) = 0;
+%MeanGoodMoviesFlippedKnn = sum(array6,2)/sum(array6~=0,2)
+MeanGoodMoviesFlippedKnn = mean(goodMoviesFlippedKnn)
+mean(totalGoodMoviesInTest)
+MeanRatioGoodMoviesFlippedKnn = MeanGoodMoviesFlippedKnn/mean(totalGoodMoviesInTest)
 
 %Average Value of Top Rank Intersection
 MeanTopRankIntersectionKnn = mean(topRankIntersectionErrorKnn)
