@@ -1,4 +1,4 @@
-function [ o_percentageCorrect ] = Top5Accuracy( i_testVector,i_predVector )
+function [ o_percentageError ] = Top5Accuracy( i_testVector,i_predVector )
 %TOP5ACCURACY Returns how many movies are common between top 5 values of
 %testVector and the top 5 values of predVector for the movies rated in test
 %vector
@@ -8,7 +8,7 @@ function [ o_percentageCorrect ] = Top5Accuracy( i_testVector,i_predVector )
 %2. i_predVector - Prediction Vector generated using multitudes of methods
 %described in the lab
 if (sum(i_testVector,2)==0)
-    o_percentageCorrect = 1;
+    o_percentageError = 0;
 end
 
 ind = find(i_testVector~=0);
@@ -22,10 +22,10 @@ if (size(ind1,2) < topK)
 end
 intersection = intersect(ind1(1:topK),ind2(1:topK));
 if (size(intersection,2) == 0)
-    o_percentageCorrect=0;
+    o_percentageError=1;
 else
-    intersection;
-    o_percentageCorrect = size(intersection,2)/topK;
+    %intersection;
+    o_percentageError = 1 - size(intersection,2)/topK;
 end
 end
 

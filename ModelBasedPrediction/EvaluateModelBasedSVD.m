@@ -25,7 +25,7 @@ for i = 1:size(testXValidUsers,1)
         rse(count) = norm(x_pred(1,filled_ind)-testX(i,filled_ind),2); %Root Square Error
         xaxis1(count) = count;
         [totalMoviesFlipped(count) totalMoviesInTest(count) goodMoviesFlipped(count) totalGoodMoviesInTest(count)]= StepErrorFunction(testX(i,:),x_pred(1,:),0.5);
-        topRankIntersection(count) = Top5Accuracy(testX(i,:),x_pred(1,:));
+        topRankIntersectionError(count) = Top5Accuracy(testX(i,:),x_pred(1,:));
         count=count+1
     end
 end
@@ -62,4 +62,4 @@ array3(isinf(array3)) = 0;
 MeanGoodMoviesFlipped = sum(array3,2)/sum(array3~=0,2)
 
 %Average Value of Top Rank Intersection
-MeanTopRankIntersection = mean(topRankIntersection)
+MeanTopRankIntersection = mean(topRankIntersectionError)
