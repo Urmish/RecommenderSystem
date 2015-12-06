@@ -79,3 +79,26 @@ U5 & - & 1 & - & 4\\ [1ex] % [1ex] adds vertical space
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
 Study the code in \textit{LatentMatrixFactorization.m} which implements the Latent Matrix Factorization technique. Use \textit{LMFCall.m} to call this method. Do you get interesting and/or useful recommendations for the new user based on her ratings for a small set of movies? Try and add/change the ratings for the new user and see how the recommendations change. Try different values of regularization parameters in \textit{LatentMatrixFactorization.m} and observe the differences in new user ratings.
 \end{myremark}
+\section{Code and Function Walkthrough}
+\begin{enumerate}
+\item \textbf{Useful Scripts} - This folder contains basic read write function implementations.
+\begin{itemize}
+\item \textbf{ConvertUDataToMatrix.m} - Contains the function to read a database and convert it into a user*movies matrix with uninitialized value set to zero.
+\item \textbf{GetMovieNameDatabase.m} - Contains the function call to read the movie names for each movie Id.
+\end{itemize}
+\item \textbf{LabFunctions} - This folder contains basic functions used throughout the lab.
+\begin{itemize}
+\item \textbf{AverageValueBasedMatrixCompletion.m} - This function is the implementation of Average Value Based Matrix Completion method.
+\item \textbf{Top5Accuracy.m} - This function takes in the test vector and predicted vector to calculate how many top five movies in the test vector were predicted by the predicted vector.
+\item \textbf{StepErrorFunction.m} - This function calculates the number of good and bad movies in a test vector that were not predicted as good and bad in the predicted vector.
+\item \textbf{IncrementalLowRankCompletion.m} - This function implements the incremental low rank completion method.
+\item \textbf{PrintOutMoivesOfAUser.m} - Given a 1682 length vector and a movie database, this function prints out the names of the movie rated by the user. The input representation can be changed using a mode flag.
+\item \textbf{TopKEigenValues.m} - Given a threshold with respect to the maximum sigma values and a diagonal matrix of sigma values, this matrix returns a matrix with sigma values below the threshold set to zero.
+\item \textbf{FillZeroEntryWithAverageInARow.m} - Function used by Average Value Based Matrix Completion for Matrix Initialization.
+\end{itemize}
+\item \textbf{ModelBasedPrediction} - This folder has the final exercise of the Model Based System
+\begin{itemize}
+\item \textbf{EvaluateModelBasedSVD.m} - This function runs the Model Based SVD for the entire movie lens dataset, parameters are configurable.
+\item \textbf{ModelBasedPredictionTest.m} - EvaluateModelBasedSVD calls this function for each customer to generate the prediction.
+\end{itemize}
+\end{enumerate}
