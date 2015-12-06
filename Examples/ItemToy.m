@@ -21,13 +21,13 @@ prediction = zeros(1,5);
 
 % Calculate the similarity of DieHard
 id = 3;
-K_D = removerows(K, 'ind', id);
-[D_sim, normXt] = PCSimVecMatrix(X(:,id), Y);
+[Y,PS] = removerows(X', 'ind', id)
+[D_sim, normXt] = PCSimVecMatrix(K, Y);
 
 % Let's pick movies with similarity greater than 0.5 and predict
 D_sim(D_sim < 0.5) = 0;
-D_rating = sum(D_sim.*K_D)/norm(D_sim,1);
-prediction(id) = D_rating;
+D_rating = sum(D_sim.*K)/norm(D_sim,1);
+prediction(id) = D_rating
 
 % Calculate the similarity of Wall-E
 id = 5;

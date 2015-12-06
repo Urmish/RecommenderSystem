@@ -85,7 +85,7 @@ Calculate the Pearson Correlation (PC) similarity of Eric with other users in Ta
 \end{myremark}
 
 \subsection{Calculating Predicted Ratings}
-The Recommender Systems exist so that they can make recommendations to the user. As highlighted in section [TODO FIXME], collaborative filtering relies on finding users similar to a user of interest based on the ratings given by them. We now have two important measures of finding similarity between users, namely Cosine similarity and Pearson Correlation similarity. It follows that these similarity measures can now be used to find the neighbors nearest to a user, and subsequently their ratings can be \textit{combined} to give us predicted ratings for a number of movies that have actually not been rated by the user of interest. It is natural that the movies whose predicted ratings are higher are the potential candidates that the recommender system can recommend to the user.
+The Recommender Systems exist so that they can make recommendations to the user. As highlighted in Section \ref{sec:approaches}, collaborative filtering relies on finding users similar to a user of interest based on the ratings given by them. We now have two important measures of finding similarity between users, namely Cosine similarity and Pearson Correlation similarity. It follows that these similarity measures can now be used to find the neighbors nearest to a user, and subsequently their ratings can be \textit{combined} to give us predicted ratings for a number of movies that have actually not been rated by the user of interest. It is natural that the movies whose predicted ratings are higher are the potential candidates that the recommender system can recommend to the user.
 
 Thus, the rating r\textsubscript{ui} of a user \textit{u} for a new item \textit{i}, can be predicted using the ratings given to \textit{i} by users most similar to \textit{u}. Let w\textsubscript{uv} denote the similarity weight between users \textit{u} and \textit{v}, and N(u) be the set of \textit{k} neighbors of \textit{u}, then the predicted rating r\textsubscript{ui} can be calculated as:
 \begin{equation} \label{eq:basic_pred}
@@ -154,7 +154,7 @@ Consider the Table \ref{table:example_ratings2} which has a new user Kim added t
 \item{}Generate a recommendation for Kim using the normalized ratings of neighbors and similarity weights
 \end{itemize}
 \end{myremark}
-Carefully read the specification of the provided MATLAB function \textit{PCSimVecMatrix}. Can you use it to skip one of the steps mentioned in Exercise \arabic{ques}.
+Carefully read the specification of the provided MATLAB function \textit{PCSimVecMatrix}. Can you use it to skip one of the steps mentioned in Exercise \arabic{ques}. Refer to our implementation for Exercise \arabic{ques} in file "UserBasedPredictionToy.m".
 \subsection{How to Evaluate a Recommender System?}
 We need some methodology to evaluate our recommendations. In this section we will discuss multiple ways to do so. A recommender system generally looks at a mix of these values to evaluate its results. We first seperate our database into a test set and a train set. We compute our results based on the train set and make our predictions. We extract the predictions from our test set and look at the corresponding predictions we genrated for them. In order to quantify the difference, we use the following techniques.
   \subsubsection{Root Mean Square Error (RMSE)}
@@ -192,7 +192,7 @@ We can try to design our algorithm to reduce this RMSE value, by minimizing the 
   \end{align*}
 
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-In this exercise, you will extend the MATLAB code from the previous exercise [TODO FIXME] to generate recommendations using user-based method on a large data set. The training data is available in file u1.base and test data in u1.test. You can read these files into \textit{utility matrix} form using the function \textit{ConvertUDataToMatrix} that takes filename as input. You should pick a user from the test data, generate recommendations for him and calculate the \textit{error} in the recommendation. You can repeat this for all the users in the test set and calculate the mean \textit{error} across the users. This will give you a measure of how well the recommendation system performs for one \textit{configuration}.
+In this exercise, you will extend the MATLAB code from Exercise 5 to generate recommendations using user-based method on a large data set. The training data is available in file u1.base and test data in u1.test. You can read these files into \textit{utility matrix} form using the function \textit{ConvertUDataToMatrix} that takes filename as input. You should pick a user from the test data, generate recommendations for him and calculate the \textit{error} in the recommendation. You can repeat this for all the users in the test set and calculate the mean \textit{error} across the users. This will give you a measure of how well the recommendation system performs for one \textit{configuration}.
 A \textit{configuration} is defined by the chosen values for a number of parameters:
 \begin{itemize}
 \item{}Choice of similarity criteria - Cosine similarity, PC similarity

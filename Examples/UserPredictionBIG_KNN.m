@@ -22,14 +22,16 @@ fclose(fid);
 X_test = [X_test zeros(mt,n - nt)];
 X_test = [X_test; zeros(m-mt,n)];
 
-MAX_KNN = 100;
+MAX_KNN = 10;
 STEP_KNN = 5;
-avg_rmse = zeros(1,MAX_KNN/STEP_KNN + 1)
+avg_rmse = zeros(1,MAX_KNN/STEP_KNN + 1);
+START_USER = 1;
+END_USER = 1;
 
 count = 1;
 for knn=1:STEP_KNN:MAX_KNN
-    rmse = zeros(1,462);
-    for id = 1:462; % let's predict for user1
+    rmse = zeros(1,END_USER - START_USER + 1);
+    for id = START_USER:END_USER; % let's predict for user1
         
 %         X_rated_or_not = X;
 %         X_rated_or_not(X~=0) = 1;
@@ -86,9 +88,9 @@ for knn=1:STEP_KNN:MAX_KNN
         error = norm((reco_ratings - X_test(id,:)),2);
         if (num_test_movies == 0)
             display(['zero test movies for id ' num2str(id)])
-            rmse(id) = 0;
+            rmse(id - START_USER + 1) = 0;
         else
-            rmse(id) = error/num_test_movies;
+            rmse(id - START_USER + 1) = error/num_test_movies;
         end
     end
     knn

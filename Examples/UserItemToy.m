@@ -1,4 +1,4 @@
-% Example to illustrate user-based and item-based similarity and
+% Example to illustrate user-based similarity and
 % recommendation
 
 %           Matrix      Titanic     DieHard    ForrestGump     Wall-E

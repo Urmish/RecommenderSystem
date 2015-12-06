@@ -88,6 +88,8 @@ Study the code in \textit{LatentMatrixFactorization.m} which implements the Late
 \end{itemize}
 \item \textbf{LabFunctions} - This folder contains basic functions used throughout the lab.
 \begin{itemize}
+\item \textbf{CosSimVecMatrix.m} - This function generates the Cosine similarity between a user and other users based on their ratings.
+\item \textbf{PCSimVecMatrix.m} - This function generates the Pearson Correlation similarity between a user and other users based on their ratings.
 \item \textbf{AverageValueBasedMatrixCompletion.m} - This function is the implementation of Average Value Based Matrix Completion method.
 \item \textbf{Top5Accuracy.m} - This function takes in the test vector and predicted vector to calculate how many top five movies in the test vector were predicted by the predicted vector.
 \item \textbf{StepErrorFunction.m} - This function calculates the number of good and bad movies in a test vector that were not predicted as good and bad in the predicted vector.
@@ -100,5 +102,8 @@ Study the code in \textit{LatentMatrixFactorization.m} which implements the Late
 \begin{itemize}
 \item \textbf{EvaluateModelBasedSVD.m} - This function runs the Model Based SVD for the entire movie lens dataset, parameters are configurable.
 \item \textbf{ModelBasedPredictionTest.m} - EvaluateModelBasedSVD calls this function for each customer to generate the prediction.
+
+
+"UserBasedPredictionToy.m" contains code to for generating prediction in Exercise 5.
 \end{itemize}
 \end{enumerate}

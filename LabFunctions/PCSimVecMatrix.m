@@ -1,9 +1,9 @@
 function [o_SimilarityVec,normM]  = PCSimVecMatrix( i_Vec1, i_M)                                                           
 % Calculates Person Coefficient similarity between a vector and rows of
-% matrix M
+% matrix i_M
 % Completion
-%   i_Vec1 - first input vector
-%   i_M - second input vector
+%   i_Vec1 - first input vector, a column vector
+%   i_M - input matrix
 %   o_SimilarityVecM - output the vector of similarities
     meanVec = sum(i_Vec1)/nnz(i_Vec1); % mean of all ratings excluding unrated items
     meanMrows = sum(i_M,2)./sum(i_M~=0,2);
