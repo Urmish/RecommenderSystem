@@ -7,7 +7,5 @@ m_h = i_eigenValuesColumn/i_eigenValuesColumn(1);
 m_ind = (m_h>=i_threshold);
 o_eigenValuesColumn = i_eigenValuesColumn;
 o_eigenValuesColumn(~m_ind) = 0;
-
-
 end
 

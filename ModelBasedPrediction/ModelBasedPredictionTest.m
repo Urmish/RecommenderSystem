@@ -1,4 +1,4 @@
-function [o_recPred, o_recNN, o_predMatrix,o_AveragePerCustomer  ] = ModelBasedPredictionTest(i_testdata,i_singularValueThreshold,i_predThreshold,i_customerId, i_modelNumber, i_iterCount, i_NumNearestNeighbor, i_knnDistanceMeasure, i_predMatrix, i_AveragePerCustomer, i_usePredMatrix )
+function [o_recPred, o_recNN, o_predMatrix,o_AveragePerCustomer  ] = ModelBasedPredictionTest(i_testdata,i_singularValueThreshold,i_predThreshold,i_customerId, i_modelNumber, i_iterCount, i_NumNearestNeighbor, i_knnDistanceMeasure, i_predMatrix, i_AveragePerCustomer, i_usePredMatrix, i_printMovieNames)
 %MODELBASEDPREDICTIONTEST Runs model based SVD to return predictions
 % Parameter Values - Input
 %i_testdata
@@ -17,6 +17,8 @@ function [o_recPred, o_recNN, o_predMatrix,o_AveragePerCustomer  ] = ModelBasedP
 %used if i_usePredMatrix is set
 %i_usePredMatrix = Set to 0 if you do not have predMatrix and
 %AveragePerCustomer, Else set to one.
+%i_printMovieNames - 0 - Do not Print Recommended Movie Names. 1 - Print
+%Movie Names
 
 % Parameter Values - Output
 % o_recPred - Recommendation based on Prediction
@@ -45,8 +47,11 @@ o_AveragePerCustomer = AveragePerCustomer;
 index_nonzero = find(X~=0);
 error = norm(X(index_nonzero) - Pred(index_nonzero))/norm(X(index_nonzero));
 %Prediction
-PrintOutMoivesOfAUser(IDtoM,X(i_customerId,:),0);
-fprintf('Prediction Based Recommendation - \n');
+if (i_printMovieNames == 1)
+    PrintOutMoivesOfAUser(IDtoM,X(i_customerId,:),0);
+    fprintf('Prediction Based Recommendation - \n');
+end
+
 if (i_predThreshold > AveragePerCustomer(i_customerId))
     possibleRecommendation = Pred(i_customerId,:)>i_predThreshold;
     removeRecommendation = X(i_customerId,:)~=0;
@@ -55,14 +60,19 @@ if (i_predThreshold > AveragePerCustomer(i_customerId))
     [SortedMovies, Index] = sort(moviesUnSorted,'descend');
     o_recPred = Pred(i_customerId,:);
     if (size(SortedMovies,2) == 0)
-        fprintf('No movies beyond the threshold\n');
+         if (i_printMovieNames == 1)
+            fprintf('No movies beyond the threshold\n');
+         end
     else
-        fprintf('Top 5 movies are - ');
-        Index(1,1:5)
-        PrintOutMoivesOfAUser(IDtoM,Index(1,1:5),1);
+        if (i_printMovieNames == 1)
+            fprintf('Top 5 movies are - ');
+            PrintOutMoivesOfAUser(IDtoM,Index(1,1:5),1);
+        end
     end
 else
-    fprintf('Average Values for this customer have been high and it is difficult to comeup with a prediction using this technique\n');    
+    if (i_printMovieNames == 1)
+        fprintf('Average Values for this customer have been high and it is difficult to comeup with a prediction using this technique\n');    
+    end
 end
 
 fprintf('*********************************\n');
@@ -70,21 +80,17 @@ fprintf('*********************************\n');
 [U S V] = svd(Pred,'econ');
 Sk = TopKEigenValues(diag(S),i_singularValueThreshold);
 k = sum(Sk~=0);
-Uk = U(:,1:k);
 Sk = diag(Sk);
-Sk = Sk(1:k,1:k);
-NNMatrix = Uk*(Sk.^0.5);
-Mdl = KDTreeSearcher(NNMatrix);
-[n,d] = knnsearch(Mdl,NNMatrix(i_customerId,:),'k',i_NumNearestNeighbor+1);
-n = n(1,2:i_NumNearestNeighbor+1); %As the first column is the customer himself
-HighRatedMoviesOfNeighbors = X(n,:);
-meanRating = mean(HighRatedMoviesOfNeighbors);
-removeRecommendation = X(i_customerId,:)~=0;
-meanRating(removeRecommendation) = 0;
-[SortedMovies, Index] = sort(meanRating,'descend');
-fprintf('Recommendation Based on Nearest Neighbor Search - \n');
-Index(1,1:5)
-PrintOutMoivesOfAUser(IDtoM,Index(1,1:5),1);
-o_recNN = meanRating;
+NNMatrix = U*Sk*V';
+[K_sim, normX] = PCSimVecMatrix(NNMatrix(i_customerId,:)',NNMatrix);
+K_sim = K_sim(2:end,:);
+[nn_weights,nn_sortId] = sort(K_sim,'descend');
+nnBasedRatings = normX(nn_sortId(1:i_NumNearestNeighbor)',:).*repmat(nn_weights(1:i_NumNearestNeighbor,:),1,1682);
+meanRatingNN = mean(nnBasedRatings);
+[SortedMovies, Index] = sort(meanRatingNN,'descend');
+if (i_printMovieNames == 1)
+    fprintf('Recommendation Based on Nearest Neighbor Search - \n');
+    PrintOutMoivesOfAUser(IDtoM,Index(1,1:5),1);
 end
-
+o_recNN = meanRatingNN;
+end
