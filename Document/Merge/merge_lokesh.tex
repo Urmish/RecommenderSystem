@@ -35,7 +35,7 @@ U =
 	\end{equation}
 	
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Look at the ratings of user Eric in Table \ref{table:example_ratings1}. Also look at the ratings given by other users in the table. Can you guess which user(s) is(are) similar to user Eric?
+Look at the ratings of Eric in Table \ref{table:example_ratings1}. Also look at the ratings given by other users in the table. Can you guess which user(s) is(are) similar to Eric?
 \end{myremark}
 
 \subsubsection{Similarity Weight Computation}
@@ -50,7 +50,7 @@ CV(u,v) = cos(\textbf{x}_{u}, \textbf{x}_{v}) = \frac
 where I\textsubscript{u} and I\textsubscript{v} represent the set of ratings of users \textit{u} and \textit{v} respectively, and I\textsubscript{uv} is the set of ratings for the movies that have been rated by both users.
 
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-In the example data set of Table \ref{table:example_ratings1}, find the users that are most similar to user Eric. You can use the function \textit{CosSimVecMatrix} (provided with the lab) to generate the similarity of user Eric with other users.
+In the example data set of Table \ref{table:example_ratings1}, find the users that are most similar to user. You can use the function \textit{CosSimVecMatrix} (provided with the lab) to generate the similarity of Eric with other users.
 \end{myremark}
 
 Hopefully that was easy and you have the answer - users that seem most similar to Eric are Lucy and Diane. That was easy. Let's look at the ratings of Diane who seems to be similar to Eric. If we calculate the means of ratings of Eric and Diane, 3.5 and 3.75, and subtract the means from their respective ratings, the new ratings look like as shown in Table \ref{table:centered_ratings1}.
@@ -109,7 +109,7 @@ r_{ui} = \frac
 We now take a small detour to look at the concept of \textit{Rating Normalization} and will then come back to learn how to really generate a recommendation for a user.
 
 \subsection{Rating Normalization}
-Various users rate the movies differently, each having his/her own personal scale even when they have to give a rating on the same scale of 1 to 5. For example, while a rating of 4 by one user might imply a strong preference for a movie, the same rating by another user whose average rating across movies is 4, might not give us any interesting information to use. To tackle this, there are two popular normalization techniques: \textit{Mean-Centering} and \textit{Z-score Normalization}.
+Various users rate the movies differently, each having his/her own personal scale. For example, while a rating of 4 by one user might imply a strong preference for a movie, the same rating by another user whose average rating across movies is 4, might not give us any interesting information. To tackle this, there are two popular normalization techniques: \textit{Mean-Centering} and \textit{Z-score Normalization}.
 
 \subsubsection{Mean-Centering}
 The idea of mean-centering is quite simple. It determines whether a rating is positive or negative by comparing it to the mean of the ratings for that user. Once we have the ratings for nearest neighbors, they can be \textit{normalized} by subtracting their corresponding means and then used to generate the predicted rating for a user using the following relation.
