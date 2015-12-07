@@ -14,15 +14,15 @@
 \label{sec:approaches}
 There are two popular techniques used for developing a recommender system~\cite{nbrsurvey}. These are discussed in the following section.
 \subsection{Content-based}
- The content-based systems are used to recommend items similar to those a user has liked in the past, i.e. recommendations are based on the content of items rather on other user's opinion. The content-based approach to recommendation has its roots in the information retrieval (IR) community, and employs many of the similar techniques. The system learns to recommend items that are similar to the ones that the user liked in the past. The similarity of items is calculated based on the features associated with the compared items. For example, if a user has positively rated a movie that belongs to the comedy genre, then the system can learn to recommend other movies from the same genre.
+Content based System is used to recommend an item to a user based upon a description of the item and a profile of users interests and other metadata. This metadata could be information like age, sex, demography etc. The content-based approach to recommendation has its roots in the information retrieval (IR) community, and employs many of the similar techniques. The system \textit{learns} to recommend items that are similar to the ones that the user liked in the past. 
 \subsection{Collaborative Filtering}
- Collaborative filtering method finds a subset of users who have similar tastes and preferences to the target user and use this subset for offering recommendations. Rather than computing the similarity of the items, we compute the similarity of the users. Typically, for each user a set of "nearest neighbor" users is found with whose past ratings there is the strongest correlation. Scores for unseen items are predicted based on a combination of the scores known from the nearest neighbors.
+ Collaborative filtering is the process of finding information using collaboration among multiple agents. Typically, for a candidate a set of "nearest neighbor" candidates are found with whose past ratings there is the strongest correlation. Scores for unseen items are predicted based on a combination of the scores known from the nearest neighbors.
 
 Main approaches for collaborative filtering:
 \begin{itemize}
-\item User based - Finds users similar to the current user to generate predictions.
+\item User based collaborative filtering  is a straightforward algorithmic interpretation of the core premise of collaborative filtering: find other users whose past rating behavior is similar to that of the current user and use their ratings on other items to predict what the current user will like.
 \end{itemize}
 \begin{itemize}
-\item Item based - Finds similar items to gernerate predictions.
+\item Item based collaborative filtering generates predictions by using the user’s own ratings for other items combined with those items’ similarities to the target item.
 \end{itemize}
 
