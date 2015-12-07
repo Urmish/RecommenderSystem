@@ -87,19 +87,19 @@ Implement a function for iterative SVD completion. Use the steps described above
   \subsubsection{Original Matrix in Lower Dimension}
   Another work around to find better neighbors is to look for neighbors in a lower dimension space of the original sparse matrix. The motivation here is that a lower dimension space will lead to a denser matrix and might help us find better neighbors.
   \subsubsection{Which Nearest Neighbor approximation to Use?}
-  To answer this question we will resort to the golden answer to anything non-concrete - \textit{"It Depends!!!"}. For the purpose of this lab we used Nearest Neighbor approach in a lower dimension space of predicted matrix. Empirically, it worked better. In general, one tries different approaches and sees what works best for their environment and their preference of error metrics.
+  To answer this question we will resort to the golden answer to life, universe and anything non-concrete - \textit{"It Depends!!!"}. For the purpose of this lab we used Nearest Neighbor approach in a lower dimension space of predicted matrix. Empirically, it worked better. In general, one tries different approaches and sees what works best for their environment and their preference of error metrics.
   \subsection{Bringing it All Together}
   Now that you have all the concepts required to understand a Model Based Recommender System, we will encourage you to experiment with it to get an idea of the different trade-offs involved and the corresponding complexity in settling down on a method.
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
 Write a code to run Model Based Prediction on the entire movie lens dataset. Follow these steps - 
 \begin{enumerate}
-\item Load u1.base and u1.test.
-\item Create a Matrix of the form user*movies where unitialized values to zero. We already have function calls to do both these steps so feel free to use them
-\item Create two matrix completion for the u1.base dataset, one based on Average Value and one based on Incremental SVD
+\item Load u1.base and u1.test. 
+\item Create a Matrix of the form user*movies where unitialized values to zero. We already have function calls to do both these steps so feel free to use them.
+\item Create two matrix completion for the u1.base dataset, one based on Average Value SVD and one based on Incremental SVD.
 \item Look at the Top 5 predictions from both of them for any random customer.
 \item Pick a customer from u1.test and look at the movies he has rated. 
 \item Look at the corresponding ratings in your predictions. Do they agree?
-\item Calculate the various error metrics that we discussed earlier in the lab.
+\item Calculate the various error metrics that we discussed earlier in the lab. Feel free to use the functions we have implemented to calculate them.
 \end{enumerate}
 We have already implemented this code in \textit{ModelBasedPrediction / EvaluateModelBasedSVD.m}. Play around with the parameters, look at the impact it has on different error rates. It is upto you to decide what factors are important and what constitutes a good system. We have provided you with outputs for many different parameters in the table-reference-here[TODO FIXME].
 \end{myremark}
