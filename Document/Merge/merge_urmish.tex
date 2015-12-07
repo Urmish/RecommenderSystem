@@ -64,8 +64,9 @@ You should observe that the columns of the matrices $U$ and $V$ are orthonormal.
     \item Add the average customer value calculated in Step 3 to this matrix, i.e, $Pred = Pred_{norm} + \overline{C} $
   \end{enumerate}
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Implement a function for average value SVD completion. Use the steps described above and run the code on matrix generated from table \ref{table:example_ratings1}. Compare the result with our implementation located in \textit{Examples/ToyExampleAverageValueSVD.m}. What do you think about the corresponding predictions? Do they make sense? 
+Implement a function for average value SVD completion. Use the steps described above and run the code on matrix generated from table~\ref{table:example_ratings1}. Compare the result with our implementation located in \textit{Examples/ToyExampleAverageValueSVD.m}. What do you think about the corresponding predictions? Do they make sense? 
 \end{myremark}
+
   \subsubsection{Iterative SVD Completion}
   Another simple approach to complete a matrix and generate predictions is to use iterative SVD. 
   \begin{enumerate}
@@ -101,8 +102,92 @@ Write a code to run Model Based Prediction on the entire movie lens dataset. Fol
 \item Look at the corresponding ratings in your predictions. Do they agree?
 \item Calculate the various error metrics that we discussed earlier in the lab. Feel free to use the functions we have implemented to calculate them.
 \end{enumerate}
-We have already implemented this code in \textit{ModelBasedPrediction / EvaluateModelBasedSVD.m}. Play around with the parameters, look at the impact it has on different error rates. It is upto you to decide what factors are important and what constitutes a good system. We have provided you with outputs for many different parameters in the table-reference-here[TODO FIXME].
+We have already implemented this code in \textit{ModelBasedPrediction / EvaluateModelBasedSVD.m}. Play around with the parameters, look at the impact it has on different error rates. It is upto you to decide what factors are important and what constitutes a good system. We have provided you with outputs for many different parameters in the table below.
 \end{myremark}
+
+\subsubsection{Results and Analysis}
+We will be using the same error metric as discussed in Section~\ref{subsection:errors}. The average number of movies rated as good or bad by a user in the test vecto is $27.5$ while the average number of movies rated as good by the user is $14.85$. For each method (Average value and Iterative Based) we would look at the results of using only the predictions as our estimates and the results of using Nearest Neighbor approach as our prediction estimates. Use the following analogy to interpret the results -
+\begin{enumerate}
+\item A RMSE value of $1$ implies that on an average our predictions our off by a value of 1.
+\item A NFP value of $20$ implies that out of the 28 movies user considered good or bad, we were not able to classify 20 of those movies as good and bad respectively.
+\item A NMNP value of $14$ implies that out of the 15 movies a user considered good, we were not able to classify 14 of those movies as good.
+\item A TFRM value of $1$ implies that the top five movie based on predictions and the top five movies based on test ratings were off by one movie. (Note: We only consider predictions for movies rated in test dataset)
+\end{enumerate}
+
+\paragraph{Changing Number of NN, singularValueThreshold = 0.03, iterationCount = 40}
+We will vary the number of nearest neighbors here and see the results for Nearest Neighbor Approach. Table~\ref{tab:prediction} gives you the results for using the prediction data only. Table~\ref{tab:nnaverage} and Table~\ref{tab:nniterative} show the results after varying the the number of nearest neighbor for average value based SVD method and iterative SVD method respectively.
+\begin{table}[]
+\centering
+\caption{Prediction 1}
+\label{tab:prediction}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+                  & RMSE   & NFP     & NMNP   & TFRM   \\ \hline
+Average Value SVD & 0.4001 & 15.8126 & 4.7124 & 0.5599 \\ \hline
+Iterative SVD     & 0.9076 & 14.3246 & 3.8562 & 0.6614 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\centering
+\caption{Nearest Neighbor Sweep - Average Value Based SVD}
+\label{tab:nnaverage}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\# Nearest Neighbors & RMSE   & NFP     & NMNP    & TFRM   \\ \hline
+1                    & 0.4972 & 27.5163 & 14.8497 & 0.5373 \\ \hline
+20                   & 0.4013 & 15.7952 & 4.7102  & 0.5595 \\ \hline
+40                   & 0.4013 & 15.7974 & 4.7124  & 0.5595 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\centering
+\caption{Nearest Neighbor Sweep - Iterative SVD}
+\label{tab:nniterative}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\# Nearest Neighbors & RMSE   & NFP     & NMNP    & TFRM   \\ \hline
+1                    & 1.4154 & 27.5163 & 14.8497 & 0.5373 \\ \hline
+20                   & 1.1235 & 17.9935 & 5.6885  & 0.6148 \\ \hline
+40                   & 1.242  & 17.9586 & 5.4423  & 0.6157 \\ \hline
+\end{tabular}
+\end{table}
+
+\paragraph{Changing Singular Value Threshold, NN = 80, itercount = 100}
+Table~\ref{tab:SingularValueThresholdSweep} shows the result for sweep singular value threshold. Singular Value Threshold will dictates the number of top singular values picked up for low rank approximation. All values greater than $singularValueThreshold*maxSingularValue$ are parth of the low rank approximation matrix.
+\begin{table}[]
+\centering
+\caption{Results for Singular Value Threshold Sweep}
+\label{tab:SingularValueThresholdSweep}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{}                                              &                          & \multicolumn{4}{l|}{Predictions}   & \multicolumn{4}{l|}{Nearest Neighbors} \\ \cline{2-10} 
+                                                               & Threshold & RMSE   & NFP     & NMNP   & TFRM   & RMSE    & NFP      & NMNP    & TFRM    \\ \hline
+\multicolumn{1}{|c|}{\multirow{3}{*}{Average Value}} & 0.01      & 0.4001 & 15.8126 & 4.7124 & 0.5599 & 0.4015  & 15.841   & 4.7495  & 0.5625  \\ \cline{2-10} 
+\multicolumn{1}{|c|}{}                                         & 0.1       & 0.3987 & 15.793  & 4.6841 & 0.5621 & 0.4013  & 15.7996  & 4.7146  & 0.5595  \\ \cline{2-10} 
+\multicolumn{1}{|c|}{}                                         & 0.8       & 0.3963 & 15.9913 & 4.9216 & 0.556  & 0.4023  & 15.8715  & 4.8126  & 0.559   \\ \hline
+\multirow{3}{*}{Iterative}                     & 0.01      & 1.5571 & 26.0392 & 14.841 & 0.7407 & 1.3346  & 21.281   & 8.6144  & 0.5956  \\ \cline{2-10} 
+                                                               & 0.1       & 0.9026 & 14.0283 & 3.7059 & 0.6575 & 1.1042  & 17.5142  & 5       & 0.6122  \\ \cline{2-10} 
+                                                               & 0.8       & 0.4495 & 13.024  & 1.1808 & 0.5647 & 0.436   & 13.0719  & 1.159   & 0.5643  \\ \hline
+\end{tabular}
+\end{table}
+
+\paragraph{Sensitivity to Iteration Count for Iterative SVD}
+Table~\ref{tab:IterationCountSweep} shows the results for different iteration counts for Iterative SVD provided, NN is fixed to 80 and Singular Value Threshold is fixed to 0.1.
+\begin{table}[]
+\centering
+\caption{My caption}
+\label{tab:IterationCountSweep}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+\hline
+           & \multicolumn{4}{l|}{Predictions}   & \multicolumn{4}{l|}{Nearest Neighbors} \\ \hline
+Iterations & RMSE   & NFP     & NMNP   & TFRM   & RMSE    & NFP      & NMNP    & TFRM    \\ \hline
+40         & 0.9076 & 14.3246 & 3.8562 & 0.6614 & 1.1209  & 17.7778  & 5.1852  & 0.6096  \\ \hline
+100        & 0.9026 & 14.0283 & 3.7059 & 0.6575 & 1.1042  & 17.5142  & 5       & 0.6122  \\ \hline
+1000       & 0.92   & 13.8344 & 3.9346 & 0.6619 & 1.0805  & 17.1155  & 4.719   & 0.6092  \\ \hline
+\end{tabular}
+\end{table}
   \section{Miscellaneous Topics}
   \subsection{Content Based Recommender Systems}
 
@@ -136,4 +221,3 @@ We have already implemented this code in \textit{ModelBasedPrediction / Evaluate
 
 Serendipity is related to unexpectedness and involves a positive emotional response of the user about a previously unknown item. It is concerned with the novelty of recommendations and how far such recommendations may positively affect the user. Serendipity is generally not easy to measure and most systems consider a trade-off between various forms of accuracy and serendipity. 
 % \end{document}
-

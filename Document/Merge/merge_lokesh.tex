@@ -156,6 +156,7 @@ Consider the Table \ref{table:example_ratings2} which has a new user Kim added t
 \end{myremark}
 Carefully read the specification of the provided MATLAB function \textit{PCSimVecMatrix}. Can you use it to skip one of the steps mentioned in Exercise \arabic{ques}? Refer to our implementation for Exercise \arabic{ques} in file ``UserBasedPredictionToy.m".
 \subsection{How to Evaluate a Recommender System?}
+\label{subsection:errors}
 We need some methodology to evaluate our recommendations. In this section we will discuss multiple ways to do so. A recommender system generally looks at a mix of these values to evaluate its results. We first seperate our database into a test set and a train set. We compute our results based on the train set and make our predictions. We extract the predictions from our test set and look at the corresponding predictions we genrated for them. In order to quantify the difference, we use the following techniques.
   \subsubsection{Root Mean Square Error (RMSE)}
 \[ RMSE = \sqrt{\frac{\sum_{(x,i) \in T} (r_{xi} - r_{xi}^{*})^{2}}{N}} \]
