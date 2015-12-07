@@ -1,4 +1,4 @@
-% Example to illustrate user-based and item-based similarity and
+% Example to illustrate user-based similarity and
 % recommendation
 
 %           Matrix      Titanic     DieHard    ForrestGump     Wall-E
@@ -8,7 +8,8 @@
 % Diane       4             3           5           3  
 % Kim         1             4                       5
 
-% Clearly Titanic, ForretGump, Wall-E are similar
+% Clearly Titanic, ForretGump, Wall-E are similar and DieHard,Matrix are
+% similar
 
 X = [5 1 0 2 2; 1 5 2 5 5; 2 0 3 5 4; 4 3 5 3 0; 1 4 0 5 0];
 

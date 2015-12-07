@@ -10,6 +10,8 @@ function [o_SimilarityVec,normM]  = PCSimVecMatrix( i_Vec1, i_M)
     
     nonzeroM = i_M~= 0; % matrix of 1s for rated entries
     nonzeroVec = i_Vec1 ~= 0;
+    
+    %subtract mean of ratings per user
     normVec1 = i_Vec1 - meanVec*nonzeroVec;
     [m,n] = size(i_M);
     normM = i_M - repmat(meanMrows, 1, n).* nonzeroM;

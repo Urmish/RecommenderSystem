@@ -2,7 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{User Based Recommendation}
 \subsection{Idea of Similarity}
-Let's say the users of a website like Imdb [TODO FIXME] rate the movies on a scale of 1 to 5, where a rating of 5 implies the user really liked the movie and a rating of 1 implies the opposite. This data can be stored in the from of a \textit{utility matrix} where each row of the matrix corresponds to a user and each column corresponds to a movie. Consider an example rating set shown in Table \ref{table:example_ratings1} that can be represented in the form of \textit{utility matrix} U as shown in equation \ref{eq:utility_U}. This 4x5 matrix stores the ratings given by 4 users to a set of 5 movies. As expected, not every user would have rated each of the 5 movies. The user-movie combination for which a rating does not exist is indicated by a 0.
+Let's say the users of a website like rate the movies on a scale of 1 to 5, where a rating of 5 implies the user really liked the movie and a rating of 1 implies the opposite. This data can be stored in the from of a \textit{utility matrix} where each row of the matrix corresponds to a user and each column corresponds to a movie. Consider an example rating set shown in Table \ref{table:example_ratings1} that can be represented in the form of \textit{utility matrix} U as shown in equation \ref{eq:utility_U}. This 4x5 matrix stores the ratings given by 4 users to a set of 5 movies. As expected, not every user would have rated each of the 5 movies. The user-movie combination for which a rating does not exist is indicated by a 0.
 \begin{table*}
 \centering
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -196,9 +196,10 @@ In this exercise, you will extend the MATLAB code from Exercise 5 to generate re
 A \textit{configuration} is defined by the chosen values for a number of parameters:
 \begin{itemize}
 \item{}Choice of similarity criteria - Cosine similarity, PC similarity
-\item{}Choice of threshold value for selecting nearest neighbors based on their similarity weights
-\item{}Choice of threshold to limit the maximum number of neighbors chosen in the previous step
-\item{}Choice of normalization used - Mean Centering, Z-score Normalization, no normalization
+\item{}Choice of threshold value for similarity \textit{ks} such that users with similarity weights greater than \textit{ks} are selected as neighbors
+\item{}Choice of threshold number \textit{kn} such that \textit{kn} users with highest similarity weights are selected as neighbors 
+\textit{You may choose to select neighbors based on either threshold ks or threshold kn. You can also use a combination of the two approaches.}
+\item{}Choice of normalization used - Mean Centering, no normalization
 \item{}Choice of metric to calculate the error - RMSE, TFRM, NMNP, NFP
 \end{itemize}
 A set of values selected for these parameters will give you one configuration. Vary one or more of these parameters to run for different configurations and calculate the mean error for each. You DO NOT need to cover the entire space of configurations. Refer to Table [TODO FIXME] to decide on 4-5 configurations. Do some choices perform better than others? Try explaining any interesting observations.
