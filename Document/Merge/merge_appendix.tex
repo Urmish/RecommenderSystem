@@ -5,7 +5,7 @@
  We talked about Latent Matrix Factorization in the document earlier. In this section, we will go through the basics of matrix factorization. Assume that we are dealing with user ratings (score in the range of 1 to 5) of items in a recommendation system.
 
 \paragraph{Basic Idea}
- In recommendation system like Netflix or MovieLens, there are a group of users and a set of items. Given that each users have rated only some items in the system, we would like to predict how the users would rate the other not yet rated items, so that we can make appropriate recommendations to the users. We can represent all the information we have about the existing ratings in a matrix. Assume that we have 5 users and 10 items, and ratings range from 1 to 5 (integer values), the matrix may look something like this:
+ In recommendation system like Netflix or MovieLens, there are a group of users and a set of items. Given that each user has rated only some items in the system, we would like to predict how the users would rate the other not yet rated items, so that we can make appropriate recommendations to the users. We can represent all the information we have about the existing ratings in a matrix. Assume that we have 5 users and 4 items, and ratings range from 1 to 5 (integer values), the matrix may look something like this:
 
 \begin{table}[ht]
 \caption{User Ratings}
@@ -40,7 +40,7 @@ U5 & - & 1 & - & 4\\ [1ex] % [1ex] adds vertical space
     r_{ij} = p_i^{T}q_j = \sum_{k=1}^{K}p_{ik}q_{kj}
   \end{gather*}
 
- Now, we have to find a way to obtain $\mathbf{P}$ and $\mathbf{Q}$. One way to approach this problem is the first initialize the two matrices with some values, calculate how `different’ their product is to $\mathbf{M}$, and then try to minimize this difference iteratively. Such a method is called gradient descent, aiming at finding a local minimum of the difference.
+ Now, we have to find a way to obtain $\mathbf{P}$ and $\mathbf{Q}$. One way to approach this problem is to first initialize the two matrices with some values, calculate how 'different' their product is from $\mathbf{M}$, and then try to minimize this difference iteratively. Such a method is called gradient descent, aiming at finding a local minimum of the difference.
 
  Here we consider the squared error because the estimated rating can be either higher or lower than the real rating.
 
@@ -80,6 +80,7 @@ U5 & - & 1 & - & 4\\ [1ex] % [1ex] adds vertical space
 Study the code in \textit{LatentMatrixFactorization.m} which implements the Latent Matrix Factorization technique. Use \textit{LMFCall.m} to call this method. Do you get interesting and/or useful recommendations for the new user based on her ratings for a small set of movies? Try and add/change the ratings for the new user and see how the recommendations change. Try different values of regularization parameters in \textit{LatentMatrixFactorization.m} and observe the differences in new user ratings.
 \end{myremark}
 \section{Code and Function Walkthrough}
+Once you unzip the files in a directory $RecommenderSystemLab$, it will contain the following four folders. Add the directory $RecommenderSystemLab$ and its subfolders to your current matlab path.
 \begin{enumerate}
 \item \textbf{Useful Scripts} - This folder contains basic read write function implementations.
 \begin{itemize}
@@ -108,10 +109,10 @@ Study the code in \textit{LatentMatrixFactorization.m} which implements the Late
 \end{itemize}
 \item \textbf{Examples} - This folder has all the toy examples used in the Lab.
 \begin{itemize}
-\item \textbf{UserBasedPredictionToy.m} - contains code to for generating prediction in Exercise 5.
+\item \textbf{UserBasedPredictionToy.m} - contains code for generating prediction in Exercise 5.
 \item \textbf{UserBasedPredictionReal\_kn.m and UserBasedPredictionReal\_kn.m} - are the implementations of user-based recommendation for reference.
 \item \textbf{ToyExampleAverageValueSVD.m} - Contains code to implement Average Value SVD.
-\item \textbf{ToyExampleIncrementalValueSVD.m} - Contains code to implement Incremental Value SVD.
+\item \textbf{ToyExampleIterativeSVD.m} - Contains code to implement Iterative Value SVD.
 \item \textbf{ToyExampleModelSVDMotivation.m} - Contains example code to describe issues with Sparsity and a potential solution.
 \item \textbf{ToyExampleModelSVDMotivation2.m} - Contains example code to describe issues related to Synonym and a potential solution.
  

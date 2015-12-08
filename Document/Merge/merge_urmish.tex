@@ -1,12 +1,12 @@
 \section{Model Based Systems}
   The systems based on methods discussed earlier in the lab have been widely used and produce good results. But such algorithms have been shown to have several limitations. 
   \begin{itemize}
-    \item \underline{Sparsity} - Nearest Neighbor (NN) Algorithms need exact matches. As a result algorithms sacrifice recommender system coverage and accuracy~\cite{model_ref1}. To be more precise, correlation coefficient is only defined between customers who have products (movies in our database) in common. In an ecommerce environment where there are large number of items, one may find many customers who do not have any correlation with other customers~\cite{model_ref2}. As a result Nearest Neighbor based algorithms are not able to recommend anything to these customers. This problem is known as the reduced coverage problem. The sparsity could also lead to a recommender system from missing certain obvious neighbors. 
+    \item \underline{Sparsity} - Nearest Neighbor (NN) Algorithms need exact matches. As a result algorithms sacrifice recommender system's coverage and accuracy~\cite{model_ref1}. To be more precise, correlation coefficient is only defined between customers who have products (movies in our database) in common. In an ecommerce environment where there are large number of items, one may find many customers who do not have any correlation with other customers~\cite{model_ref2}. As a result Nearest Neighbor based algorithms are not able to recommend anything to these customers. This problem is known as the reduced coverage problem. The sparsity could also lead to a recommender system to miss certain obvious neighbors. 
 
-\textit{For example - John and Susan are highly correlated. Susan and Jack are also highly correlated. Conventional wisdom might suggest John and Jack should also have similar choices, however if John and Jack have very few ratings in common, such patterns could be easily missed}
+\textit{For example - John and Susan are highly correlated. Susan and Jack are also highly correlated. Conventional wisdom might suggest John and Jack should also have similar choices, however if John and Jack have very few ratings in common, such patterns could be easily missed.}
     \item \underline{Synonym Problem} - In real life scenarios, different product names can refer to similar items. Correlation based recommender systems cannot find such latent association and thus end up treating these objects as two separate entities. 
 
-\textit{For example, let us consider two customers one of whom rates 10 different writing pad products as "high" and another customer rates 10 different notepads as "high". NN based recommender system will not capture their association.}
+\textit{For example, let us consider two customers one of whom rates 10 different writing pad products as ``high" and another customer rates 10 different notepads as ``high". NN based recommender system will not capture their association.}
   \end{itemize}
   One of the methods used to handle both the problems is the low rank approximation method. Let us do an exercise to understand the issues discussed above and see how low rank approximation can help us. \\
   \begin{table}[]
@@ -24,15 +24,15 @@ Jack  &            &            & 4          & 4          \\ \hline
   \end{table}
 \\
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Take a look at Table~\ref{Model-1}. The table illustrates the example we described while discussing \textit{Sparsity}. So how do you ensure that John and Eric are considered similar to each other? Look at the code written in \textit{Examples/ToyExampleModelSVDMotivation.m} and run it to see how low rank approximation helps us magically establish this relationship between John and Eric!! We will discuss what low rank approximation in the next section.  For now, do you agree that this method is helping us with the sparsity problem? 
+Take a look at Table~\ref{Model-1}. The table illustrates the example we described while discussing \textit{Sparsity}. How do you ensure that John and Eric are considered similar to each other? Look at the code written in \textit{Examples/ToyExampleModelSVDMotivation.m} and run it to see how low rank approximation helps us magically establish this relationship between John and Eric!! We will discuss what low rank approximation is in the next section.  For now, do you agree that this method is helping us with the sparsity problem? 
 \end{myremark}
 
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Look at \textit{Examples/ToyExampleModelSVDMotivation2.m}. It explains a scenario similar to the talked about in Synonym Problem and looks at a potential solution. Run the code and observe the output? Do you think Low Rank approximation is finding some sort of latent association? What are the predictions for values not rated by the user?
+Look at \textit{Examples/ToyExampleModelSVDMotivation2.m}. It explains a scenario similar to the one talked about in Synonym Problem and looks at a potential solution. Run the code and observe the output? Do you think Low Rank approximation is finding some sort of latent association? What are the predictions for values not rated by the user?
 \end{myremark}
   \subsection{Singular Vector Decomposition}
 
-The Singular Value Decomposition (SVD) is a well known matrix factorization method. Formally, the SVD of a $m \times n$ matrix $A$ is a factorization of the form $A = U \Sigma V^{T}$ where $U$ is a $m \times m$ orthogonal matrix, $\Sigma$ is a $m \times n$ diagonal matrix with non-negative terms on the diagonal, and $V$ is a $n \times n$ orthogonal matrix. The diagonal entries of $\Sigma$ are known as the singular values of $A$. The $m$ columns of $U$ and the $n$ column of $V$ are known as the left and right singular vectors of $A$ respectively. 
+The Singular Value Decomposition (SVD) is a well known matrix factorization method. Formally, the SVD of an $m \times n$ matrix $A$ is a factorization of the form $A = U \Sigma V^{T}$ where $U$ is an $m \times m$ orthogonal matrix, $\Sigma$ is an $m \times n$ diagonal matrix with non-negative terms on the diagonal, and $V$ is an $n \times n$ orthogonal matrix. The diagonal entries of $\Sigma$ are known as the singular values of $A$. The $m$ columns of $U$ and the $n$ columns of $V$ are known as the left and right singular vectors of $A$ respectively. 
 
 The SVD gives the `best' low-rank approximation of a matrix. To put this in a more formal notation, it minimizes the Frobenius form of the difference between the approximation and the original matrix.
 
@@ -48,18 +48,18 @@ A = magic(3)
 
 You should observe that the columns of the matrices $U$ and $V$ are orthonormal. Also note that $\Sigma$ is a diagonal matrix with non-negative and monotonically decreasing entries along the diagonal. These are the singular values of $A$.
   \subsection{Generating Predictions}
-  We can use SVD in recommender system to capture certain latent relationship between customers and products/movies. We can use this relationship to capture the predicted likeliness of a certain product/movie by a consumer. \textit{So the next big question is}, how do you calculate the SVD of an incomplete matrix? Or rather, how do you complete a matrix in general? In order to handle this, we will study various approximations. We will then run these methods and collect empirical evidence to validate their effectiveness.
+  We can use SVD in a recommender system to capture a certain latent relationship between customers and products/movies. We can use this relationship to capture the predicted preference for a certain product/movie of a consumer. \textit{So the next big question is}, how do you calculate the SVD of an incomplete matrix? Or rather, how do you complete a matrix in general? In order to handle this, we will study various approximations. We will then run these methods and collect empirical evidence to validate their effectiveness.
   \subsubsection{Latent Matrix Factorization}
   Since we cannot generate an SVD of an incomplete matrix, we can try to find a low rank approximation to our matrix using factorization similar to SVD. To do this, we first fill the incomplete values with 0 or any random permissible number within the valid range of our ratings. Thus the factorization of a matrix $R$ into two matrices $P$ and $Q$ could be viewed as a minimization problem where we are trying to reduce the error of our known values from their predicted values. In other words, our ideal factorization would be the one where after multiplying $P$ and $Q$, we get back the same value of ratings that the user had filled initially along with some predictions. In order to avoid over-fitting and generate good predictions, we use regularized least squares approach to solve the factorization problem. Because Latent Matrix Factorization is difficult to implement, we discuss this topics in a more formal context in the Appendix. We encourage the user to go through the tutorial in Appendix and run the code provided in the end to get an idea of Latent Matrix Factorization. We now discuss two other simple, yet effective approaches for Matrix Completion.
   \subsubsection{Average Value Based SVD Completion} 
   Below is the description of steps used to generate predictions using Average Values -
   \begin{enumerate}
     \item Let $R$ be the original sparse matrix where rows represent the user and columns represent the movies
-    \item Fill the empty cells in each column with average values of the product/movies in that column.
+    \item Fill the empty cells in each column with average values of the ratings of the product/movies in that column
     \item Calculate the average rating for each customer $\overline{C}$ using the non zero values
-    \item Let $R_{norm} = R - \overline{C}$, i.e. mean center each row. 
+    \item Let $R_{norm} = R - \overline{C}$, i.e. mean center each row 
     \item Factor $R_{norm}$ using SVD and obtain $U$, $S$ and $V$
-    \item Truncate $U$, $S$ and $V$ to $U_k$, $S_k$ and $V_k$.
+    \item Truncate $U$, $S$ and $V$ to $U_k$, $S_k$ and $V_k$
     \item Compute the resultant matrix $Pred_{norm} = U_k*S_k*V_k$
     \item Add the average customer value calculated in Step 3 to this matrix, i.e, $Pred = Pred_{norm} + \overline{C} $
   \end{enumerate}
@@ -73,49 +73,49 @@ Implement a function for average value SVD completion. Use the steps described a
     \item Let $R$ be the original sparse matrix where rows represent the user and columns represent the movies
     \item Fill the empty cells in each row with 0. Let this new Matrix be $R_{next}$
     \item Factorize $R_{next}$ using SVD and obtain $U$, $S$ and $V$
-    \item Truncate $U$, $S$ and $V$ to $U_k$, $S_k$ and $V_k$.
+    \item Truncate $U$, $S$ and $V$ to $U_k$, $S_k$ and $V_k$
     \item Compute the resultant matrix $R_{next} = U_k*S_k*V_k$
     \item Use the known values in $R$ to replace values in $R_{next}$
-    \item Repeat the process from Step 3, $T$ number of times. $T$ is the number of times you want to repeat the process.
+    \item Repeat steps from $3$ to $6$, $T$ number of times
   \end{enumerate}
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
 Implement a function for iterative SVD completion. Use the steps described above and run your code on the matrix generated from table \ref{table:example_ratings1}. Compare the result with our implementation located in \textit{Examples/ToyExampleIterativeSVD.m}. Look at the corresponding predictions. What do you think about them? How do they compare to the predictions using the previous methods?
 \end{myremark}
   \subsection{Nearest Neighbor}
-  By now you should have learnt to predict the ratings for unmarked items. So what do we do with these predictions? One thing we can do is recommend the top rated predictions for each user and that works perfectly fine. Another thing we can look into is the Nearest Neighbor approach that we discussed earlier in the lab.
+  By now you should have learnt to predict the ratings for unrated items. So what do we do with these predictions? One thing that we can do after applying a matrix completion technique is to recommend the top rated predictions for each user. Additionally we can look into the Nearest Neighbor approach that we discussed earlier in the lab.
   \subsubsection{Using Predicted Matrix}
-  Once we have a prediction for all the movies/products of all the users, we can use nearest neighbors to generate item recommendation for a user. Why do we do this when we already have a prediction? Well, nearest neighbor method can lead to something called as "Serendipity". We will discuss the meaning of Serendipity in a later section. This method is based on the assumption - given a high accuracy of prediction, we might find better neighbors and thus better ratings.
+  Once we have a prediction for all the movies/products of all the users, we can use nearest neighbors to generate item recommendation for a user. Why do we do this when we already have a prediction? Well, nearest neighbor method can lead to something called as ``Serendipity". We will discuss the meaning of Serendipity in a later section. This method is based on the assumption - given a high accuracy of prediction, we might find better neighbors and thus better ratings.
   \subsubsection{Original Matrix in Lower Dimension}
   Another work around to find better neighbors is to look for neighbors in a lower dimension space of the original sparse matrix. The motivation here is that a lower dimension space will lead to a denser matrix and might help us find better neighbors.
   \subsubsection{Which Nearest Neighbor approximation to Use?}
   To answer this question we will resort to the golden answer to life, universe and anything non-concrete - \textit{"It Depends!!!"}. For the purpose of this lab we used Nearest Neighbor approach in a lower dimension space of predicted matrix. Empirically, it worked better. In general, one tries different approaches and sees what works best for their environment and their preference of error metrics.
   \subsection{Bringing it All Together}
-  Now that you have all the concepts required to understand a Model Based Recommender System, we will encourage you to experiment with it to get an idea of the different trade-offs involved and the corresponding complexity in settling down on a method.
+  Now that you have all the concepts required to understand a Model Based Recommender System, we will encourage you to experiment with it to get an idea of the different trade-offs involved and the corresponding complexity in settling down on a method. We will be using the MovieLens dataset for this. The train dataset has 943 users and 1682 movies while the test dataset has 463 users and 1682 movies. 
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
 Write a code to run Model Based Prediction on the entire movie lens dataset. Follow these steps - 
 \begin{enumerate}
-\item Load u1.base and u1.test. 
-\item Create a Matrix of the form user*movies where unitialized values are set to zero. We already have function calls to do both these steps so feel free to use them.
-\item Create two matrix completion for the u1.base dataset, one based on Average Value SVD and one based on Incremental SVD.
+\item Read u1.base and u1.test. 
+\item Create a Utility Matrix where unitialized values are set to zero. Use \textit{ConvertUDataToMatrix.m} to do both these steps.
+\item Create two matrix completion for the u1.base dataset, one based on Average Value SVD and one based on Incremental SVD. Use \textit{IncrementalLowRankCompletion.m} and \textit{AverageValueBasedMatrixCompletion.m} for the same.
 \item Look at the Top 5 predictions from both of them for any random customer.
 \item Pick a customer from u1.test and look at the movies he has rated. 
 \item Look at the corresponding ratings in your predictions. Do they agree?
-\item Calculate the various error metrics that we discussed earlier in the lab. Feel free to use the functions we have implemented to calculate them.
+\item Calculate the average errors for all the customers in the test dataset using one of the error metrics - RMSE, TFRM (use \textit{Top5Accuracy}), NMNP, NFP (use \textit{StepErrorFunction})
 \end{enumerate}
-We have already implemented this code in \textit{ModelBasedPrediction / EvaluateModelBasedSVD.m}. Play around with the parameters, look at the impact it has on different error rates. It is upto you to decide what factors are important and what constitutes a good system. We have provided you with outputs for many different parameters in the table below.
+We have already implemented this code in \textit{ModelBasedPrediction / EvaluateModelBasedSVD.m}. Play around with the parameters {i\_singularValueThreshold, i\_iterCount, i\_NumNearestNeighbor}, look at the impact it has on different error rates. It is upto you to decide what factors are important and what constitutes a good system. We have provided you with outputs for many different parameters in the section below.
 \end{myremark}
 
 \subsubsection{Results and Analysis}
-We will be using the same error metric as discussed in Section~\ref{subsection:errors}. The average number of movies rated as good or bad by a user in the test vector is $27.5$ while the average number of movies rated as good by the user is $14.85$. For each method (Average value and Iterative Based) we would look at the results of using only the predictions as our estimates and the results of using Nearest Neighbor approach as our prediction estimates. Use the following analogy to interpret the results -
+We will be using the same error metric as discussed in Section~\ref{subsection:errors}. The average number of movies rated as good or bad per user is $27.5$ while the average number of movies rated as good is $14.85$. We would look at the results of using the best ratings from our ``Completed Matrix" (using Average value and Iterative Based) as our estimates, and the results obtained from using Nearest Neighbor approach on this ``Completed Matrix" as our prediction estimates. Use the following analogy to interpret the results -
 \begin{enumerate}
-\item A RMSE value of $1$ implies that on an average our predictions our off by a value of 1.
-\item A NFP value of $20$ implies that out of the 28 movies user considered good or bad, we were not able to classify 20 of those movies as good and bad respectively.
-\item A NMNP value of $14$ implies that out of the 15 movies a user considered good, we were not able to classify 14 of those movies as good.
-\item A TFRM value of $1$ implies that the top five movie based on predictions and the top five movies based on test ratings were off by one movie. (Note: We only consider predictions for movies rated in test dataset)
+\item An RMSE value of $1$ implies that on an average our predicted rating is off by a value of 1.
+\item An NFP value of $20$ implies that out of the 28 movies user considered good or bad, we were not able to classify 20 of those.
+\item An NMNP value of $14$ implies that out of the 15 movies a user considered good, we were not able to classify 14 of those.
+\item A TFRM value of $1$ implies that the top five movies based on predicted ratings and the top five movies based on test ratings were off by one movie. (Note: We only consider predictions for movies rated in test dataset)
 \end{enumerate}
 
-\paragraph{Changing Number of NN, singularValueThreshold = 0.03, iterationCount = 40}
-We will vary the number of nearest neighbors here and see the results for Nearest Neighbor Approach. Table~\ref{tab:prediction} gives you the results for using the prediction data only. Table~\ref{tab:nnaverage} and Table~\ref{tab:nniterative} show the results after varying the the number of nearest neighbor for average value based SVD method and iterative SVD method respectively.
+\paragraph{Changing i\_NumNearestNeighbor, i\_singularValueThreshold = 0.03, i\_iterCount = 40}
+We will vary the number of nearest neighbors here and see the results for Nearest Neighbor Approach. Table~\ref{tab:prediction} gives you the results for using the ``Completed Matrix". Table~\ref{tab:nnaverage} and Table~\ref{tab:nniterative} show the results after varying the the number of nearest neighbors for average value based SVD method and iterative SVD method respectively.
 \begin{table}[]
 \centering
 \caption{Prediction 1}
@@ -136,8 +136,8 @@ Iterative SVD     & 0.9076 & 14.3246 & 3.8562 & 0.6614 \\ \hline
 \hline
 \# Nearest Neighbors & RMSE   & NFP     & NMNP    & TFRM   \\ \hline
 1                    & 0.4972 & 27.5163 & 14.8497 & 0.5373 \\ \hline
-20                   & 0.4013 & 15.7952 & 4.7102  & 0.5595 \\ \hline
-40                   & 0.4013 & 15.7974 & 4.7124  & 0.5595 \\ \hline
+20                   & \textbf{0.4013} & \textbf{15.7952} & \textbf{4.7102}  & \textbf{0.5595} \\ \hline
+40                   & \textbf{0.4013} & 15.7974 & 4.7124  & \textbf{0.5595} \\ \hline
 \end{tabular}
 \end{table}
 
@@ -149,13 +149,13 @@ Iterative SVD     & 0.9076 & 14.3246 & 3.8562 & 0.6614 \\ \hline
 \hline
 \# Nearest Neighbors & RMSE   & NFP     & NMNP    & TFRM   \\ \hline
 1                    & 1.4154 & 27.5163 & 14.8497 & 0.5373 \\ \hline
-20                   & 1.1235 & 17.9935 & 5.6885  & 0.6148 \\ \hline
-40                   & 1.242  & 17.9586 & 5.4423  & 0.6157 \\ \hline
+20                   & \textbf{1.1235} & 17.9935 & 5.6885  & \textbf{0.6148} \\ \hline
+40                   & 1.242  & \textbf{17.9586} & \textbf{5.4423}  & 0.6157 \\ \hline
 \end{tabular}
 \end{table}
 
-\paragraph{Changing Singular Value Threshold, NN = 80, itercount = 100}
-Table~\ref{tab:SingularValueThresholdSweep} shows the result for sweep singular value threshold. Singular Value Threshold will dictates the number of top singular values picked up for low rank approximation. All values greater than $singularValueThreshold*maxSingularValue$ are parth of the low rank approximation matrix.
+\paragraph{Changing i\_singularValueThreshold, i\_NumNearestNeighbor = 80, i\_iterCount = 100}
+Table~\ref{tab:SingularValueThresholdSweep} shows the result for sweeping singular value threshold. Singular Value Threshold will dictate the number of top singular values picked up for low rank approximation. All values greater than $singularValueThreshold*maxSingularValue$ are part of the low rank approximation matrix.
 \begin{table}[]
 \centering
 \caption{Results for Singular Value Threshold Sweep}
@@ -165,38 +165,42 @@ Table~\ref{tab:SingularValueThresholdSweep} shows the result for sweep singular 
 \multirow{2}{*}{}                                              &                          & \multicolumn{4}{l|}{Predictions}   & \multicolumn{4}{l|}{Nearest Neighbors} \\ \cline{2-10} 
                                                                & Threshold & RMSE   & NFP     & NMNP   & TFRM   & RMSE    & NFP      & NMNP    & TFRM    \\ \hline
 \multicolumn{1}{|c|}{\multirow{3}{*}{Average Value}} & 0.01      & 0.4001 & 15.8126 & 4.7124 & 0.5599 & 0.4015  & 15.841   & 4.7495  & 0.5625  \\ \cline{2-10} 
-\multicolumn{1}{|c|}{}                                         & 0.1       & 0.3987 & 15.793  & 4.6841 & 0.5621 & 0.4013  & 15.7996  & 4.7146  & 0.5595  \\ \cline{2-10} 
-\multicolumn{1}{|c|}{}                                         & 0.8       & 0.3963 & 15.9913 & 4.9216 & 0.556  & 0.4023  & 15.8715  & 4.8126  & 0.559   \\ \hline
+\multicolumn{1}{|c|}{}                                         & 0.1       & 0.3987 & \textbf{15.793}  & \textbf{4.6841} & 0.5621 & \textbf{0.4013}  & \textbf{15.7996}  & \textbf{4.7146}  & 0.5595  \\ \cline{2-10} 
+\multicolumn{1}{|c|}{}                                         & 0.8       & \textbf{0.3963} & 15.9913 & 4.9216 & \textbf{0.556}  & 0.4023  & 15.8715  & 4.8126  & \textbf{0.559}   \\ \hline
 \multirow{3}{*}{Iterative}                     & 0.01      & 1.5571 & 26.0392 & 14.841 & 0.7407 & 1.3346  & 21.281   & 8.6144  & 0.5956  \\ \cline{2-10} 
                                                                & 0.1       & 0.9026 & 14.0283 & 3.7059 & 0.6575 & 1.1042  & 17.5142  & 5       & 0.6122  \\ \cline{2-10} 
-                                                               & 0.8       & 0.4495 & 13.024  & 1.1808 & 0.5647 & 0.436   & 13.0719  & 1.159   & 0.5643  \\ \hline
+                                                               & 0.8       & \textbf{0.4495} & \textbf{13.024}  & \textbf{1.1808} & \textbf{0.5647} & \textbf{0.436}   & \textbf{13.0719}  & \textbf{1.159}   & \textbf{0.5643}  \\ \hline
 \end{tabular}
 \end{table}
 
 \paragraph{Sensitivity to Iteration Count for Iterative SVD}
-Table~\ref{tab:IterationCountSweep} shows the results for different iteration counts for Iterative SVD provided, NN is fixed to 80 and Singular Value Threshold is fixed to 0.1.
+Table~\ref{tab:IterationCountSweep} shows the results for different iteration counts for Iterative SVD provided, i\_singularValueThreshold is fixed to 80 and Singular Value Threshold is fixed to 0.1.
 \begin{table}[]
 \centering
-\caption{My caption}
+\caption{Iteration Count Sweep}
 \label{tab:IterationCountSweep}
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|}
 \hline
            & \multicolumn{4}{l|}{Predictions}   & \multicolumn{4}{l|}{Nearest Neighbors} \\ \hline
 Iterations & RMSE   & NFP     & NMNP   & TFRM   & RMSE    & NFP      & NMNP    & TFRM    \\ \hline
 40         & 0.9076 & 14.3246 & 3.8562 & 0.6614 & 1.1209  & 17.7778  & 5.1852  & 0.6096  \\ \hline
-100        & 0.9026 & 14.0283 & 3.7059 & 0.6575 & 1.1042  & 17.5142  & 5       & 0.6122  \\ \hline
-1000       & 0.92   & 13.8344 & 3.9346 & 0.6619 & 1.0805  & 17.1155  & 4.719   & 0.6092  \\ \hline
+100        & \textbf{0.9026} & 14.0283 & \textbf{3.7059} & \textbf{0.6575} & 1.1042  & 17.5142  & 5       & 0.6122  \\ \hline
+1000       & 0.92   & \textbf{13.8344} & 3.9346 & 0.6619 & \textbf{1.0805}  & \textbf{17.1155}  & \textbf{4.719}   & \textbf{0.6092}  \\ \hline
 \end{tabular}
 \end{table}
+
+\paragraph{Analysis}
+As we can see, different parameters can lead to the optimization of different error metrics. The parameter set which gives us the best result depends on the error metric a system developer considers important.
+
   \section{Miscellaneous Topics}
   \subsection{Content Based Recommender Systems}
 
- Content-based recommender systems recommend an item to a user based upon a description of the item and the profile of the user’s interests. Systems implementing a content-based recommendation approach analyze a set of documents and/or descriptions of items previously rated by a user, and build a model or profile of user interests based on the features of the objects rated by that user. The profile is a structured representation of user interests, adopted to recommend new interesting items. The recommendation process basically consists in matching up the attributes of the user profile against the attributes of a content object. The result is a relevance judgment that represents the user’s level of interest in that object. If a profile accurately reflects user preferences, it is of tremendous advantage for the effectiveness of an information access process. For instance, it could be used to filter search results by deciding whether a user is interested in a specific Web page or not and, in the negative case, preventing it from being displayed.
-\subsubsection{Advantages and Drawbacks of Content-based Filtering}
+ Content-based recommender systems recommend an item to a user based upon a description of the item and the profile of the user's interests. Systems implementing a content-based recommendation approach analyze a set of documents and/or descriptions of items previously rated by a user, and build a model or profile of user interests based on the features of the objects rated by that user. The profile is a structured representation of user interests, adopted to recommend new interesting items. The recommendation process basically consists of matching up the attributes of the user profile against the attributes of an item. The result is a relevance judgement that represents the user’s level of interest in that object. If a profile accurately reflects user preferences, it is of tremendous advantage for the effectiveness of an information access process. For instance, it could be used to filter search results by deciding whether a user is interested in a specific Web page or not and, in the negative case, preventing it from being displayed.
+\subsubsection{Advantages and Disadvantages of Content-based Filtering}
 
  The adoption of the content-based recommendation paradigm has several advantages when compared to the collaborative one:
 \begin{itemize}
-\item \textbf{User Independence} - Content-based recommenders exploit solely ratings provided by the active user to build her own profile.
+\item \textbf{User Independence} - Content-based recommenders exploit the ratings provided by the active user to build her profile.
 \end{itemize}
 \begin{itemize}
 \item \textbf{Transparency} - Explanations on how the recommender system works can be provided by explicitly listing content features or descriptions that caused an item to occur in the list of recommendations. 
