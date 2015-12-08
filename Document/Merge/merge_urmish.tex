@@ -3,7 +3,7 @@
   \begin{itemize}
     \item \underline{Sparsity} - Nearest Neighbor (NN) Algorithms need exact matches. As a result algorithms sacrifice recommender system coverage and accuracy~\cite{model_ref1}. To be more precise, correlation coefficient is only defined between customers who have products (movies in our database) in common. In an ecommerce environment where there are large number of items, one may find many customers who do not have any correlation with other customers~\cite{model_ref2}. As a result Nearest Neighbor based algorithms are not able to recommend anything to these customers. This problem is known as the reduced coverage problem. The sparsity could also lead to a recommender system from missing certain obvious neighbors. 
 
-\textit{For example - John and Susan are highly correlated, while Susan and Jack are highly correlated. Conventional wisdom might suggest John and Jack should also have similar choices, however if John and Jack have very few ratings in common, such patterns could be easily missed}
+\textit{For example - John and Susan are highly correlated. Susan and Jack are also highly correlated. Conventional wisdom might suggest John and Jack should also have similar choices, however if John and Jack have very few ratings in common, such patterns could be easily missed}
     \item \underline{Synonym Problem} - In real life scenarios, different product names can refer to similar items. Correlation based recommender systems cannot find such latent association and thus end up treating these objects as two separate entities. 
 
 \textit{For example, let us consider two customers one of whom rates 10 different writing pad products as "high" and another customer rates 10 different notepads as "high". NN based recommender system will not capture their association.}
@@ -95,7 +95,7 @@ Implement a function for iterative SVD completion. Use the steps described above
 Write a code to run Model Based Prediction on the entire movie lens dataset. Follow these steps - 
 \begin{enumerate}
 \item Load u1.base and u1.test. 
-\item Create a Matrix of the form user*movies where unitialized values to zero. We already have function calls to do both these steps so feel free to use them.
+\item Create a Matrix of the form user*movies where unitialized values are set to zero. We already have function calls to do both these steps so feel free to use them.
 \item Create two matrix completion for the u1.base dataset, one based on Average Value SVD and one based on Incremental SVD.
 \item Look at the Top 5 predictions from both of them for any random customer.
 \item Pick a customer from u1.test and look at the movies he has rated. 
@@ -106,7 +106,7 @@ We have already implemented this code in \textit{ModelBasedPrediction / Evaluate
 \end{myremark}
 
 \subsubsection{Results and Analysis}
-We will be using the same error metric as discussed in Section~\ref{subsection:errors}. The average number of movies rated as good or bad by a user in the test vecto is $27.5$ while the average number of movies rated as good by the user is $14.85$. For each method (Average value and Iterative Based) we would look at the results of using only the predictions as our estimates and the results of using Nearest Neighbor approach as our prediction estimates. Use the following analogy to interpret the results -
+We will be using the same error metric as discussed in Section~\ref{subsection:errors}. The average number of movies rated as good or bad by a user in the test vector is $27.5$ while the average number of movies rated as good by the user is $14.85$. For each method (Average value and Iterative Based) we would look at the results of using only the predictions as our estimates and the results of using Nearest Neighbor approach as our prediction estimates. Use the following analogy to interpret the results -
 \begin{enumerate}
 \item A RMSE value of $1$ implies that on an average our predictions our off by a value of 1.
 \item A NFP value of $20$ implies that out of the 28 movies user considered good or bad, we were not able to classify 20 of those movies as good and bad respectively.
@@ -217,7 +217,7 @@ Iterations & RMSE   & NFP     & NMNP   & TFRM   & RMSE    & NFP      & NMNP    &
 \end{itemize}
 
   \subsection{Serendipity}
-  Recommender Systems exist to help users discover an item that he or she would like among the large pool of items available. Most of the errors that we saw did not talk about the novelty of recommendation. For example, if I have seen Star Wars: A New Hope, Star Wars: The Empire Strikes Back and Star Wars: Revenge of the Sith, I will most likely find a lot of nearest neighbors whose collective votes leads to the recommendation for The Phantom Menace, Attack of the Clones and Revenge of the Sith. I will definitely end up liking that movie. Now consider a scenario where watch a movie of a completely different genre, say \textit{Lincoln} and enjoy it a lot. An item based recommendation system would have never led me to discover this movie as all the movies I have rated fall into the Action/Saga/Fantasy category. Such discoveries are called serendipitous discoveries. 
+  Recommender Systems exist to help users discover an item that he or she would like among the large pool of items available. Most of the errors that we saw did not talk about the novelty of recommendation. For example, if I have seen Star Wars: A New Hope, Star Wars: The Empire Strikes Back and Star Wars: Revenge of the Sith, I will most likely find a lot of nearest neighbors whose collective votes leads to the recommendation for The Phantom Menace, Attack of the Clones and Revenge of the Sith. I will definitely end up liking that movie. Now consider a scenario where I watch a movie of a completely different genre, say \textit{Lincoln} and enjoy it a lot. An item based recommendation system would have never led me to discover this movie as all the movies I have rated fall into the Action/Saga/Fantasy category. Such discoveries are called serendipitous discoveries. 
 
 Serendipity is related to unexpectedness and involves a positive emotional response of the user about a previously unknown item. It is concerned with the novelty of recommendations and how far such recommendations may positively affect the user. Serendipity is generally not easy to measure and most systems consider a trade-off between various forms of accuracy and serendipity. 
 % \end{document}

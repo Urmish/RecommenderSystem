@@ -1,8 +1,7 @@
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{User Based Recommendation}
 \subsection{Idea of Similarity}
-Let's say the users of a website like rate the movies on a scale of 1 to 5, where a rating of 5 implies the user really liked the movie and a rating of 1 implies the opposite. This data can be stored in the from of a \textit{utility matrix} where each row of the matrix corresponds to a user and each column corresponds to a movie. Consider an example rating set shown in Table \ref{table:example_ratings1} that can be represented in the form of \textit{utility matrix} U as shown in equation \ref{eq:utility_U}. This 4x5 matrix stores the ratings given by 4 users to a set of 5 movies. As expected, not every user would have rated each of the 5 movies. The user-movie combination for which a rating does not exist is indicated by a 0.
+Let's say the users of a website rate movies on a scale of 1 to 5, where a rating of 5 implies the user really liked the movie and a rating of 1 implies the opposite. This data can be stored in the form of a \textit{utility matrix} where each row of the matrix corresponds to a user and each column corresponds to a movie. Consider an example rating set shown in Table \ref{table:example_ratings1} that can be represented in the form of \textit{utility matrix} U as shown in equation \ref{eq:utility_U}. This 4x5 matrix stores the ratings given by 4 users to a set of 5 movies. As expected, not every user would have rated each of the 5 movies. The user-movie combination for which a rating does not exist is indicated by a 0.
 \begin{table*}
 \centering
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -81,7 +80,7 @@ PC(u,v) = PC(\textbf{x}_{u}, \textbf{x}_{v}) = \frac
 where $\bar{r_{u}}$ represents the mean of the ratings given by user \textit{u}. Note that PC accounts for variance in ratings only for the ratings of the movies I\textsubscript{uv} that have been rated by both users \textit{u} and \textit{v}. The sign of similarity weight calculated using PC indicates whether the correlation between the two users is direct or inverse, and the magnitude of similarity weight (ranging from 0 to 1) represents the strength of correlation. These will be used to predict unknown ratings for a user using \textit{neighborhood-based} methods later.
 
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Calculate the Pearson Correlation (PC) similarity of Eric with other users in Table \ref{table:example_ratings1}. You can use the function \textit{PCSimVecMatrix} provided with the lab. Which user(s) would you say is similar to Eric. You can do a similar analysis for comparing the Cosine similarities and Pearson Correlation similarities of other users.
+Calculate the Pearson Correlation (PC) similarity of Eric with other users in Table \ref{table:example_ratings1}. You can use the function \textit{PCSimVecMatrix} provided with the lab. Which user(s) would you say is similar to Eric? You can do a similar analysis for comparing the Cosine similarities and Pearson Correlation similarities of other users.
 \end{myremark}
 
 \subsection{Calculating Predicted Ratings}
@@ -166,7 +165,6 @@ We need some methodology to evaluate our recommendations. In this section we wil
 &r_{xi}:\text{The actual rating of item `i' by user `x'} \\
 &r_{xi}^{*}:\text{The rating that our system predicts user `x' will give item `i'}
 \end{align*}
-\paragraph{}
 We can try to design our algorithm to reduce this RMSE value, by minimizing the sum of squared errors (SSE) thereby giving us more accurate predictions of user ratings and hence improving our recommendations. 
   \subsubsection{Top Five Rated Movies (TFRM)}
   Sort the movies in the test dataset in a decreasing order and look at the top five rated movies. For the movies in the test dataset, look at their corresponding predictions and sort them in a decreasing fashion. We find the intersection of the top 5 movies for both these sets to see how close we came to understanding user preference. let  the top five movies in the test dataset for a user be represented by :
@@ -187,7 +185,7 @@ We can try to design our algorithm to reduce this RMSE value, by minimizing the 
   Error = 1 - \frac{|S_{gtb}|}{|S_{g}|}
   \end{align*}
   \subsubsection{Number of Flipped Movies (NFP)}
-  This is an extension of the previous error metric. Here we look at all the movies that user rated good an bad. The definition of good remains the same as before. We define bad movies as movies which have ratings lower than $AverageValue - Threshold$. $S_{flip}$ represent the sum of number of good movies that the recommender system predicted as bad and bad movies that the recommender system predicted as good, $S_{gb}$ are the set of all good and bad movies in the test data set, then the error is simply, 
+  This is an extension of the previous error metric. Here we look at all the movies that user rated good and bad. The definition of good remains the same as before. We define bad movies as movies which have ratings lower than $AverageValue - Threshold$. $S_{flip}$ represent the sum of number of good movies that the recommender system predicted as bad and bad movies that the recommender system predicted as good, $S_{gb}$ are the set of all good and bad movies in the test data set, then the error is simply, 
   \begin{align*}
   Error = 1 - \frac{|S_{flip}|}{|S_{gb}|}
   \end{align*}
@@ -197,7 +195,7 @@ In this exercise, you will extend the MATLAB code from Exercise 5 to generate re
 A \textit{configuration} is defined by the chosen values for a number of parameters:
 \begin{itemize}
 \item{}Choice of similarity criteria - Cosine similarity, PC similarity (Use functions \textit{CosSimVecMatrix} and \textit{PCSimVecMatrix})
-\item{}Choice of threshold value for similarity \textit{ks} such that users with similarity weights greater than \textit{ks} are selected as neighbors
+\item{}Choice of threshold value for similarity \textit{ks} such that users with similar weights greater than \textit{ks} are selected as neighbors
 \item{}Choice of threshold number \textit{kn} such that \textit{kn} users with highest similarity weights are selected as neighbors 
 \textit{(You may choose to select neighbors based on either threshold ks or threshold kn. You can also use a combination of the two approaches.)}
 \item{}Choice of normalization used - Mean Centering (Check out function \textit{PCSimVecMatrix}), no normalization
