@@ -80,7 +80,7 @@ U5 & - & 1 & - & 4\\ [1ex] % [1ex] adds vertical space
 Study the code in \textit{LatentMatrixFactorization.m} which implements the Latent Matrix Factorization technique. Use \textit{LMFCall.m} to call this method. Do you get interesting and/or useful recommendations for the new user based on her ratings for a small set of movies? Try and add/change the ratings for the new user and see how the recommendations change. Try different values of regularization parameters in \textit{LatentMatrixFactorization.m} and observe the differences in new user ratings.
 \end{myremark}
 \section{Code and Function Walkthrough}
-Once you unzip the files in a directory $RecommenderSystemLab$, it will contain the following four folders. Add the directory $RecommenderSystemLab$ and its subfolders to your current matlab path.
+Once you unzip the files in a directory $RecommenderSystemLab$, it will contain the following five folders. Add the directory $RecommenderSystemLab$ and its subfolders to your current matlab path.
 \begin{enumerate}
 \item \textbf{Useful Scripts} - This folder contains basic read write function implementations.
 \begin{itemize}
@@ -100,8 +100,7 @@ Once you unzip the files in a directory $RecommenderSystemLab$, it will contain 
 \item \textbf{FillZeroEntryWithAverageInARow.m} - Function used by Average Value Based Matrix Completion for Matrix Initialization.
 \item \textbf{LatentMatrixFactorization.m} - This function implements the technique for Matrix Factorization.
 \item \textbf{LMFCall.m} - This calls the LatentMatrixFactorization function to factorize the given matrix.
-\end
-{itemize}
+\end{itemize}
 \item \textbf{ModelBasedPrediction} - This folder has the final exercise of the Model Based System
 \begin{itemize}
 \item \textbf{EvaluateModelBasedSVD.m} - This function runs the Model Based SVD for the entire movie lens dataset, parameters are configurable.
@@ -110,11 +109,14 @@ Once you unzip the files in a directory $RecommenderSystemLab$, it will contain 
 \item \textbf{Examples} - This folder has all the toy examples used in the Lab.
 \begin{itemize}
 \item \textbf{UserBasedPredictionToy.m} - contains code for generating prediction in Exercise 5.
-\item \textbf{UserBasedPredictionReal\_kn.m and UserBasedPredictionReal\_kn.m} - are the implementations of user-based recommendation for reference.
+\item \textbf{UserBasedPredictionReal\_ks.m and UserBasedPredictionReal\_kn.m} - are the implementations of user-based recommendation for reference.
 \item \textbf{ToyExampleAverageValueSVD.m} - Contains code to implement Average Value SVD.
 \item \textbf{ToyExampleIterativeSVD.m} - Contains code to implement Iterative Value SVD.
 \item \textbf{ToyExampleModelSVDMotivation.m} - Contains example code to describe issues with Sparsity and a potential solution.
 \item \textbf{ToyExampleModelSVDMotivation2.m} - Contains example code to describe issues related to Synonym and a potential solution.
- 
 \end{itemize}
+\item \textbf{Data}
+\item \textbf{u1.base} - Train Data for our examples.
+\item \textbf{u1.test} - Test Data for our examples.
+\item \textbf{u.data} - Entire Data set for our examples.
 \end{enumerate}
