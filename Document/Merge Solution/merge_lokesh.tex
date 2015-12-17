@@ -36,6 +36,7 @@ U =
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
 Look at the ratings of Eric in Table \ref{table:example_ratings1}. Also look at the ratings given by other users in the table. Can you guess which user(s) is(are) similar to Eric?
 \end{myremark}
+\textit{Solution: Looking at the similarity in ratings, Lucy seems to be similar to Eric}
 
 \subsubsection{Similarity Weight Computation}
 The example data set in Table \ref{table:example_ratings1} is very small in size for which finding users that are similar to the user of interest might be trivial. For real data sets, we need to define a measure of similarity that can be used to find the items/users that are similar to each other. The computation of of the similarity weights is one of the most critical aspects of building a \textit{neighborhood-based} recommendation systems, since it can have a significant impact on the performance and accuracy of the system.
@@ -51,6 +52,7 @@ where I\textsubscript{u} and I\textsubscript{v} represent the set of ratings of 
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
 In the example data set of Table \ref{table:example_ratings1}, find the users that are most similar to user. You can use the function \textit{CosSimVecMatrix} (provided with the lab) to generate the similarity of Eric with other users.
 \end{myremark}
+\textit{Solution: MATLAB code in file Solutions/Exercise\_2and3.m. Looking at cosine similarity values, Lucy is most similar to Eric. However, you could also say that John and Diane are also similar to Eric (cosine similarities grater than 0.6); which is the weakness of naive Cosine Similarity.}
 
 Hopefully that was easy and you have the answer - users that seem most similar to Eric are Lucy and Diane. That was easy. Let's look at the ratings of Diane who seems to be similar to Eric. If we calculate the means of ratings of Eric and Diane, 3.5 and 3.75, and subtract the means from their respective ratings, the new ratings look like as shown in Table \ref{table:centered_ratings1}.
 \begin{table*}
@@ -82,6 +84,7 @@ where $\bar{r_{u}}$ represents the mean of the ratings given by user \textit{u}.
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
 Calculate the Pearson Correlation (PC) similarity of Eric with other users in Table \ref{table:example_ratings1}. You can use the function \textit{PCSimVecMatrix} provided with the lab. Which user(s) would you say is(are) similar to Eric? You can do a similar analysis by comparing the Cosine similarities and Pearson Correlation similarities of other users.
 \end{myremark}
+\textit{Solution: MATLAB code in file Solutions/Exercise\_2and3.m. As per PC similarity, only Lucy is similar to Eric. It further highlights that John and Diane have preferences opposite to that of Eric.}
 
 \subsection{Calculating Predicted Ratings}
 The Recommender Systems exist so that they can make recommendations to the user. As highlighted in Section \ref{sec:approaches}, collaborative filtering relies on finding users similar to a user of interest based on the ratings given by them. We now have two important measures of finding similarity between users, namely Cosine similarity and Pearson Correlation similarity. It follows that these similarity measures can now be used to find the neighbors nearest to a user, and subsequently their ratings can be \textit{combined} to give us predicted ratings for a number of movies that have actually not been rated by the user of interest. It is natural that the movies whose predicted ratings are higher are the potential candidates that the recommender system can recommend to the user.
@@ -97,6 +100,7 @@ Note that the formula considers only the neighbors \textit{v} of user \textit{u}
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
 Carefully look at the formula in equation \ref{eq:basic_pred}. Can you find a flaw in the formula? What does it use the similarity weights of user \textit{u} with different users \textit{v} for? Explain qualitatively, how the formula is not making full use of the similarity weights.
 \end{myremark}
+\textit{Solution: The formula does not use the similarity weights directly. It only uses them to select some users as neighbors. A more intuitive way of using the similarity weights would be to give more importance to users whose similarity weights are higher.}
 
 If you have an intuitive answer to Exercise \arabic{ques}, equation  \ref{eq:second_pred}, which is more sophisticated in its calculation of the predicted rating, should make sense. It accounts for the fact that there can be some neighbors who are more ``similar" than others i.e. it distinguishes between neighbors and does not treat them alike while generating predicted ratings.
 \begin{equation} \label{eq:second_pred}
@@ -153,6 +157,8 @@ Consider Table \ref{table:example_ratings2} which has a new user Kim added to ou
 \item{}Generate a recommendation for Kim using the normalized ratings of neighbors and similarity weights
 \end{itemize}
 \end{myremark}
+\textit{Solution: Looking at the table, it seems we should recommend Wall-E. MATLAB code in file Solutions/Exercise\_5.m.}
+
 Carefully read the specification of the provided MATLAB function \textit{PCSimVecMatrix}. Can you use it to skip one of the steps mentioned in Exercise \arabic{ques}? Refer to our implementation for Exercise \arabic{ques} in file \textit{UserBasedPredictionToy.m}.
 \subsection{How to Evaluate a Recommender System?}
 \label{subsection:errors}
@@ -198,6 +204,7 @@ A \textit{configuration} is defined by the chosen values for a number of paramet
 A set of values selected for these parameters will give you one configuration. Vary one or more of these parameters to run for different configurations and calculate the mean error for each. You DO NOT need to cover the entire space of configurations. Refer to Table \ref{table:userbased_params} that gives the values of parameters that gave us best results for this data set. Do some choices perform better than others? Try explaining any interesting observations.
 Our implementation is also provided for reference in files ``UserBasedPredictionReal\_kn.m" and ``UserBasedPredictionReal\_ks.m".
 \end{myremark}
+\textit{Solution: MATLAB code in files Solutions/Exercise\_6\_1.m and Solutions/Exercise\_6\_2.m}
 
 \begin{table*}
 \centering

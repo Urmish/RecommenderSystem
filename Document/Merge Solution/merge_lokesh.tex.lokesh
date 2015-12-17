@@ -1,7 +1,8 @@
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{User Based Recommendation}
 \subsection{Idea of Similarity}
-Let's say the users of a website rate movies on a scale of 1 to 5, where a rating of 5 implies the user really liked the movie and a rating of 1 implies the opposite. This data can be stored in the form of a \textit{utility matrix} where each row of the matrix corresponds to a user and each column corresponds to a movie. Consider an example rating set shown in Table \ref{table:example_ratings1} that can be represented in the form of \textit{utility matrix} U as shown in equation \ref{eq:utility_U}. This 4x5 matrix stores the ratings given by 4 users to a set of 5 movies. As expected, not every user would have rated each of the 5 movies. The user-movie combination for which a rating does not exist is indicated by a 0.
+Let's say the users of a website like Imdb [TODO FIXME] rate the movies on a scale of 1 to 5, where a rating of 5 implies the user really liked the movie and a rating of 1 implies the opposite. This data can be stored in the from of a \textit{utility matrix} where each row of the matrix corresponds to a user and each column corresponds to a movie. Consider an example rating set shown in Table \ref{table:example_ratings1} that can be represented in the form of \textit{utility matrix} U as shown in equation \ref{eq:utility_U}. This 4x5 matrix stores the ratings given by 4 users to a set of 5 movies. As expected, not every user would have rated each of the 5 movies. The user-movie combination for which a rating does not exist is indicated by a 0.
 \begin{table*}
 \centering
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -40,7 +41,7 @@ Look at the ratings of Eric in Table \ref{table:example_ratings1}. Also look at 
 \subsubsection{Similarity Weight Computation}
 The example data set in Table \ref{table:example_ratings1} is very small in size for which finding users that are similar to the user of interest might be trivial. For real data sets, we need to define a measure of similarity that can be used to find the items/users that are similar to each other. The computation of of the similarity weights is one of the most critical aspects of building a \textit{neighborhood-based} recommendation systems, since it can have a significant impact on the performance and accuracy of the system.
 
-\textbf{Cosine Similarity:} We apply the traditional notion of Cosine Vector (CV) similarity to find the similarity between two users \textit{u} and \textit{v}. If \textbf{x\textsubscript{u}} is vector of ratings r\textsubscript{ui} of a user \textit{u}, then the cosine similarity of users \textit{u} and \textit{v} can be calculated using equation \ref{eq:cosine_sim}.
+\textbf{Cosine Similarity:} We apply the traditional notion of Cosine Vector (CV) similarity to find the similarity between two users \textit{u} and \textit{v}. If \textbf{x\textsubscript{u}} is vector of ratings r\textsubscript{ui} of a user \textit{u}, then the cosine similarity of users \textit{u} and \textit{v} can be calculated using the equation \ref{eq:cosine_sim}.
  \begin{equation} \label{eq:cosine_sim}
 CV(u,v) = cos(\textbf{x}_{u}, \textbf{x}_{v}) = \frac
 {\sum_{i \in{I_{uv}}}^{}{r_{ui}r_{vi}}}
@@ -70,7 +71,7 @@ Hopefully that was easy and you have the answer - users that seem most similar t
 
 Positive values in Table \ref{table:centered_ratings1} represent a preference for the movie by the user since it's rating is more than the average, whereas a negative value implies a disliking for the movie. On analyzing these \textit{mean-centered ratings}, Eric and Diane don't seem to be so similar anymore. In fact, they seem to have quite the opposite taste. What's going on?
 
-\textbf{Pearson Correlation Similarity:} A major flaw in using \textit{Cosine Similarity} to find the similarity between users is the fact that Cosine Similarity does not take into account the differences in the mean and variance of the ratings made by the users. Pearson Correlation (PC) similarity is a popular measure that can be used to compare the ratings of users since it removes the effects of mean and variance in ratings while calculating the similarity between users. The PC similarity between users \textit{u} and \textit{v} can be calculated using equation \ref{eq:PC_sim}.
+\textbf{Pearson Correlation Similarity:} A major flaw in using \textit{Cosine Similarity} to find the similarity between users is the fact that Cosine Similarity does not take into account the differences in the mean and variance of the ratings made by the users. Pearson Correlation (PC) similarity is a popular measure that can be used to compare the ratings of users since it removes the effects of mean and variance in ratings while calculating the similarity between users. The PC similarity between users \textit{u} and \textit{v} can be calculated using the equation \ref{eq:PC_sim}.
  \begin{equation} \label{eq:PC_sim}
 PC(u,v) = PC(\textbf{x}_{u}, \textbf{x}_{v}) = \frac
 {\sum_{i \in{I_{uv}}}^{}{(r_{ui} - \bar{r_{u}})(r_{vi} - \bar{r_{v}})}}
@@ -80,7 +81,7 @@ PC(u,v) = PC(\textbf{x}_{u}, \textbf{x}_{v}) = \frac
 where $\bar{r_{u}}$ represents the mean of the ratings given by user \textit{u}. Note that PC accounts for variance in ratings only for the ratings of the movies I\textsubscript{uv} that have been rated by both users \textit{u} and \textit{v}. The sign of similarity weight calculated using PC indicates whether the correlation between the two users is direct or inverse, and the magnitude of similarity weight (ranging from 0 to 1) represents the strength of correlation. These will be used to predict unknown ratings for a user using \textit{neighborhood-based} methods later.
 
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Calculate the Pearson Correlation (PC) similarity of Eric with other users in Table \ref{table:example_ratings1}. You can use the function \textit{PCSimVecMatrix} provided with the lab. Which user(s) would you say is(are) similar to Eric? You can do a similar analysis by comparing the Cosine similarities and Pearson Correlation similarities of other users.
+Calculate the Pearson Correlation (PC) similarity of Eric with other users in Table \ref{table:example_ratings1}. You can use the function \textit{PCSimVecMatrix} provided with the lab. Which user(s) would you say is similar to Eric. You can do a similar analysis for comparing the Cosine similarities and Pearson Correlation similarities of other users.
 \end{myremark}
 
 \subsection{Calculating Predicted Ratings}
@@ -95,10 +96,10 @@ r_{ui} = \frac
 Note that the formula considers only the neighbors \textit{v} of user \textit{u} who have rated the movie \textit{i}, N\textsubscript{i}(u) representing the set of such neighbors.
 
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Carefully look at the formula in equation \ref{eq:basic_pred}. Can you find a flaw in the formula? What does it use the similarity weights of user \textit{u} with different users \textit{v} for? Explain qualitatively, how the formula is not making full use of the similarity weights.
+Carefully look at the formula in the equation \ref{eq:basic_pred}. Can you find a flaw in the formula? What does it use the similarity weights of user \textit{u} with different users \textit{v} for? Explain qualitatively, how the formula is not making full use of the similarity weights?
 \end{myremark}
 
-If you have an intuitive answer to Exercise \arabic{ques}, equation  \ref{eq:second_pred}, which is more sophisticated in its calculation of the predicted rating, should make sense. It accounts for the fact that there can be some neighbors who are more ``similar" than others i.e. it distinguishes between neighbors and does not treat them alike while generating predicted ratings.
+If you have an intuitive answer to Exercise \arabic{ques}, equation  \ref{eq:second_pred}, which is more sophisticated in its calculation of the predicted rating, should make sense.
 \begin{equation} \label{eq:second_pred}
 r_{ui} = \frac
 {\sum_{v \in{N_{i}(u)}}^{}{w_{uv}r_{vi}}}
@@ -145,7 +146,7 @@ where $\bar{r_{u}}$ is the mean of ratings of user \textit{u}.
 \end{table*}
 
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
-Consider Table \ref{table:example_ratings2} which has a new user Kim added to our earlier toy example. We are interested in generating a recommendation for Kim. Can you guess which movie we should recommend just by looking at the table? Now write a small code in MATLAB to generate those predictions following the steps mentioned below:
+Consider the Table \ref{table:example_ratings2} which has a new user Kim added to our earlier toy example. We are interested in generating a recommendation for Kim. Can you guess which movie we should recommend just by looking at the table? Now write a small code in MATLAB to generate those predictions following the steps mentioned below:
 \begin{itemize}
 \item{}Calculate the PC similarity of Kim with other users using the provided MATLAB function \textit{PCSimVecMatrix}
 \item{}Find the nearest neighbors of Kim using a threshold for the similarity
@@ -153,10 +154,9 @@ Consider Table \ref{table:example_ratings2} which has a new user Kim added to ou
 \item{}Generate a recommendation for Kim using the normalized ratings of neighbors and similarity weights
 \end{itemize}
 \end{myremark}
-Carefully read the specification of the provided MATLAB function \textit{PCSimVecMatrix}. Can you use it to skip one of the steps mentioned in Exercise \arabic{ques}? Refer to our implementation for Exercise \arabic{ques} in file \textit{UserBasedPredictionToy.m}.
+Carefully read the specification of the provided MATLAB function \textit{PCSimVecMatrix}. Can you use it to skip one of the steps mentioned in Exercise \arabic{ques}. Refer to our implementation for Exercise \arabic{ques} in file "UserBasedPredictionToy.m".
 \subsection{How to Evaluate a Recommender System?}
-\label{subsection:errors}
-We need some methodology to evaluate our recommendations. In this section we will discuss multiple ways to do so. A recommender system generally looks at a mix of these values to evaluate its results. We first seperate our database into a test set and a train set. We compute our results based on the train set and make our predictions. We extract the ratings from our test set and look at the corresponding predictions we genrated for them. In order to quantify the difference, we use the following techniques.
+We need some methodology to evaluate our recommendations. In this section we will discuss multiple ways to do so. A recommender system generally looks at a mix of these values to evaluate its results. We first seperate our database into a test set and a train set. We compute our results based on the train set and make our predictions. We extract the predictions from our test set and look at the corresponding predictions we genrated for them. In order to quantify the difference, we use the following techniques.
   \subsubsection{Root Mean Square Error (RMSE)}
 \[ RMSE = \sqrt{\frac{\sum_{(x,i) \in T} (r_{xi} - r_{xi}^{*})^{2}}{N}} \]
 \begin{align*}
@@ -165,49 +165,47 @@ We need some methodology to evaluate our recommendations. In this section we wil
 &r_{xi}:\text{The actual rating of item `i' by user `x'} \\
 &r_{xi}^{*}:\text{The rating that our system predicts user `x' will give item `i'}
 \end{align*}
+\paragraph{}
 We can try to design our algorithm to reduce this RMSE value, by minimizing the sum of squared errors (SSE) thereby giving us more accurate predictions of user ratings and hence improving our recommendations. 
   \subsubsection{Top Five Rated Movies (TFRM)}
-  Sort the movies in the test dataset in a decreasing order of ratings and look at the top five rated movies. For the movies rated in the test dataset, look at their corresponding predicted ratings and sort the predictions in a decreasing order. We find the intersection of the top 5 movies for both these sets to see how close we came to understanding user preference. Let the top five movies in the test dataset for a user be represented by $S_{test}$ and the top five movies using the predicted ratings be $S_{pred}$
-  Then, 
+  Sort the movies in the test dataset in a decreasing order and look at the top five rated movies. For the movies in the test dataset, look at their corresponding predictions and sort them in a decreasing fashion. We find the intersection of the top 5 movies for both these sets to see how close we came to understanding user preference. let  the top five movies in the test dataset for a user be represented by :
+  \begin{align*}
+  S_{test}
+  \end{align*}
+  And the top five movies using the predictions for the movies rated in test dataset for the user be represented by:
+  \begin{align*}
+  S_{pred}
+  \end{align*}
+  Thus, 
   \begin{align*}
   Error = \frac{S_{test} \cap S_{pred}}{|S_{test}|}
   \end{align*}
   \subsubsection{Number of Good Movies Not Predicted (NMNP)}
-  Another measure of error could be the number of movies that were rated by the user in the test dataset as good which the recommender system predicted as bad. For the notion of good, we use a threshold value $t$. Given a mean rating of $m$, any movie with a rating greater than $m+t$ is considered good. Thus, if $S_{gtb}$ represents the number of movies that were good as per test data but were bad as per our predictions, and $S_{g}$ are the set of all the good movies in the test data set, then the error is, 
+  Another measure of error could be the number of movies that were rated by the user in the test dataset as good which the recommender system predicted as bad. For the notion of good, we use a threshold value. Any movie with a rating more than the threshold value above average is considered good. Thus, if $S_{gtb}$ represent the number of good movies that the recommender system predicted as bad and $S_{g}$ are the set of all good movies in the test data set, then the error is simply, 
   \begin{align*}
   Error = 1 - \frac{|S_{gtb}|}{|S_{g}|}
   \end{align*}
   \subsubsection{Number of Flipped Movies (NFP)}
-  This is an extension of the previous error metric. Here we look at all the movies that user rated as good and bad. The definition of good remains the same as before. We define bad movies as movies which have ratings lower than $m - t$. $S_{flip}$ is set of good movies that the recommender system predicted as bad and bad movies that the recommender system predicted as good, $S_{gb}$ is the set of all good and bad movies in the test data set, then the error is, 
+  This is an extension of the previous error metric. Here we look at all the movies that user rated good an bad. The definition of good remains the same as before. We define bad movies as movies which have ratings lower than $AverageValue - Threshold$. $S_{flip}$ represent the sum of number of good movies that the recommender system predicted as bad and bad movies that the recommender system predicted as good, $S_{gb}$ are the set of all good and bad movies in the test data set, then the error is simply, 
   \begin{align*}
   Error = 1 - \frac{|S_{flip}|}{|S_{gb}|}
   \end{align*}
 
-Now that we have all the pieces required to build a user based recommendation system, let's work out an example! We will be using the MovieLens dataset for this. The train dataset has 943 users and 1682 movies while the test dataset has 463 users and 1682 movies.
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
 In this exercise, you will extend the MATLAB code from Exercise 5 to generate recommendations using user-based method on a large data set. The training data is available in file u1.base and test data in u1.test. You can read these files into \textit{utility matrix} form using the function \textit{ConvertUDataToMatrix} that takes filename as input. You should pick a user from the test data, generate recommendations for him and calculate the \textit{error} in the recommendation. You can repeat this for all the users in the test set and calculate the mean \textit{error} across the users. This will give you a measure of how well the recommendation system performs for one \textit{configuration}.
 A \textit{configuration} is defined by the chosen values for a number of parameters:
 \begin{itemize}
-\item{}Choice of similarity criteria - Cosine similarity, PC similarity (Use functions \textit{CosSimVecMatrix} and \textit{PCSimVecMatrix})
-\item{}Choice of threshold value for similarity \textit{ks} such that users with similarity weights greater than \textit{ks} are selected as neighbors
-\item{}Choice of threshold number \textit{kn} such that \textit{kn} users with highest similarity weights are selected as neighbors 
-\textit{(You may choose to select neighbors based on either threshold ks or threshold kn. You can also use a combination of the two approaches.)}
-\item{}Choice of normalization used - Mean Centering (Check out function \textit{PCSimVecMatrix}), no normalization
-\item{}Choice of metric to calculate the error - RMSE, TFRM (use \textit{Top5Accuracy}), NMNP, NFP (use \textit{StepErrorFunction})
+\item{}Choice of similarity criteria - Cosine similarity, PC similarity
+\item{}Choice of threshold value for selecting nearest neighbors based on their similarity weights
+\item{}Choice of threshold to limit the maximum number of neighbors chosen in the previous step
+\item{}Choice of normalization used - Mean Centering, Z-score Normalization, no normalization
+\item{}Choice of metric to calculate the error - RMSE, TFRM, NMNP, NFP
 \end{itemize}
-A set of values selected for these parameters will give you one configuration. Vary one or more of these parameters to run for different configurations and calculate the mean error for each. You DO NOT need to cover the entire space of configurations. Refer to Table \ref{table:userbased_params} that gives the values of parameters that gave us best results for this data set. Do some choices perform better than others? Try explaining any interesting observations.
-Our implementation is also provided for reference in files ``UserBasedPredictionReal\_kn.m" and ``UserBasedPredictionReal\_ks.m".
+A set of values selected for these parameters will give you one configuration. Vary one or more of these parameters to run for different configurations and calculate the mean error for each. You DO NOT need to cover the entire space of configurations. Refer to Table [TODO FIXME] to decide on 4-5 configurations. Do some choices perform better than others? Try explaining any interesting observations.
 \end{myremark}
 
-\begin{table*}
-\centering
-\begin{tabular}{|c|c|c|c|}
-\hline
-\textbf{Similarity measure} & \textbf{\textit{kn}} & \textbf{\textit{ks}} & \textbf{Normalization}\\ 
-\hline
-Pearson Correlation		    & 		30		 	 & 			0.95	    &   	Mean-Centering\\ 
-\hline
-\end{tabular}
-\caption{User-based recommendation parameters}
-\label{table:userbased_params}
-\end{table*}
+"CosSimVecMatrix.m" contains code that generates the Cosine similarity between a user and other users based on their ratings.
+
+"PCSimVecMatrix.m" contains code that generates the Pearson Correlation similarity between a user and other users based on their ratings.
+
+"UserBasedPredictionToy.m" contains code to for generating prediction in Exercise 5.

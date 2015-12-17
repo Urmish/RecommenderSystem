@@ -1,0 +1,27 @@
+\section{Motivation}
+
+ User modeling, adaptation and personalization methods have reached the mainstream. The tremendous growth of social networking websites and the computational power of mobile devices are generating extremely huge amounts of user data, and an increasing need of users to "personalize" their e-mail, phone etc.
+
+ The potential value of personalization is now clear both as a commodity for the benefit of end-users and as an enabler of better (or new) services – a tactical opportunity to expand and improve businesses.
+
+ The main characteristic of recommender systems is that they attract the interest of industry and businesses while posing extremely interesting challenges.
+
+ In spite of noteworthy progress in the research community and the efforts of the industry to provide the end users the the benefits of new techniques, there are still many important gaps that make personalization and adaptation challenging for users. Research activities still focus on narrow problems, such as incremental accuracy improvements of current techniques or on a few applicative problems. This confines the range of other applications where personalization technologies might be useful as well.
+
+ Thus, we have come to a good point where we can take a step back to obtain a perspective in the research done in recommender systems.
+
+\section{Approaches}
+\label{sec:approaches}
+\subsection{Content-based}
+ The content-based systems are used to recommend items similar to those a user has liked in the past, i.e. recommendations are based on the content of items rather on other user's opinion. The content-based approach to recommendation has its roots in the information retrieval (IR) community, and employs many of the similar techniques. The system learns to recommend items that are similar to the ones that the user liked in the past. The similarity of items is calculated based on the features associated with the compared items. For example, if a user has positively rated a movie that belongs to the comedy genre, then the system can learn to recommend other movies from the same genre.
+\subsection{Collaborative Filtering}
+ Collaborative filtering method finds a subset of users who have similar tastes and preferences to the target user and use this subset for offering recommendations. Rather than computing the similarity of the items, we compute the similarity of the users. Typically, for each user a set of "nearest neighbor" users is found with whose past ratings there is the strongest correlation. Scores for unseen items are predicted based on a combination of the scores known from the nearest neighbors.
+
+Main approaches for collaborative filtering:
+\begin{itemize}
+\item User based
+\end{itemize}
+\begin{itemize}
+\item Item based
+\end{itemize}
+

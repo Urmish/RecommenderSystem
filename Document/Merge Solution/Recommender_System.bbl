@@ -1,0 +1,26 @@
+\begin{thebibliography}{1}
+
+\bibitem{movielens}
+{MovieLens 100K Dataset}.
+\newblock \url{http://grouplens.org/datasets/movielens/100k/}.
+
+\bibitem{model_ref2}
+Daniel Billsus and Michael~J. Pazzani.
+\newblock Learning collaborative information filters.
+\newblock In {\em Proceedings of the Fifteenth International Conference on
+  Machine Learning}, ICML '98, pages 46--54, San Francisco, CA, USA, 1998.
+  Morgan Kaufmann Publishers Inc.
+
+\bibitem{nbrsurvey}
+Christian Desrosiers and George Karypis.
+\newblock A comprehensive survey of neighborhood-based recommendation methods.
+\newblock In {\em Recommender systems handbook}, pages 107--144. Springer,
+  2011.
+
+\bibitem{model_ref1}
+Badrul~M Sarwar, Joseph~A Konstan, Al~Borchers, John~T Riedl, Badrul~M Sarwar,
+  Joseph~A Konstan, and John~T Riedl.
+\newblock Applying knowledge from kdd to recommender systems.
+\newblock {\em University of Minnesota, Minneapolis}, 1(612):625--4002, 1999.
+
+\end{thebibliography}
