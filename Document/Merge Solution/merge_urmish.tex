@@ -64,7 +64,6 @@ You should observe that the columns of the matrices $U$ and $V$ are orthonormal.
     \item Truncate $U$, $S$ and $V$ to $U_k$, $S_k$ and $V_k$
     \item Compute the resultant matrix $Pred_{norm} = U_k*S_k*V_k$
     \item Add the average customer value calculated in Step 3 to this matrix, i.e, $Pred = Pred_{norm} + \overline{C} $
-olutions/Exercise_9.mmatrix.
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
 Implement a function for average value SVD completion. Use the steps described above and run the code on matrix generated from table~\ref{table:example_ratings1}. Compare the result with our implementation located in \textit{Examples/ToyExampleAverageValueSVD.m}. What do you think about the corresponding predictions? Do they make sense? 
 \end{myremark}
