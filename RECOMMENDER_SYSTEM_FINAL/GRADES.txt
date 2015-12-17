@@ -1,0 +1,20 @@
+JINMAN ZHAO (jzhao237@wisc.edu): 100/100
+Response to comments on question 5:
+Yes, we do not want to pick users with PC similarity of negative sign.
+Good observation. In this example, we knew that the similar users used for generating predictions
+have rated all the movies that were unrated by Kim. So we did not worr about that.
+In the next exercise, the MATLAB code does (must) take this into account.
+
+
+SCOTT T SIEVERT (stsievert@wisc.edu): 100/100
+Response to comments on question 1:
+The mean is indeed removed before calculating similarity, and thus before finding similar users.
+
+Response to comment on question 4:
+You are correct. It would be intersting to see what is the impact of that.
+
+Response to comment on question 5:
+There are no direct issues as you think. The similarity weights are calculated based on mean centered ratings.
+These similarity weights are subsequently used to find similar neighbors.
+So we are in fact finding neighbors after removing the effect of mean.
+
