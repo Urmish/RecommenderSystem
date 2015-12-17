@@ -1,12 +1,23 @@
-JINMAN ZHAO (jzhao237@wisc.edu): 100/100
+JINMAN ZHAO (jzhao237@wisc.edu): [100/100]
+------------------------------
 Response to comments on question 5:
 Yes, we do not want to pick users with PC similarity of negative sign.
 Good observation. In this example, we knew that the similar users used for generating predictions
-have rated all the movies that were unrated by Kim. So we did not worr about that.
+have rated all the movies that were unrated by Kim. So we did not worry about that.
 In the next exercise, the MATLAB code does (must) take this into account.
 
+Response to comment on question 7:
+The typo has been fixed.
 
-SCOTT T SIEVERT (stsievert@wisc.edu): 100/100
+Response to comment on question 8:
+The typo was fixed. The user has to print the contents of the variable completion1 to see the output. It is mentioned within the script.
+
+Response to comment on question 9:
+The issue has been fixed.
+
+SCOTT T SIEVERT (stsievert@wisc.edu): [100/100]
+-----------------------------------
+
 Response to comments on question 1:
 The mean is indeed removed before calculating similarity, and thus before finding similar users.
 
@@ -18,3 +29,11 @@ There are no direct issues as you think. The similarity weights are calculated b
 These similarity weights are subsequently used to find similar neighbors.
 So we are in fact finding neighbors after removing the effect of mean.
 
+Response to comment on question 7:
+Yes. The only purpose of this exercise is to show some form of association being captured. This is a motivation example and does not capture the complexity of the problem.
+
+Response to comment on  question 8:
+Agreed. The method is not doing a good job. And this was expected and also what we have written in our solution. Again, the idea was to give a user an intuition that this method tries to find these latent association without going into the details.
+
+Response to Question 10:
+A more popular method is Latent Matrix Factorization. We cover this technique as part of the Appendix and not in the lab because of the complexity involved in understanding the technique. The methods used in question 9 and 10 are meant to be approximations which are easy to implement.
