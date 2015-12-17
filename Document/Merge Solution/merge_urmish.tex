@@ -17,7 +17,7 @@
       & Die Hard 1 & Die Hard 2 & Die Hard 3 & Die Hard 4 \\ \hline
 John  & 4          & 4          &            &            \\ \hline
 Susan & 4          & 2          & 3          & 3          \\ \hline
-Jack  &            &            & 4          & 4          \\ \hline
+Eric  &            &            & 4          & 4          \\ \hline
   \end{tabular}
   \caption{Truncate to Die Hard}
   \label{Model-1}
@@ -26,10 +26,12 @@ Jack  &            &            & 4          & 4          \\ \hline
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
 Take a look at Table~\ref{Model-1}. The table illustrates the example we described while discussing \textit{Sparsity}. How do you ensure that John and Eric are considered similar to each other? Look at the code written in \textit{Examples/ToyExampleModelSVDMotivation.m} and run it to see how low rank approximation helps us magically establish this relationship between John and Eric!! We will discuss what low rank approximation is in the next section.  For now, do you agree that this method is helping us with the sparsity problem? 
 \end{myremark}
+\textit{Solution: In the lower rank approximation, we can see that John and Eric are to similar to each other. Thus the approach seems to be helping us}
 
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
 Look at \textit{Examples/ToyExampleModelSVDMotivation2.m}. It explains a scenario similar to the one talked about in Synonym Problem and looks at a potential solution. Run the code and observe the output? Do you think Low Rank approximation is finding some sort of latent association? What are the predictions for values not rated by the user?
 \end{myremark}
+\textit{Solution: In the lower rank approximation, we do see some ratings for products not rated by user 1. The low rank approximation does find some association between notepad and writing pad. However, our original ratings have been affected. Items that user 1 rated as 4 are now shown to be of value 1.3. We will see a better way to approach this problem in a later section.}
   \subsection{Singular Vector Decomposition}
 
 The Singular Value Decomposition (SVD) is a well known matrix factorization method. Formally, the SVD of an $m \times n$ matrix $A$ is a factorization of the form $A = U \Sigma V^{T}$ where $U$ is an $m \times m$ orthogonal matrix, $\Sigma$ is an $m \times n$ diagonal matrix with non-negative terms on the diagonal, and $V$ is an $n \times n$ orthogonal matrix. The diagonal entries of $\Sigma$ are known as the singular values of $A$. The $m$ columns of $U$ and the $n$ columns of $V$ are known as the left and right singular vectors of $A$ respectively. 
@@ -62,10 +64,11 @@ You should observe that the columns of the matrices $U$ and $V$ are orthonormal.
     \item Truncate $U$, $S$ and $V$ to $U_k$, $S_k$ and $V_k$
     \item Compute the resultant matrix $Pred_{norm} = U_k*S_k*V_k$
     \item Add the average customer value calculated in Step 3 to this matrix, i.e, $Pred = Pred_{norm} + \overline{C} $
-  \end{enumerate}
+olutions/Exercise_9.mmatrix.
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
 Implement a function for average value SVD completion. Use the steps described above and run the code on matrix generated from table~\ref{table:example_ratings1}. Compare the result with our implementation located in \textit{Examples/ToyExampleAverageValueSVD.m}. What do you think about the corresponding predictions? Do they make sense? 
 \end{myremark}
+\textit{Solution: Solution is in the file Solutions/Exercise\_9.m. John likes the movie Matrix while Diane likes Wall-E. If you look at the table, people who liked Matrix also enjoyed Die Hard while people who liked Wall-E also enjoyed Titanic. Using the same analogy, the predicted ratings seem fair.}
 
   \subsubsection{Iterative SVD Completion}
   Another simple approach to complete a matrix and generate predictions is to use iterative SVD. 
@@ -81,6 +84,7 @@ Implement a function for average value SVD completion. Use the steps described a
 \begin{myremark}{\stepcounter{ques}Exercise \arabic{ques}}
 Implement a function for iterative SVD completion. Use the steps described above and run your code on the matrix generated from table \ref{table:example_ratings1}. Compare the result with our implementation located in \textit{Examples/ToyExampleIterativeSVD.m}. Look at the corresponding predictions. What do you think about them? How do they compare to the predictions using the previous methods?
 \end{myremark}
+\textit{Solution: Solution is in the file Solutions/Exercise\_10.m. John likes the movie Matrix while Diane likes Wall-E. If you look at the table, people who liked Matrix also enjoyed Die Hard while people who liked Wall-E also enjoyed Titanic. The predicted rating for Diane seems fair while for John seems to be a little off. I say, for this small dataset, AverageValueSVD is doing better.}
   \subsection{Nearest Neighbor}
   By now you should have learnt to predict the ratings for unrated items. So what do we do with these predictions? One thing that we can do after applying a matrix completion technique is to recommend the top rated predictions for each user. Additionally we can look into the Nearest Neighbor approach that we discussed earlier in the lab.
   \subsubsection{Using Predicted Matrix}
@@ -104,6 +108,7 @@ Write a code to run Model Based Prediction on the entire movie lens dataset. Fol
 \end{enumerate}
 We have already implemented this code in \textit{ModelBasedPrediction / EvaluateModelBasedSVD.m}. Play around with the parameters {i\_singularValueThreshold, i\_iterCount, i\_NumNearestNeighbor}, look at the impact it has on different error rates. It is upto you to decide what factors are important and what constitutes a good system. We have provided you with outputs for many different parameters in the section below.
 \end{myremark}
+\textit{Solution: Solution is in the file Solutions/Exercise\_11.m. We have already discussed some of the results in the next section.}
 
 \subsubsection{Results and Analysis}
 We will be using the same error metric as discussed in Section~\ref{subsection:errors}. The average number of movies rated as good or bad per user is $27.5$ while the average number of movies rated as good is $14.85$. We would look at the results of using the best ratings from our ``Completed Matrix" (using Average value and Iterative Based) as our estimates, and the results obtained from using Nearest Neighbor approach on this ``Completed Matrix" as our prediction estimates. Use the following analogy to interpret the results -
