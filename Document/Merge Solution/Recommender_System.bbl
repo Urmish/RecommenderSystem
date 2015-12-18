@@ -23,4 +23,8 @@ Badrul~M Sarwar, Joseph~A Konstan, Al~Borchers, John~T Riedl, Badrul~M Sarwar,
 \newblock Applying knowledge from kdd to recommender systems.
 \newblock {\em University of Minnesota, Minneapolis}, 1(612):625--4002, 1999.
 
+\bibitem{model_ref3}
+Albert~Au Yeung.
+\newblock Matrix factorization: A simple tutorial and implementation in python.
+
 \end{thebibliography}

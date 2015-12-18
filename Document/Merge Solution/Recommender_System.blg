@@ -8,45 +8,47 @@ A level-1 auxiliary file: merge_appendix.aux
 The style file: plain.bst
 Database file #1: references.bib
 Warning--to sort, need author or key in movielens
-You've used 4 entries,
+Warning--empty journal in model_ref3
+Warning--empty year in model_ref3
+You've used 5 entries,
             2118 wiz_defined-function locations,
-            527 strings with 4816 characters,
-and the built_in function-call counts, 1574 in all, are:
-= -- 162
-> -- 65
+            530 strings with 4909 characters,
+and the built_in function-call counts, 1773 in all, are:
+= -- 179
+> -- 72
 < -- 2
-+ -- 27
-- -- 22
-* -- 105
-:= -- 240
-add.period$ -- 13
-call.type$ -- 4
-change.case$ -- 23
++ -- 30
+- -- 24
+* -- 116
+:= -- 276
+add.period$ -- 15
+call.type$ -- 5
+change.case$ -- 27
 chr.to.int$ -- 0
-cite$ -- 5
-duplicate$ -- 63
-empty$ -- 129
-format.name$ -- 22
-if$ -- 348
+cite$ -- 8
+duplicate$ -- 73
+empty$ -- 146
+format.name$ -- 24
+if$ -- 386
 int.to.chr$ -- 0
-int.to.str$ -- 4
-missing$ -- 3
-newline$ -- 22
-num.names$ -- 6
-pop$ -- 29
+int.to.str$ -- 5
+missing$ -- 4
+newline$ -- 26
+num.names$ -- 8
+pop$ -- 37
 preamble$ -- 1
-purify$ -- 19
+purify$ -- 22
 quote$ -- 0
-skip$ -- 51
+skip$ -- 57
 stack$ -- 0
-substring$ -- 105
+substring$ -- 110
 swap$ -- 20
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 16
-warning$ -- 1
-while$ -- 14
-width$ -- 5
-write$ -- 46
-(There was 1 warning)
+type$ -- 20
+warning$ -- 3
+while$ -- 16
+width$ -- 6
+write$ -- 53
+(There were 3 warnings)
